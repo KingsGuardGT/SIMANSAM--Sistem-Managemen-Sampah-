@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:trashpick/Models/trash_pick_ups_model.dart';
-import 'package:trashpick/Pages/BottomNavBar/TrashToBeCollected/trash_to_be_collected_list.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
-import 'package:trashpick/Widgets/toast_messages.dart';
+import 'package:SiManSam/Models/trash_pick_ups_model.dart';
+import 'package:SiManSam/Pages/BottomNavBar/TrashToBeCollected/trash_to_be_collected_list.dart';
+import 'package:SiManSam/Theme/theme_provider.dart';
+import 'package:SiManSam/Widgets/toast_messages.dart';
 
 class TrashToBeCollected extends StatefulWidget {
   @override
@@ -120,19 +120,19 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
             .then((querySnapshot) {
           if (querySnapshot.docs.isNotEmpty) {
             querySnapshot.docs.forEach((result) {
-              TrashPickUpsModel trashPickUpsModel =
-                  TrashPickUpsModel.fromDocument(result);
+              SiManSamUpsModel SiManSamUpsModel =
+                  SiManSamUpsModel.fromDocument(result);
               print(
                   "--------------------- Recycling Center ---------------------\n"
-                  "id: ${trashPickUpsModel.trashID}\n"
-                  "name: ${trashPickUpsModel.trashName}\n"
-                  "latitude: ${trashPickUpsModel.trashLocationLocation.latitude}\n"
-                  "longitude: ${trashPickUpsModel.trashLocationLocation.longitude}");
+                  "id: ${SiManSamUpsModel.trashID}\n"
+                  "name: ${SiManSamUpsModel.trashName}\n"
+                  "latitude: ${SiManSamUpsModel.trashLocationLocation.latitude}\n"
+                  "longitude: ${SiManSamUpsModel.trashLocationLocation.longitude}");
               setRecyclingCentersMarkers(
-                trashPickUpsModel.trashID,
-                trashPickUpsModel.trashName,
-                trashPickUpsModel.trashLocationLocation.latitude,
-                trashPickUpsModel.trashLocationLocation.longitude,
+                SiManSamUpsModel.trashID,
+                SiManSamUpsModel.trashName,
+                SiManSamUpsModel.trashLocationLocation.latitude,
+                SiManSamUpsModel.trashLocationLocation.longitude,
               );
             });
           }

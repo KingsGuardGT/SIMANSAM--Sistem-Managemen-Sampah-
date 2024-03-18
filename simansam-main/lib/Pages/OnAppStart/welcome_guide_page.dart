@@ -37,14 +37,14 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
                   height: 50.0,
                 ),
                 Image.asset(
-                  'assets/logos/trashpick_logo_banner.png',
+                  'assets/logos/SiManSam_logo_banner.png',
                   height: 200.0,
                   width: 200.0,
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
-                Text("Welcome to TrashPick",
+                Text("Welcome to SiManSam",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0)
                         .copyWith(color: Colors.grey.shade900)),

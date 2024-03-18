@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/OnAppStart/sign_in_page.dart';
+import 'package:SiManSam/Pages/OnAppStart/sign_in_page.dart';
 
 import '../../Theme/theme_provider.dart';
 import '../../Widgets/button_widgets.dart';
@@ -25,7 +25,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 children: [
                   SizedBox(height: 40),
                   Image.asset(
-                    'assets/logos/trashpick_logo_banner_2.png',
+                    'assets/logos/SiManSam_logo_banner_2.png',
                     height: 250,
                     width: 250,
                   ),
@@ -49,7 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("New to TrashPick ?",
+                      Text("New to SiManSam ?",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

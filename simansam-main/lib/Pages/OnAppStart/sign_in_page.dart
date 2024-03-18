@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/BottomNavBar/bottom_nav_bar.dart';
-import 'package:trashpick/Pages/OnAppStart/welcome_page.dart';
+import 'package:SiManSam/Pages/BottomNavBar/bottom_nav_bar.dart';
+import 'package:SiManSam/Pages/OnAppStart/welcome_page.dart';
 
 import '../../Theme/theme_provider.dart';
 import '../../Widgets/button_widgets.dart';
@@ -267,7 +267,7 @@ class _SignInPageState extends State<SignInPage> {
                             })),
                     SizedBox(height: 20),
                     Image.asset(
-                      'assets/logos/trashpick_logo_banner.png',
+                      'assets/logos/SiManSam_logo_banner.png',
                       height: 200,
                       width: 200,
                     ),
@@ -339,7 +339,7 @@ class _SignInPageState extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("New to TrashPick?",
+                          Text("New to SiManSam?",
                               style: TextStyle(
                                 fontSize:
                                     Theme.of(context).textTheme.button.fontSize,

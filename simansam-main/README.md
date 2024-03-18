@@ -1,25 +1,25 @@
-# TrashPick Mobile App
+# SiManSam Mobile App
 
-![GitHub repo size](https://img.shields.io/github/repo-size/dileepabandara/trashpick?color=red&label=repository%20size)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dileepabandara/trashpick?color=red)
-![GitHub language count](https://img.shields.io/github/languages/count/dileepabandara/trashpick)
-![GitHub top language](https://img.shields.io/github/languages/top/dileepabandara/trashpick)
-![GitHub](https://img.shields.io/github/license/dileepabandara/trashpick?color=yellow)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/dileepabandara/trashpick?color=brightgreen&label=commits)
+![GitHub repo size](https://img.shields.io/github/repo-size/dileepabandara/SiManSam?color=red&label=repository%20size)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/dileepabandara/SiManSam?color=red)
+![GitHub language count](https://img.shields.io/github/languages/count/dileepabandara/SiManSam)
+![GitHub top language](https://img.shields.io/github/languages/top/dileepabandara/SiManSam)
+![GitHub](https://img.shields.io/github/license/dileepabandara/SiManSam?color=yellow)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/dileepabandara/SiManSam?color=brightgreen&label=commits)
 
 ## ✨ About
 
-The **TrashPick** mobile app is designed to guide people on how to properly dispose of waste. Users
+The **SiManSam** mobile app is designed to guide people on how to properly dispose of waste. Users
 can register as a Trash Picker or Trash Collector. Trash Pickers can post details about trash
 disposal and they can sell their trash to Trash Pickers. Trash Collectors can buy it from Trash
 Pickers and sell it to recycling centers. Both users have a chance to earn points and win rewards by
-using this app. The TrashPick project has been developed with the Ethugalpura Pioneers' District
+using this app. The SiManSam project has been developed with the Ethugalpura Pioneers' District
 Rover Crew. This alpha release does not include the complete requirements and interface. **This
 project has been developed as an open source for educational purposes.**
 
 <br>
 
-![Sample Screenshot](https://dileepabandara.github.io/public-images/projects/trashpick-preview.png)
+![Sample Screenshot](https://dileepabandara.github.io/public-images/projects/SiManSam-preview.png)
 
 ## 🎬 Release Status
 
@@ -97,7 +97,7 @@ Before you get started, follow these requirements
 ## 🖼️ Project Gallery
 
 Project screenshots and
-pictures - [Click here to view](https://www.figma.com/file/p9IcDzJLcYuoYnkSShFrUp/TrashPick---Mobile-App-UI?node-id=0%3A1)
+pictures - [Click here to view](https://www.figma.com/file/p9IcDzJLcYuoYnkSShFrUp/SiManSam---Mobile-App-UI?node-id=0%3A1)
 
 ## ❤️ Thanks
 
@@ -121,4 +121,4 @@ If you want to contact me, leave a message via email or Twitter
 This project is licensed under the MIT License  
 MIT ©dileepabandara.dev  
 See the license file for more
-details [LICENSE.md](https://github.com/dileepabandara/trashpick/blob/main/LICENSE)
+details [LICENSE.md](https://github.com/dileepabandara/SiManSam/blob/main/LICENSE)

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Models/user_model.dart';
+import 'package:SiManSam/Models/user_model.dart';
 
 import '../../../Widgets/primary_app_bar_widget.dart';
 
@@ -203,7 +203,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PrimaryAppBar(
-        title: "TrashPick",
+        title: "SiManSam",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
-                  'assets/logos/trashpick_logo_curved.png',
+                  'assets/logos/SiManSam_logo_curved.png',
                   height: 75.0,
                   width: 75.0,
                 ),

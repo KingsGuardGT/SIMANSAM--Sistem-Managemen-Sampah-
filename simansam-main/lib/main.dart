@@ -94,7 +94,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static const String title = 'TrashPick';
+  static const String title = 'SiManSam';
 
   _mainPage() {
     print(
@@ -133,7 +133,7 @@ class _MyAppState extends State<MyApp> {
             home:
                 /*AnimatedSplashScreen(
               splash: Image.asset(
-                'assets/images/trashpick_logo_2.png',
+                'assets/images/SiManSam_logo_2.png',
               ),
               animationDuration: Duration(seconds: 2),
               nextScreen: HomePage(title: title),

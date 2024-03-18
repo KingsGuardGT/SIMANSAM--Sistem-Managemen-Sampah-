@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
-import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
+import 'package:SiManSam/Theme/theme_provider.dart';
+import 'package:SiManSam/Widgets/secondary_app_bar_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class ReadArticle extends StatefulWidget {

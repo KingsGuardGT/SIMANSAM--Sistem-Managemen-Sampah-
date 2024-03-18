@@ -6,12 +6,12 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:trashpick/Models/user_model.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
-import 'package:trashpick/Widgets/button_widgets.dart';
-import 'package:trashpick/Widgets/image_frames_widgets.dart';
-import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
-import 'package:trashpick/Widgets/toast_messages.dart';
+import 'package:SiManSam/Models/user_model.dart';
+import 'package:SiManSam/Theme/theme_provider.dart';
+import 'package:SiManSam/Widgets/button_widgets.dart';
+import 'package:SiManSam/Widgets/image_frames_widgets.dart';
+import 'package:SiManSam/Widgets/secondary_app_bar_widget.dart';
+import 'package:SiManSam/Widgets/toast_messages.dart';
 
 class ProfileInfoPage extends StatefulWidget {
   @override

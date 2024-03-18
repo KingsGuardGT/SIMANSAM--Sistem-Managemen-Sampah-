@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Models/articles_model.dart';
-import 'package:trashpick/Pages/BottomNavBar/BeAware/read_article.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
+import 'package:SiManSam/Models/articles_model.dart';
+import 'package:SiManSam/Pages/BottomNavBar/BeAware/read_article.dart';
+import 'package:SiManSam/Theme/theme_provider.dart';
 
 import '../../../Widgets/primary_app_bar_widget.dart';
 
@@ -94,7 +94,7 @@ class _BeAwareState extends State<BeAware> {
                                       color: AppThemeData
                                           .lightTheme.iconTheme.color),
                                 ),
-                                //Text(trashPickUpsModel.trashLocationAddress),
+                                //Text(SiManSamUpsModel.trashLocationAddress),
                               ],
                             ),
                           ),
@@ -181,7 +181,7 @@ class _BeAwareState extends State<BeAware> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "TrashPick Articles",
+                  "SiManSam Articles",
                   style: TextStyle(
                       fontSize: Theme.of(context).textTheme.headline6.fontSize,
                       fontWeight: FontWeight.bold),
