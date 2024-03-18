@@ -339,7 +339,7 @@ class _SignInPageState extends State<SignInPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text("New to TrashPick?",
+                          Text("New to SIMANSAM?",
                               style: TextStyle(
                                 fontSize:
                                     Theme.of(context).textTheme.button.fontSize,

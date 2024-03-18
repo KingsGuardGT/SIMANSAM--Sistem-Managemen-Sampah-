@@ -49,7 +49,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("New to TrashPick ?",
+                      Text("New to SIMANSAM ?",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
