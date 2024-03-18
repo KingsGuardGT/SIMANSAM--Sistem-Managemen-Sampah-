@@ -94,7 +94,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static const String title = 'TrashPick';
+  static const String title = 'SIMANSAM';
 
   _mainPage() {
     print(
