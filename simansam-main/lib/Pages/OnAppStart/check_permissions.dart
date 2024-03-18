@@ -251,7 +251,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .subtitle1
+                                    .titleMedium
                                     .fontSize),
                           )
                         ],
@@ -271,7 +271,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .subtitle1
+                                    .titleMedium
                                     .fontSize),
                           )
                         ],
@@ -291,7 +291,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .subtitle1
+                                    .titleMedium
                                     .fontSize),
                           )
                         ],
@@ -307,7 +307,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                       "Storage access is looking for photos to use in your picker.",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.subtitle1.fontSize),
+                              Theme.of(context).textTheme.titleMedium.fontSize),
                     ),
                   ),
                   Padding(

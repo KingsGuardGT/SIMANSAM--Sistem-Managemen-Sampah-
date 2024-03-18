@@ -42,7 +42,7 @@ class _UserGuidePageState extends State<UserGuidePage> {
             ),
             title: Text(
               "User Guide",
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             elevation: Theme.of(context).appBarTheme.elevation,
             actions: [
@@ -51,7 +51,7 @@ class _UserGuidePageState extends State<UserGuidePage> {
                 child: TextButton(
                   child: Text(
                     "Continue to Sign Up",
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(

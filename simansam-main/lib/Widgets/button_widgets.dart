@@ -17,7 +17,7 @@ class TextButtonWidget extends StatelessWidget {
         onPressed: onClicked,
         child: Text(text,
             style: TextStyle(
-              fontSize: Theme.of(context).textTheme.button.fontSize,
+              fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
               color: Colors.grey.shade900,
               fontWeight: FontWeight.bold,
             )),
@@ -46,7 +46,7 @@ class RadiusFlatButtonWidget extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: Theme.of(context).textTheme.button.fontSize,
+            fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -114,7 +114,7 @@ class MinButtonWidget extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: Theme.of(context).textTheme.button.fontSize,
+            fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -153,8 +153,8 @@ class TextWithIconButtonWidget extends StatelessWidget {
             ),
             Text(text,
                 style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.button.fontSize,
-                  color: Theme.of(context).textTheme.button.color,
+                  fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
+                  color: Theme.of(context).textTheme.labelLarge.color,
                   fontWeight: FontWeight.bold,
                 )),
           ],

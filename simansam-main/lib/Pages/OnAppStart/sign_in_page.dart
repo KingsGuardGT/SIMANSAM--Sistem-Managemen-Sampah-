@@ -342,7 +342,7 @@ class _SignInPageState extends State<SignInPage> {
                           Text("New to SIMANSAM?",
                               style: TextStyle(
                                 fontSize:
-                                    Theme.of(context).textTheme.button.fontSize,
+                                    Theme.of(context).textTheme.labelLarge.fontSize,
                                 fontWeight: FontWeight.bold,
                               )),
                           SizedBox(width: 10),

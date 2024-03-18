@@ -785,7 +785,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               Text(
                 "Current Location",
                 style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                    fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                     fontWeight: FontWeight.bold),
               ),
             ],
@@ -795,7 +795,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
           widget = Center(
             child: MinButtonWidget(
               text: "Select from Map",
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).colorScheme.background,
               onClicked: () {
                 print("Pressed: Select from Map");
                 showInfoAlert(context);
@@ -830,7 +830,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               Text(
                 'Current Location',
                 style: new TextStyle(
-                    fontSize: Theme.of(context).textTheme.subtitle1.fontSize),
+                    fontSize: Theme.of(context).textTheme.titleMedium.fontSize),
               ),
               Radio(
                 value: 2,
@@ -846,7 +846,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               Text(
                 'Select from Map',
                 style: new TextStyle(
-                  fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+                  fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
                 ),
               ),
             ],
@@ -1022,7 +1022,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                 Text(
                   "Pick Trash Image",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1066,7 +1066,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                                     style: TextStyle(
                                       fontSize: Theme.of(context)
                                           .textTheme
-                                          .headline6
+                                          .titleLarge
                                           .fontSize,
                                       fontWeight: FontWeight.normal,
                                     ),
@@ -1089,7 +1089,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                 Text(
                   "Select Trash Types",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 garbageTypes(),
@@ -1099,7 +1099,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                 Text(
                   "Select Location",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 radioButtonList(),
@@ -1114,7 +1114,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                       "Trash Location",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.subtitle1.fontSize,
+                              Theme.of(context).textTheme.titleMedium.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -1124,7 +1124,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                       "$trashLocationAddress",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.subtitle1.fontSize,
+                              Theme.of(context).textTheme.titleMedium.fontSize,
                           fontWeight: FontWeight.normal),
                     ),
                   ],
@@ -1135,7 +1135,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                 Text(
                   "Select Available Date Period",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1159,7 +1159,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                 Text(
                   "Select Available Time Period",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(

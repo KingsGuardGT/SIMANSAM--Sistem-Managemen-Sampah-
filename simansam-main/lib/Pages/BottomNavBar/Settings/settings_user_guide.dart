@@ -27,7 +27,7 @@ class _SettingsUserGuideState extends State<SettingsUserGuide> {
         ),
         title: Text(
           "User Guide",
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         elevation: Theme.of(context).appBarTheme.elevation,
       ),

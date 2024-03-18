@@ -79,7 +79,7 @@ class _BeAwareState extends State<BeAware> {
                                   style: TextStyle(
                                       fontSize: Theme.of(context)
                                           .textTheme
-                                          .headline6
+                                          .titleLarge
                                           .fontSize,
                                       fontWeight: FontWeight.w500,
                                       color: Theme.of(context).primaryColor),
@@ -130,7 +130,7 @@ class _BeAwareState extends State<BeAware> {
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .headline6
+                                    .titleLarge
                                     .fontSize),
                           ),
                           Image.asset(
@@ -183,7 +183,7 @@ class _BeAwareState extends State<BeAware> {
                 Text(
                   "TrashPick Articles",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(

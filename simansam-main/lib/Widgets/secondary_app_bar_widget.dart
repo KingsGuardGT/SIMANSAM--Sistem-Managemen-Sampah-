@@ -19,7 +19,7 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       elevation: Theme.of(context).appBarTheme.elevation,
       actions: widgets,

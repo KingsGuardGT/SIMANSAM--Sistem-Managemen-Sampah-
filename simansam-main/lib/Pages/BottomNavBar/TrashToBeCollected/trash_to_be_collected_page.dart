@@ -233,7 +233,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
           automaticallyImplyLeading: false,
           title: Text(
             "Trash To Be Collected",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           elevation: Theme.of(context).appBarTheme.elevation,
           actions: <Widget>[
@@ -254,7 +254,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
                   children: [
                     Text(
                       "Trash List",
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(
                       Icons.list_alt_rounded,
@@ -269,7 +269,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
                   children: [
                     Text(
                       "Map View",
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(Icons.map_rounded,
                         color: Theme.of(context).iconTheme.color),

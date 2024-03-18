@@ -35,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
           return Text(
             "Hi! ",
             style: TextStyle(
-                fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
@@ -52,14 +52,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     "${userModelClass.name}",
                     style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.headline6.fontSize,
+                            Theme.of(context).textTheme.titleLarge.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "${userModelClass.accountType}",
                     style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.subtitle1.fontSize,
+                            Theme.of(context).textTheme.titleMedium.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -82,8 +82,8 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       Text("About Us",
           style: TextStyle(
-            fontSize: Theme.of(context).textTheme.button.fontSize,
-            color: Theme.of(context).textTheme.button.color,
+            fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
+            color: Theme.of(context).textTheme.labelLarge.color,
             fontWeight: FontWeight.bold,
           ))
     ]);
@@ -95,7 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
         Text(
           hashTags,
           style: TextStyle(
-              fontSize: Theme.of(context).textTheme.caption.fontSize,
+              fontSize: Theme.of(context).textTheme.bodySmall.fontSize,
               fontWeight: FontWeight.bold,
               color: AppThemeData().deepBlueColor),
         ),
@@ -177,7 +177,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           "$themeText",
                           style: TextStyle(
                               fontSize:
-                                  Theme.of(context).textTheme.button.fontSize,
+                                  Theme.of(context).textTheme.labelLarge.fontSize,
                               fontWeight: FontWeight.bold),
                         ),
                       ],

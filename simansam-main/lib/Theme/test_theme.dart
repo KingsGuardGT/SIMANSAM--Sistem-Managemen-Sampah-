@@ -29,48 +29,48 @@ class _TestThemeState extends State<TestTheme> {
           child: Column(
             children: [
               Container(
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
                 child: Text(
                   'Text with a background color',
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
               ChangeThemeButtonWidget(),
               Text(
                 "App Theme $themeText",
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Text(
                 "headline1",
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               Text(
                 "headline2",
-                style: Theme.of(context).textTheme.headline2,
+                style: Theme.of(context).textTheme.displayMedium,
               ),
               Text(
                 "headline3",
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.displaySmall,
               ),
               Text(
                 "headline4",
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Text(
                 "headline5",
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               Text(
                 "headline6",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Text(
                 "bodyText1",
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               Text(
                 "bodyText2",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               SizedBox(
                 height: 50.0,
@@ -98,7 +98,7 @@ class _TestThemeState extends State<TestTheme> {
               ),
               Text(
                 "PrimaryColor - Green",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,
@@ -107,25 +107,25 @@ class _TestThemeState extends State<TestTheme> {
               ),
               Text(
                 "SecondaryColor",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,
                 width: MediaQuery.of(context).size.width,
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.background,
               ),
               Text(
                 "AccentColor",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,
                 width: MediaQuery.of(context).size.width,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               Text(
                 "RedColor",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,
@@ -134,7 +134,7 @@ class _TestThemeState extends State<TestTheme> {
               ),
               Text(
                 "BlueColor",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,
@@ -143,7 +143,7 @@ class _TestThemeState extends State<TestTheme> {
               ),
               Text(
                 "YellowColor",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,
@@ -152,7 +152,7 @@ class _TestThemeState extends State<TestTheme> {
               ),
               Text(
                 "WhiteColor",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,
@@ -161,7 +161,7 @@ class _TestThemeState extends State<TestTheme> {
               ),
               Text(
                 "GreyColor",
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               Container(
                 height: 50.0,

@@ -38,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       title,
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
           fontWeight: FontWeight.bold),
     );
   }
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       detailString,
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
           fontWeight: FontWeight.bold),
     );
   }
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
       points,
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
           fontWeight: FontWeight.normal),
     );
   }
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
           return Text(
             "Hi! ",
             style: TextStyle(
-                fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 "Hi! ${userModelClass.name}",
                 style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                    fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                     fontWeight: FontWeight.normal),
               ),
             ],
@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                     "Welcome",
                     style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.headline5.fontSize,
+                            Theme.of(context).textTheme.headlineSmall.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

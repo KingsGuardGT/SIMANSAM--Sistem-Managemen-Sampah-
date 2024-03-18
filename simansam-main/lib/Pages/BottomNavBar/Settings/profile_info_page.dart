@@ -275,7 +275,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+            fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -288,7 +288,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+            fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
             fontWeight: FontWeight.normal),
       ),
     );
@@ -307,7 +307,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
             return Text(
               "Hi! ",
               style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                  fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                   fontWeight: FontWeight.bold),
             );
           } else {

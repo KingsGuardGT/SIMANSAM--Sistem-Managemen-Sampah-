@@ -15,7 +15,7 @@ class SignOutAlertDialog {
             TextButton(
               child: Text(
                 "NO",
-                style: Theme.of(context).textTheme.button,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -25,7 +25,7 @@ class SignOutAlertDialog {
             TextButton(
               child: Text(
                 "YES",
-                style: Theme.of(context).textTheme.button,
+                style: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();

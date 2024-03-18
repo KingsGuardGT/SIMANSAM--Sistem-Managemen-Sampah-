@@ -80,7 +80,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
                                 style: TextStyle(
                                     fontSize: Theme.of(context)
                                         .textTheme
-                                        .headline6
+                                        .titleLarge
                                         .fontSize,
                                     fontWeight: FontWeight.w500,
                                     color: Theme.of(context).primaryColor),
@@ -145,7 +145,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .headline6
+                                    .titleLarge
                                     .fontSize),
                           ),
                           ClipOval(

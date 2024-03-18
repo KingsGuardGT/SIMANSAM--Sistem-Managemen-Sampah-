@@ -302,7 +302,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           "Select Account Type",
           style: TextStyle(
-              fontSize: Theme.of(context).textTheme.headline6.fontSize,
+              fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
               fontWeight: FontWeight.bold),
         ),
         SizedBox(
@@ -391,7 +391,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .headline5
+                                    .headlineSmall
                                     .fontSize,
                                 fontWeight: FontWeight.bold,
                               )),

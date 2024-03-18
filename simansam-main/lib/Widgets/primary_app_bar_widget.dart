@@ -15,7 +15,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: Text(
         title,
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       elevation: Theme.of(context).appBarTheme.elevation,
       actions: widgets,

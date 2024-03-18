@@ -221,7 +221,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
           automaticallyImplyLeading: false,
           title: Text(
             "Recycling Centers",
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           elevation: Theme.of(context).appBarTheme.elevation,
           actions: <Widget>[
@@ -242,7 +242,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
                   children: [
                     Text(
                       "Centers List",
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(
                       Icons.location_on_rounded,
@@ -257,7 +257,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
                   children: [
                     Text(
                       "Map View",
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(Icons.map_rounded,
                         color: Theme.of(context).iconTheme.color),

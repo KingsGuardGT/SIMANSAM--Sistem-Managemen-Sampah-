@@ -8,8 +8,8 @@ class RecyclingCentersBottomSheet {
       child: Text(
         detailsTitle,
         style: TextStyle(
-            color: Theme.of(context).textTheme.subtitle2.color,
-            fontSize: Theme.of(context).textTheme.subtitle2.fontSize,
+            color: Theme.of(context).textTheme.titleSmall.color,
+            fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -21,8 +21,8 @@ class RecyclingCentersBottomSheet {
       child: Text(
         detailsName,
         style: TextStyle(
-            color: Theme.of(context).textTheme.subtitle2.color,
-            fontSize: Theme.of(context).textTheme.subtitle2.fontSize,
+            color: Theme.of(context).textTheme.titleSmall.color,
+            fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
             fontWeight: FontWeight.normal),
       ),
     );
@@ -32,7 +32,7 @@ class RecyclingCentersBottomSheet {
       RecyclingCenterModel recyclingCenterModel, var latitude, var longitude) {
     return SingleChildScrollView(
       child: Container(
-        color: Theme.of(context).appBarTheme.color,
+        color: Theme.of(context).appBarTheme.backgroundColor,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -53,10 +53,10 @@ class RecyclingCentersBottomSheet {
                           "Recycling Center",
                           style: TextStyle(
                               color:
-                                  Theme.of(context).textTheme.headline6.color,
+                                  Theme.of(context).textTheme.titleLarge.color,
                               fontSize: Theme.of(context)
                                   .textTheme
-                                  .headline6
+                                  .titleLarge
                                   .fontSize,
                               fontWeight: FontWeight.bold),
                         ),

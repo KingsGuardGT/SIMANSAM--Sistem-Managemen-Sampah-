@@ -73,7 +73,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                               style: TextStyle(
                                   fontSize: Theme.of(context)
                                       .textTheme
-                                      .headline6
+                                      .titleLarge
                                       .fontSize,
                                   fontWeight: FontWeight.w500,
                                   color: Theme.of(context).primaryColor),
@@ -128,7 +128,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .headline6
+                                    .titleLarge
                                     .fontSize),
                           ),
                           Image.asset(
@@ -185,7 +185,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                       "Made for ${widget.accountType}",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.subtitle1.fontSize,
+                              Theme.of(context).textTheme.titleMedium.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -195,7 +195,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                 ),
                 MinButtonWidget(
                   text: "Schedule a Trash Pick Up",
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   onClicked: () {
                     print("Pressed: Schedule a Trash Pick Up");
                     Navigator.push(
@@ -212,7 +212,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                 Text(
                   "My Scheduled Trash Pick Ups",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(

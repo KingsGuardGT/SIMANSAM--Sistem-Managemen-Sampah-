@@ -12,7 +12,7 @@ class ToastMessages {
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.black87,
       textColor: AppThemeData().whiteColor,
-      fontSize: Theme.of(context).textTheme.caption.fontSize,
+      fontSize: Theme.of(context).textTheme.bodySmall.fontSize,
     );
   }
 
@@ -24,7 +24,7 @@ class ToastMessages {
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.black87,
       textColor: AppThemeData().whiteColor,
-      fontSize: Theme.of(context).textTheme.caption.fontSize,
+      fontSize: Theme.of(context).textTheme.bodySmall.fontSize,
     );
   }
 
@@ -36,7 +36,7 @@ class ToastMessages {
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.black87,
       textColor: AppThemeData().whiteColor,
-      fontSize: Theme.of(context).textTheme.caption.fontSize,
+      fontSize: Theme.of(context).textTheme.bodySmall.fontSize,
     );
   }
 
@@ -48,7 +48,7 @@ class ToastMessages {
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.black87,
       textColor: AppThemeData().whiteColor,
-      fontSize: Theme.of(context).textTheme.caption.fontSize,
+      fontSize: Theme.of(context).textTheme.bodySmall.fontSize,
     );
   }
 }

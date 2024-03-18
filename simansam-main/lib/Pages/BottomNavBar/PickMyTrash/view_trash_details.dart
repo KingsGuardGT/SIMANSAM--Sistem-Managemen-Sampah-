@@ -84,7 +84,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
     return Text(
       title,
       style: TextStyle(
-          fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
           fontWeight: FontWeight.bold),
     );
   }
@@ -95,7 +95,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
       child: Text(
         detailsData,
         style: TextStyle(
-            fontSize: Theme.of(context).textTheme.subtitle1.fontSize,
+            fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
             fontWeight: FontWeight.normal),
       ),
     );
@@ -168,7 +168,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
           return Text(
             "Data Unavailable",
             style: TextStyle(
-                fontSize: Theme.of(context).textTheme.headline6.fontSize,
+                fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
@@ -182,7 +182,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
               Text(
                 "${trashPickUpsModel.trashName}",
                 style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.headline5.fontSize,
+                    fontSize: Theme.of(context).textTheme.headlineSmall.fontSize,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -244,7 +244,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                     child: widget.accountType == "Trash Picker"
                         ? MinButtonWidget(
                             text: "Edit Trash Pick Up",
-                            color: Theme.of(context).backgroundColor,
+                            color: Theme.of(context).colorScheme.background,
                             onClicked: () =>
                                 {print("Edit Trash Pick Ups Pressed!")},
                           )

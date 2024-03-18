@@ -83,7 +83,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                                 style: TextStyle(
                                     fontSize: Theme.of(context)
                                         .textTheme
-                                        .headline6
+                                        .titleLarge
                                         .fontSize,
                                     fontWeight: FontWeight.w500,
                                     color: Theme.of(context).primaryColor),
@@ -139,7 +139,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .headline6
+                                    .titleLarge
                                     .fontSize),
                           ),
                           ClipOval(
@@ -210,7 +210,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
             ),
             Text(
               "${selectedTrashPickerModel.name}'s Trash Pick Ups",
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
@@ -267,7 +267,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                               style: TextStyle(
                                   fontSize: Theme.of(context)
                                       .textTheme
-                                      .headline6
+                                      .titleLarge
                                       .fontSize,
                                   fontWeight: FontWeight.w500,
                                   color: Theme.of(context).primaryColor),
@@ -322,7 +322,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
-                                    .headline6
+                                    .titleLarge
                                     .fontSize),
                           ),
                           Image.asset(
@@ -367,7 +367,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                     ),
                     Text(
                       "Trash Pickers",
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     _trashPickersList(),
                   ],
