@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:SiManSam/Pages/BottomNavBar/PickMyTrash/pick_my_trash_page.dart';
-import 'package:SiManSam/Pages/BottomNavBar/TrashToBeCollected/trash_to_be_collected_page.dart';
+import 'package:trashpick/Pages/BottomNavBar/PickMyTrash/pick_my_trash_page.dart';
+import 'package:trashpick/Pages/BottomNavBar/TrashToBeCollected/trash_to_be_collected_page.dart';
 
 import '../../Theme/theme_provider.dart';
 import 'BeAware/be_aware.dart';
@@ -104,7 +104,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       onWillPop: () async => showDialog<bool>(
           context: context,
           builder: (c) => AlertDialog(
-                title: Text('Exit from SiManSam'),
+                title: Text('Exit from TrashPick'),
                 content: Text('Do you really want to exit'),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),

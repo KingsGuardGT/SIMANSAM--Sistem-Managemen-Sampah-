@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:SiManSam/Pages/OnAppStart/sign_up_page.dart';
-import 'package:SiManSam/Pages/OnAppStart/welcome_page.dart';
+import 'package:trashpick/Pages/OnAppStart/sign_up_page.dart';
+import 'package:trashpick/Pages/OnAppStart/welcome_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class UserGuidePage extends StatefulWidget {
@@ -12,7 +12,7 @@ class _UserGuidePageState extends State<UserGuidePage> {
   final _key = UniqueKey();
   bool isLoading = true;
   String siteLink =
-      "https://sites.google.com/view/SiManSam--app-user-guide/home";
+      "https://sites.google.com/view/trashpick--app-user-guide/home";
 
   @override
   Widget build(BuildContext context) {

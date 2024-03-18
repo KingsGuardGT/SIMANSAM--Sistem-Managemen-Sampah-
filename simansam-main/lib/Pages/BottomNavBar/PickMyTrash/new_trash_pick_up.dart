@@ -8,25 +8,25 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:SiManSam/Generators/uui_generator.dart';
-import 'package:SiManSam/Pages/BottomNavBar/PickMyTrash/pick_trash_location.dart';
-import 'package:SiManSam/Theme/theme_provider.dart';
-import 'package:SiManSam/Widgets/button_widgets.dart';
-import 'package:SiManSam/Widgets/secondary_app_bar_widget.dart';
-import 'package:SiManSam/Widgets/toast_messages.dart';
+import 'package:trashpick/Generators/uui_generator.dart';
+import 'package:trashpick/Pages/BottomNavBar/PickMyTrash/pick_trash_location.dart';
+import 'package:trashpick/Theme/theme_provider.dart';
+import 'package:trashpick/Widgets/button_widgets.dart';
+import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
+import 'package:trashpick/Widgets/toast_messages.dart';
 
 import '../bottom_nav_bar.dart';
 
-class NewSiManSamUp extends StatefulWidget {
+class NewTrashPickUp extends StatefulWidget {
   final String accountType;
 
-  NewSiManSamUp(this.accountType);
+  NewTrashPickUp(this.accountType);
 
   @override
-  _NewSiManSamUpState createState() => _NewSiManSamUpState();
+  _NewTrashPickUpState createState() => _NewTrashPickUpState();
 }
 
-class _NewSiManSamUpState extends State<NewSiManSamUp> {
+class _NewTrashPickUpState extends State<NewTrashPickUp> {
   TextEditingController _trashNameController = new TextEditingController();
   TextEditingController _trashDescriptionController =
       new TextEditingController();
@@ -509,7 +509,7 @@ class _NewSiManSamUpState extends State<NewSiManSamUp> {
     }
   }
 
-  printSiManSamUpDetails() {
+  printTrashPickUpDetails() {
     String info =
         "------------------------- Trash Pick Up Details -------------------------\n"
                 "Trash Name: " +
@@ -568,11 +568,11 @@ class _NewSiManSamUpState extends State<NewSiManSamUp> {
       new ToastMessages().toastError(
           "Return Time cannot be early than Start Time on same day", context);
     } else {
-      printSiManSamUpDetails();
+      printTrashPickUpDetails();
       showAlertDialog(context);
       uploadImagesToStorage();
     }
-    //printSiManSamUpDetails();
+    //printTrashPickUpDetails();
   }
 
   @override
@@ -1182,7 +1182,7 @@ class _NewSiManSamUpState extends State<NewSiManSamUp> {
                 MinButtonWidget(
                   onClicked: () {
                     getCheckboxItems();
-                    //printSiManSamUpDetails();
+                    //printTrashPickUpDetails();
                     validatePickUp();
                   },
                   color: AppThemeData().secondaryColor,

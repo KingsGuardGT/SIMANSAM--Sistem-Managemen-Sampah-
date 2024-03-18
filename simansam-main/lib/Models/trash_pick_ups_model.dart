@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SiManSamUpsModel {
+class TrashPickUpsModel {
   final String trashID;
   final String postedDate;
   final String trashName;
@@ -14,7 +14,7 @@ class SiManSamUpsModel {
   final String startTime;
   final String returnTime;
 
-  SiManSamUpsModel({
+  TrashPickUpsModel({
     this.trashID,
     this.postedDate,
     this.trashName,
@@ -29,8 +29,8 @@ class SiManSamUpsModel {
     this.returnTime,
   });
 
-  factory SiManSamUpsModel.fromDocument(DocumentSnapshot documentSnapshot) {
-    return SiManSamUpsModel(
+  factory TrashPickUpsModel.fromDocument(DocumentSnapshot documentSnapshot) {
+    return TrashPickUpsModel(
       trashID: documentSnapshot['trashID'],
       postedDate: documentSnapshot['postedDate'],
       trashName: documentSnapshot['trashName'],

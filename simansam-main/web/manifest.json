@@ -1,6 +1,6 @@
 {
-  "name": "SiManSam",
-  "short_name": "SiManSam",
+  "name": "trashpick",
+  "short_name": "trashpick",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",

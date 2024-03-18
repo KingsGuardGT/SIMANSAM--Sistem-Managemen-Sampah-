@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:SiManSam/Models/trash_pick_ups_model.dart';
-import 'package:SiManSam/Models/user_model.dart';
-import 'package:SiManSam/Pages/BottomNavBar/PickMyTrash/view_trash_details.dart';
-import 'package:SiManSam/Theme/theme_provider.dart';
+import 'package:trashpick/Models/trash_pick_ups_model.dart';
+import 'package:trashpick/Models/user_model.dart';
+import 'package:trashpick/Pages/BottomNavBar/PickMyTrash/view_trash_details.dart';
+import 'package:trashpick/Theme/theme_provider.dart';
 
 class TrashToBeCollectedList extends StatefulWidget {
   @override
@@ -12,10 +12,10 @@ class TrashToBeCollectedList extends StatefulWidget {
 
 class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
   final firestoreInstance = FirebaseFirestore.instance;
-  SiManSamUpsModel SiManSamUpsModel;
-  UserModelClass selectedSiManSamerModel;
+  TrashPickUpsModel trashPickUpsModel;
+  UserModelClass selectedTrashPickerModel;
   String accountType = "Trash Collector";
-  bool viewSiManSamer = false;
+  bool viewTrashPicker = false;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
     );
   }
 
-  Widget SiManSamersDetailsCard(
+  Widget trashPickersDetailsCard(
       AsyncSnapshot<QuerySnapshot> snapshot, UserModelClass userModelClass) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -49,8 +49,8 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
             onTap: () {
               print('Selected Trash: ${userModelClass.uuid}');
               setState(() {
-                viewSiManSamer = true;
-                selectedSiManSamerModel = userModelClass;
+                viewTrashPicker = true;
+                selectedTrashPickerModel = userModelClass;
               });
             },
             child: snapshot.data.docs.length == null
@@ -110,7 +110,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
     );
   }
 
-  _SiManSamersList() {
+  _trashPickersList() {
     return Container(
       height: MediaQuery.of(context).size.height * 0.75,
       child: StreamBuilder<QuerySnapshot>(
@@ -144,7 +144,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                           ),
                           ClipOval(
                             child: Image.asset(
-                              'assets/images/SiManSam_user_avatar.png',
+                              'assets/images/trashpick_user_avatar.png',
                               height: 60.0,
                               width: 60.0,
                             ),
@@ -160,7 +160,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                         UserModelClass userModelClass =
                             UserModelClass.fromDocument(
                                 snapshot.data.docs[index]);
-                        return SiManSamersDetailsCard(
+                        return trashPickersDetailsCard(
                             snapshot, userModelClass);
                       },
                     );
@@ -169,7 +169,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
     );
   }
 
-  getAllSiManSamUps() {
+  getAllTrashPickUps() {
     FirebaseFirestore.instance.collection("Users").get().then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
         FirebaseFirestore.instance
@@ -179,20 +179,20 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
             .get()
             .then((querySnapshot) {
           querySnapshot.docs.forEach((result) {
-            SiManSamUpsModel SiManSamUpsModel =
-                SiManSamUpsModel.fromDocument(result);
+            TrashPickUpsModel trashPickUpsModel =
+                TrashPickUpsModel.fromDocument(result);
 
             print("--------------------- Trash Pick Ups ---------------------\n"
-                "id: ${SiManSamUpsModel.trashID}\n"
-                "name: ${SiManSamUpsModel.trashName}\n"
-                "image: ${SiManSamUpsModel.trashImage}");
+                "id: ${trashPickUpsModel.trashID}\n"
+                "name: ${trashPickUpsModel.trashName}\n"
+                "image: ${trashPickUpsModel.trashImage}");
           });
         });
       });
     });
   }
 
-  _selectedSiManSamer() {
+  _selectedTrashPicker() {
     return Column(
       children: [
         SizedBox(
@@ -204,24 +204,24 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
               icon: Icon(Icons.arrow_back_ios_rounded),
               onPressed: () {
                 setState(() {
-                  viewSiManSamer = false;
+                  viewTrashPicker = false;
                 });
               },
             ),
             Text(
-              "${selectedSiManSamerModel.name}'s Trash Pick Ups",
+              "${selectedTrashPickerModel.name}'s Trash Pick Ups",
               style: Theme.of(context).textTheme.bodyText2,
             ),
           ],
         ),
-        _scheduledSiManSamsList(
-            selectedSiManSamerModel.name, selectedSiManSamerModel.uuid),
+        _scheduledTrashPicksList(
+            selectedTrashPickerModel.name, selectedTrashPickerModel.uuid),
       ],
     );
   }
 
   Widget trashDetailsCard(AsyncSnapshot<QuerySnapshot> snapshot,
-      SiManSamUpsModel SiManSamUpsModel, String userID) {
+      TrashPickUpsModel trashPickUpsModel, String userID) {
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -231,12 +231,12 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
-            print('Selected Trash: ${SiManSamUpsModel.trashID}');
+            print('Selected Trash: ${trashPickUpsModel.trashID}');
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ViewTrashDetails(
-                      userID, SiManSamUpsModel.trashID, "Trash Collector")),
+                      userID, trashPickUpsModel.trashID, "Trash Collector")),
             );
           },
           child: snapshot.data.docs.length == null
@@ -246,7 +246,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image.network(
-                        SiManSamUpsModel.trashImage,
+                        trashPickUpsModel.trashImage,
                         fit: BoxFit.cover,
                         height: 150,
                         width: 150,
@@ -263,7 +263,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              SiManSamUpsModel.trashName,
+                              trashPickUpsModel.trashName,
                               style: TextStyle(
                                   fontSize: Theme.of(context)
                                       .textTheme
@@ -276,13 +276,13 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                               color: Theme.of(context).iconTheme.color,
                             ),
                             Text(
-                              SiManSamUpsModel.trashDescription,
+                              trashPickUpsModel.trashDescription,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color:
                                       AppThemeData.lightTheme.iconTheme.color),
                             ),
-                            //Text(SiManSamUpsModel.trashLocationAddress),
+                            //Text(trashPickUpsModel.trashLocationAddress),
                           ],
                         ),
                       ),
@@ -294,7 +294,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
     );
   }
 
-  _scheduledSiManSamsList(String userName, String userID) {
+  _scheduledTrashPicksList(String userName, String userID) {
     return Container(
       height: MediaQuery.of(context).size.height,
       //color: Colors.red,
@@ -338,11 +338,11 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                       physics: BouncingScrollPhysics(),
                       itemCount: snapshot.data.docs.length,
                       itemBuilder: (BuildContext context, int index) {
-                        SiManSamUpsModel SiManSamUpsModel =
-                            SiManSamUpsModel.fromDocument(
+                        TrashPickUpsModel trashPickUpsModel =
+                            TrashPickUpsModel.fromDocument(
                                 snapshot.data.docs[index]);
                         return trashDetailsCard(
-                            snapshot, SiManSamUpsModel, userID);
+                            snapshot, trashPickUpsModel, userID);
                       },
                     );
         },
@@ -356,9 +356,9 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Center(
-          child: viewSiManSamer
+          child: viewTrashPicker
               ? Container(
-                  child: _selectedSiManSamer(),
+                  child: _selectedTrashPicker(),
                 )
               : Column(
                   children: [
@@ -369,7 +369,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                       "Trash Pickers",
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    _SiManSamersList(),
+                    _trashPickersList(),
                   ],
                 ),
         ),

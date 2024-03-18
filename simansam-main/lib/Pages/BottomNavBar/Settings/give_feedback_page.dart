@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:SiManSam/Generators/uui_generator.dart';
-import 'package:SiManSam/Theme/theme_provider.dart';
-import 'package:SiManSam/Widgets/button_widgets.dart';
-import 'package:SiManSam/Widgets/secondary_app_bar_widget.dart';
-import 'package:SiManSam/Widgets/toast_messages.dart';
+import 'package:trashpick/Generators/uui_generator.dart';
+import 'package:trashpick/Theme/theme_provider.dart';
+import 'package:trashpick/Widgets/button_widgets.dart';
+import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
+import 'package:trashpick/Widgets/toast_messages.dart';
 
 class GiveFeedbackPage extends StatefulWidget {
   @override
@@ -212,7 +212,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
             height: 20.0,
           ),
           Image.asset(
-            'assets/logos/SiManSam_logo_curved.png',
+            'assets/logos/trashpick_logo_curved.png',
             height: 150.0,
             width: 150.0,
           ),

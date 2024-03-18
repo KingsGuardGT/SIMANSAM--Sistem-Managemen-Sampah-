@@ -76,21 +76,21 @@ class _TestThemeState extends State<TestTheme> {
                 height: 50.0,
               ),
               Image.asset(
-                'assets/logos/SiManSam_logo_curved.png',
+                'assets/logos/trashpick_logo_curved.png',
                 scale: 5.0,
               ),
               SizedBox(
                 height: 20.0,
               ),
               Image.asset(
-                'assets/logos/SiManSam_logo_round.png',
+                'assets/logos/trashpick_logo_round.png',
                 scale: 5.0,
               ),
               SizedBox(
                 height: 20.0,
               ),
               Image.asset(
-                'assets/logos/SiManSam_logo_square.png',
+                'assets/logos/trashpick_logo_square.png',
                 scale: 5.0,
               ),
               SizedBox(

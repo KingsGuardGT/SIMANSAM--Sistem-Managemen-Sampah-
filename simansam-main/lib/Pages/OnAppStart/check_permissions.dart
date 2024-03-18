@@ -192,7 +192,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
       onWillPop: () async => showDialog<bool>(
           context: context,
           builder: (c) => AlertDialog(
-                title: Text('Exit from SiManSam'),
+                title: Text('Exit from TrashPick'),
                 content: Text('Do you really want to exit'),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -219,7 +219,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                 children: <Widget>[
                   SizedBox(height: 20),
                   Image.asset(
-                    'assets/logos/SiManSam_logo_banner.png',
+                    'assets/logos/trashpick_logo_banner.png',
                     height: 150,
                     width: 150,
                   ),

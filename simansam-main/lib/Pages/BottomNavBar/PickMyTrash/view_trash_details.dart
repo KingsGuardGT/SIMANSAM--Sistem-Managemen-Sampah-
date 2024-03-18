@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:SiManSam/Models/trash_pick_ups_model.dart';
-import 'package:SiManSam/Widgets/button_widgets.dart';
-import 'package:SiManSam/Widgets/secondary_app_bar_widget.dart';
+import 'package:trashpick/Models/trash_pick_ups_model.dart';
+import 'package:trashpick/Widgets/button_widgets.dart';
+import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
 
 class ViewTrashDetails extends StatefulWidget {
   final String userID, trashID, accountType;
@@ -19,18 +19,18 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   List trashTypesList;
 
-  Widget trashTypesFilter(SiManSamUpsModel SiManSamUpsModel) {
+  Widget trashTypesFilter(TrashPickUpsModel trashPickUpsModel) {
     return Container(
-      height: (SiManSamUpsModel.trashTypes.length.toDouble() * 45),
+      height: (trashPickUpsModel.trashTypes.length.toDouble() * 45),
       child: ListView.builder(
           scrollDirection: Axis.vertical,
           physics: BouncingScrollPhysics(),
-          itemCount: SiManSamUpsModel.trashTypes.length,
+          itemCount: trashPickUpsModel.trashTypes.length,
           itemBuilder: (BuildContext context, int index) {
             Color trashTypeColor;
             String trashTypeDescription;
 
-            switch (SiManSamUpsModel.trashTypes[index]) {
+            switch (trashPickUpsModel.trashTypes[index]) {
               case "Plastic & Polythene":
                 trashTypeColor = Colors.orange.shade700;
                 trashTypeDescription = "Plastic & Polythene";
@@ -72,7 +72,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                   SizedBox(
                     width: 10.0,
                   ),
-                  Text(SiManSamUpsModel.trashTypes[index]),
+                  Text(trashPickUpsModel.trashTypes[index]),
                 ],
               ),
             );
@@ -172,15 +172,15 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                 fontWeight: FontWeight.bold),
           );
         } else {
-          SiManSamUpsModel SiManSamUpsModel =
-              SiManSamUpsModel.fromDocument(snapshot.data.docs[0]);
+          TrashPickUpsModel trashPickUpsModel =
+              TrashPickUpsModel.fromDocument(snapshot.data.docs[0]);
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${SiManSamUpsModel.trashName}",
+                "${trashPickUpsModel.trashName}",
                 style: TextStyle(
                     fontSize: Theme.of(context).textTheme.headline5.fontSize,
                     fontWeight: FontWeight.bold),
@@ -191,7 +191,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
                 child: Image.network(
-                  SiManSamUpsModel.trashImage,
+                  trashPickUpsModel.trashImage,
                   height: 200.0,
                   width: MediaQuery.of(context).size.width,
                   fit: BoxFit.cover,
@@ -205,38 +205,38 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   trashTitle("Trash Location"),
-                  trashDetailsData(SiManSamUpsModel.trashLocationAddress),
+                  trashDetailsData(trashPickUpsModel.trashLocationAddress),
                   SizedBox(
                     height: 20.0,
                   ),
                   trashTitle("Trash Description"),
-                  trashDetailsData(SiManSamUpsModel.trashDescription),
+                  trashDetailsData(trashPickUpsModel.trashDescription),
                   SizedBox(
                     height: 20.0,
                   ),
                   trashTitle("Trash Types"),
-                  trashDetailsData(SiManSamUpsModel.trashTypes.toString()),
-                  trashTypesFilter(SiManSamUpsModel),
+                  trashDetailsData(trashPickUpsModel.trashTypes.toString()),
+                  trashTypesFilter(trashPickUpsModel),
                   trashAvailableDatesTimes(
                       true,
                       "Start Date",
-                      SiManSamUpsModel.startDate,
+                      trashPickUpsModel.startDate,
                       "Return Date",
-                      SiManSamUpsModel.returnDate),
+                      trashPickUpsModel.returnDate),
                   SizedBox(
                     height: 20.0,
                   ),
                   trashAvailableDatesTimes(
                       false,
                       "Start Time",
-                      SiManSamUpsModel.startTime,
+                      trashPickUpsModel.startTime,
                       "Return Time",
-                      SiManSamUpsModel.returnTime),
+                      trashPickUpsModel.returnTime),
                   SizedBox(
                     height: 20.0,
                   ),
                   trashTitle("Posted Date"),
-                  trashDetailsData(SiManSamUpsModel.postedDate),
+                  trashDetailsData(trashPickUpsModel.postedDate),
                   SizedBox(
                     height: 20.0,
                   ),

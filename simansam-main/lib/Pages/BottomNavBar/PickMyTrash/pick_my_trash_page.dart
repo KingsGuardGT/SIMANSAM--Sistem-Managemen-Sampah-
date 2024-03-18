@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:SiManSam/Pages/BottomNavBar/PickMyTrash/new_trash_pick_up.dart';
-import 'package:SiManSam/Theme/theme_provider.dart';
-import 'package:SiManSam/Widgets/button_widgets.dart';
+import 'package:trashpick/Pages/BottomNavBar/PickMyTrash/new_trash_pick_up.dart';
+import 'package:trashpick/Theme/theme_provider.dart';
+import 'package:trashpick/Widgets/button_widgets.dart';
 
 import '../../../Models/trash_pick_ups_model.dart';
 import '../../../Widgets/primary_app_bar_widget.dart';
@@ -22,12 +22,12 @@ class _PickMyTrashState extends State<PickMyTrash> {
   final String userProfileID = FirebaseAuth.instance.currentUser.uid.toString();
   final firestoreInstance = FirebaseFirestore.instance;
 
-/*  _scheduledSiManSamsList() {
-    return Text("_scheduledSiManSamsList");
+/*  _scheduledTrashPicksList() {
+    return Text("_scheduledTrashPicksList");
   }*/
 
   Widget trashDetailsCard(AsyncSnapshot<QuerySnapshot> snapshot,
-      SiManSamUpsModel SiManSamUpsModel) {
+      TrashPickUpsModel trashPickUpsModel) {
     return Container(
       child: Card(
         shape: RoundedRectangleBorder(
@@ -37,12 +37,12 @@ class _PickMyTrashState extends State<PickMyTrash> {
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
-            print('Selected Trash: ${SiManSamUpsModel.trashID}');
+            print('Selected Trash: ${trashPickUpsModel.trashID}');
             Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ViewTrashDetails(userProfileID,
-                      SiManSamUpsModel.trashID, widget.accountType)),
+                      trashPickUpsModel.trashID, widget.accountType)),
             );
           },
           child: snapshot.data.docs.length == null
@@ -52,7 +52,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image.network(
-                        SiManSamUpsModel.trashImage,
+                        trashPickUpsModel.trashImage,
                         fit: BoxFit.cover,
                         height: 150,
                         width: 150,
@@ -69,7 +69,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              SiManSamUpsModel.trashName,
+                              trashPickUpsModel.trashName,
                               style: TextStyle(
                                   fontSize: Theme.of(context)
                                       .textTheme
@@ -82,13 +82,13 @@ class _PickMyTrashState extends State<PickMyTrash> {
                               color: Theme.of(context).iconTheme.color,
                             ),
                             Text(
-                              SiManSamUpsModel.trashDescription,
+                              trashPickUpsModel.trashDescription,
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   color:
                                       AppThemeData.lightTheme.iconTheme.color),
                             ),
-                            //Text(SiManSamUpsModel.trashLocationAddress),
+                            //Text(trashPickUpsModel.trashLocationAddress),
                           ],
                         ),
                       ),
@@ -100,7 +100,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
     );
   }
 
-  _scheduledSiManSamsList() {
+  _scheduledTrashPicksList() {
     return Container(
       height: MediaQuery.of(context).size.height,
       //color: Colors.red,
@@ -144,10 +144,10 @@ class _PickMyTrashState extends State<PickMyTrash> {
                       physics: BouncingScrollPhysics(),
                       itemCount: snapshot.data.docs.length,
                       itemBuilder: (BuildContext context, int index) {
-                        SiManSamUpsModel SiManSamUpsModel =
-                            SiManSamUpsModel.fromDocument(
+                        TrashPickUpsModel trashPickUpsModel =
+                            TrashPickUpsModel.fromDocument(
                                 snapshot.data.docs[index]);
-                        return trashDetailsCard(snapshot, SiManSamUpsModel);
+                        return trashDetailsCard(snapshot, trashPickUpsModel);
                       },
                     );
         },
@@ -202,7 +202,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              NewSiManSamUp(widget.accountType)),
+                              NewTrashPickUp(widget.accountType)),
                     );
                   },
                 ),
@@ -218,7 +218,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                 SizedBox(
                   height: 20.0,
                 ),
-                _scheduledSiManSamsList(),
+                _scheduledTrashPicksList(),
               ],
             ),
           ),
