@@ -8,12 +8,12 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:trashpick/Generators/uui_generator.dart';
-import 'package:trashpick/Pages/BottomNavBar/PickMyTrash/pick_trash_location.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
-import 'package:trashpick/Widgets/button_widgets.dart';
-import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
-import 'package:trashpick/Widgets/toast_messages.dart';
+import 'package:simansam/Generators/uui_generator.dart';
+import 'package:simansam/Pages/BottomNavBar/PickMyTrash/pick_trash_location.dart';
+import 'package:simansam/Theme/theme_provider.dart';
+import 'package:simansam/Widgets/button_widgets.dart';
+import 'package:simansam/Widgets/secondary_app_bar_widget.dart';
+import 'package:simansam/Widgets/toast_messages.dart';
 
 import '../bottom_nav_bar.dart';
 

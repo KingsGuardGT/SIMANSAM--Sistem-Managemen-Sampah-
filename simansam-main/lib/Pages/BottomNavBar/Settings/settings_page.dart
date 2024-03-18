@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:trashpick/Models/user_model.dart';
-import 'package:trashpick/Pages/BottomNavBar/Settings/give_feedback_page.dart';
-import 'package:trashpick/Widgets/button_widgets.dart';
-import 'package:trashpick/Widgets/image_frames_widgets.dart';
+import 'package:simansam/Models/user_model.dart';
+import 'package:simansam/Pages/BottomNavBar/Settings/give_feedback_page.dart';
+import 'package:simansam/Widgets/button_widgets.dart';
+import 'package:simansam/Widgets/image_frames_widgets.dart';
 
 import '../../../Theme/theme_provider.dart';
 import '../../../Widgets/alert_dialogs.dart';

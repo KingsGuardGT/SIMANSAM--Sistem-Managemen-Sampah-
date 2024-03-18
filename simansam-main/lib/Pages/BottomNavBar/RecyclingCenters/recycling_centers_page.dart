@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:trashpick/Models/recycling_center_model.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
-import 'package:trashpick/Widgets/toast_messages.dart';
+import 'package:simansam/Models/recycling_center_model.dart';
+import 'package:simansam/Theme/theme_provider.dart';
+import 'package:simansam/Widgets/toast_messages.dart';
 
 import 'recycling_centers_list.dart';
 import 'recyling_centers_bottom_sheet.dart';

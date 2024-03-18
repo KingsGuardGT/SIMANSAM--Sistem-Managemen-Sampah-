@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/BottomNavBar/PickMyTrash/new_trash_pick_up.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
-import 'package:trashpick/Widgets/button_widgets.dart';
+import 'package:simansam/Pages/BottomNavBar/PickMyTrash/new_trash_pick_up.dart';
+import 'package:simansam/Theme/theme_provider.dart';
+import 'package:simansam/Widgets/button_widgets.dart';
 
 import '../../../Models/trash_pick_ups_model.dart';
 import '../../../Widgets/primary_app_bar_widget.dart';

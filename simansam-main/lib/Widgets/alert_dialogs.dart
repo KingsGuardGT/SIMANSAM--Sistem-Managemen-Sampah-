@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/OnAppStart/welcome_page.dart';
-import 'package:trashpick/Widgets/toast_messages.dart';
+import 'package:simansam/Pages/OnAppStart/welcome_page.dart';
+import 'package:simansam/Widgets/toast_messages.dart';
 
 class SignOutAlertDialog {
   void showAlert(BuildContext context) {

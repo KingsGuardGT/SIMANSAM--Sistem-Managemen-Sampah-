@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Models/trash_pick_ups_model.dart';
-import 'package:trashpick/Widgets/button_widgets.dart';
-import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
+import 'package:simansam/Models/trash_pick_ups_model.dart';
+import 'package:simansam/Widgets/button_widgets.dart';
+import 'package:simansam/Widgets/secondary_app_bar_widget.dart';
 
 class ViewTrashDetails extends StatefulWidget {
   final String userID, trashID, accountType;

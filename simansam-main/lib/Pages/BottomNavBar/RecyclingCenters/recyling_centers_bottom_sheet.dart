@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trashpick/Models/recycling_center_model.dart';
+import 'package:simansam/Models/recycling_center_model.dart';
 
 class RecyclingCentersBottomSheet {
   detailsTitle(BuildContext context, String detailsTitle) {

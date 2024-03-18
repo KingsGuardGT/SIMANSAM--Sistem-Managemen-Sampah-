@@ -17,7 +17,7 @@ class ImageFramesWidgets {
                       )
                     : CircleAvatar(
                         backgroundImage: AssetImage(
-                            'assets/images/trashpick_user_avatar.png'),
+                            'assets/images/simansam_user_avatar.png'),
                         radius: radius,
                       ),
               ],

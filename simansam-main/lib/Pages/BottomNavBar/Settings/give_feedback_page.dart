@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:trashpick/Generators/uui_generator.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
-import 'package:trashpick/Widgets/button_widgets.dart';
-import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
-import 'package:trashpick/Widgets/toast_messages.dart';
+import 'package:simansam/Generators/uui_generator.dart';
+import 'package:simansam/Theme/theme_provider.dart';
+import 'package:simansam/Widgets/button_widgets.dart';
+import 'package:simansam/Widgets/secondary_app_bar_widget.dart';
+import 'package:simansam/Widgets/toast_messages.dart';
 
 class GiveFeedbackPage extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Models/recycling_center_model.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
+import 'package:simansam/Models/recycling_center_model.dart';
+import 'package:simansam/Theme/theme_provider.dart';
 
 class RecyclingCentersList extends StatefulWidget {
   @override
@@ -150,7 +150,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
                           ),
                           ClipOval(
                             child: Image.asset(
-                              'assets/images/trashpick_user_avatar.png',
+                              'assets/images/simansam_user_avatar.png',
                               height: 60.0,
                               width: 60.0,
                             ),

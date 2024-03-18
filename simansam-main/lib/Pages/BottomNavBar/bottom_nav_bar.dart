@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/BottomNavBar/PickMyTrash/pick_my_trash_page.dart';
-import 'package:trashpick/Pages/BottomNavBar/TrashToBeCollected/trash_to_be_collected_page.dart';
+import 'package:simansam/Pages/BottomNavBar/PickMyTrash/pick_my_trash_page.dart';
+import 'package:simansam/Pages/BottomNavBar/TrashToBeCollected/trash_to_be_collected_page.dart';
 
 import '../../Theme/theme_provider.dart';
 import 'BeAware/be_aware.dart';

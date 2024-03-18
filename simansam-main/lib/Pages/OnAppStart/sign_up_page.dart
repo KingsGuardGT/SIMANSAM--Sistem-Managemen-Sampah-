@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:trashpick/Pages/OnAppStart/sign_in_page.dart';
-import 'package:trashpick/Pages/OnAppStart/user_guide.dart';
-import 'package:trashpick/Pages/OnAppStart/welcome_guide_page.dart';
+import 'package:simansam/Pages/OnAppStart/sign_in_page.dart';
+import 'package:simansam/Pages/OnAppStart/user_guide.dart';
+import 'package:simansam/Pages/OnAppStart/welcome_guide_page.dart';
 
 import '../../Theme/theme_provider.dart';
 import '../../Widgets/button_widgets.dart';
@@ -34,7 +34,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController confirmPasswordController = TextEditingController();
 
   String defaultUserAvatar =
-      "https://firebasestorage.googleapis.com/v0/b/trashpick-db.appspot.com/o/Default%20User%20Avatar%2Ftrashpick_user_avatar.png?alt=media&token=734f7e74-2c98-4c27-b982-3ecd072ced79";
+      "https://firebasestorage.googleapis.com/v0/b/trashpick-db.appspot.com/o/Default%20User%20Avatar%2Fsimansam_user_avatar.png?alt=media&token=734f7e74-2c98-4c27-b982-3ecd072ced79";
 
   bool _isHidden = true;
   bool _isHiddenC = true;

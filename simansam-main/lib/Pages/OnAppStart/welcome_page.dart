@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/OnAppStart/sign_in_page.dart';
+import 'package:simansam/Pages/OnAppStart/sign_in_page.dart';
 
 import '../../Theme/theme_provider.dart';
 import '../../Widgets/button_widgets.dart';

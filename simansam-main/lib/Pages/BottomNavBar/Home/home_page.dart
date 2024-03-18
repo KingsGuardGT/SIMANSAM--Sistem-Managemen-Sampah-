@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Models/user_model.dart';
+import 'package:simansam/Models/user_model.dart';
 
 import '../../../Widgets/primary_app_bar_widget.dart';
 

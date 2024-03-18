@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Models/articles_model.dart';
-import 'package:trashpick/Pages/BottomNavBar/BeAware/read_article.dart';
-import 'package:trashpick/Theme/theme_provider.dart';
+import 'package:simansam/Models/articles_model.dart';
+import 'package:simansam/Pages/BottomNavBar/BeAware/read_article.dart';
+import 'package:simansam/Theme/theme_provider.dart';
 
 import '../../../Widgets/primary_app_bar_widget.dart';
 

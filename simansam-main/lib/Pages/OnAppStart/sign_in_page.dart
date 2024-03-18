@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/BottomNavBar/bottom_nav_bar.dart';
-import 'package:trashpick/Pages/OnAppStart/welcome_page.dart';
+import 'package:simansam/Pages/BottomNavBar/bottom_nav_bar.dart';
+import 'package:simansam/Pages/OnAppStart/welcome_page.dart';
 
 import '../../Theme/theme_provider.dart';
 import '../../Widgets/button_widgets.dart';

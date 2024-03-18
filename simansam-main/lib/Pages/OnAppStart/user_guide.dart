@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trashpick/Pages/OnAppStart/sign_up_page.dart';
-import 'package:trashpick/Pages/OnAppStart/welcome_page.dart';
+import 'package:simansam/Pages/OnAppStart/sign_up_page.dart';
+import 'package:simansam/Pages/OnAppStart/welcome_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class UserGuidePage extends StatefulWidget {

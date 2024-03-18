@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:trashpick/Widgets/marker_details_cards.dart';
-import 'package:trashpick/Widgets/secondary_app_bar_widget.dart';
-import 'package:trashpick/Widgets/toast_messages.dart';
+import 'package:simansam/Widgets/marker_details_cards.dart';
+import 'package:simansam/Widgets/secondary_app_bar_widget.dart';
+import 'package:simansam/Widgets/toast_messages.dart';
 
 class PickTrashLocation extends StatefulWidget {
   PickTrashLocation(this.currentPosition);
