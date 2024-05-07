@@ -1,11 +1,11 @@
 {
-  "name": "trashpick",
-  "short_name": "trashpick",
+  "name": "Sistem Manajemen Sampah",
+  "short_name": "SIMANSAM",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#0175C2",
   "theme_color": "#0175C2",
-  "description": "An application that guides the proper disposal of garbage.",
+  "description": "Aplikasi yang memandu pembuangan sampah dengan benar.",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [

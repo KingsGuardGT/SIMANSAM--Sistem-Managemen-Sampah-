@@ -171,7 +171,14 @@ class _SignInPageState extends State<SignInPage> {
         .doc(userID)
         .get()
         .then((value) {
-      accountType = value.data()["accountType"];
+      if (value.exists && value.data() != null) {
+        // Check if the document exists and the data is not null
+        accountType = value.data()['accountType'] ?? 'default';
+        // Use the null-aware operator '??' to provide a default value if accountType is null
+      } else {
+        print('Document does not exist or has no data');
+        accountType = 'default'; // Set a default value if the document doesn't exist or has no data
+      }
     });
   }
 

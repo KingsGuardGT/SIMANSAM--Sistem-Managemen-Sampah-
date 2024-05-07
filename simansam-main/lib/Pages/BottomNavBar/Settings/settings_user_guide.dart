@@ -10,7 +10,7 @@ class _SettingsUserGuideState extends State<SettingsUserGuide> {
   final _key = UniqueKey();
   bool isLoading = true;
   String siteLink =
-      "https://sites.google.com/view/trashpick--app-user-guide/home";
+      "https://sites.google.com/view/simansam-user-guide";
 
   @override
   Widget build(BuildContext context) {
