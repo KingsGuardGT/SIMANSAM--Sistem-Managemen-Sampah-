@@ -31,33 +31,33 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
             String trashTypeDescription;
 
             switch (trashPickUpsModel.trashTypes[index]) {
-              case "Plastic & Polythene":
+              case "Plastik & Polietilen":
                 trashTypeColor = Colors.orange.shade700;
-                trashTypeDescription = "Plastic & Polythene";
+                trashTypeDescription = "Plastik & Polietilen";
                 break;
-              case "Glass":
+              case "Kaca":
                 trashTypeColor = Colors.red;
-                trashTypeDescription = "Glass";
+                trashTypeDescription = "Kaca";
                 break;
-              case "Paper":
+              case "Kertas":
                 trashTypeColor = Colors.blue;
-                trashTypeDescription = "Paper";
+                trashTypeDescription = "Kertas";
                 break;
-              case "Metal & Coconut Shell":
+              case "Logam & Tempurung Kelapa":
                 trashTypeColor = Colors.black;
-                trashTypeDescription = "Metal & Coconut Shell";
+                trashTypeDescription = "Logam & Tempurung Kelapa";
                 break;
-              case "Clinical Waste":
+              case "Limbah Klinis":
                 trashTypeColor = Colors.yellow;
-                trashTypeDescription = "Clinical Waste";
+                trashTypeDescription = "Limbah Klinis";
                 break;
-              case "E-Waste":
+              case "Limbah Elektronik":
                 trashTypeColor = Colors.grey.shade200;
-                trashTypeDescription = "E-Waste";
+                trashTypeDescription = "Limbah Elektronik";
                 break;
               default:
                 trashTypeColor = Colors.grey.shade100;
-                trashTypeDescription = "Other";
+                trashTypeDescription = "Lainnya";
             }
 
             return Padding(
@@ -166,7 +166,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
         if (!snapshot.hasData) {
           //return profileHeaderShimmer();
           return Text(
-            "Data Unavailable",
+            "Data tidak tersedia",
             style: TextStyle(
                 fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                 fontWeight: FontWeight.bold),
@@ -204,38 +204,38 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  trashTitle("Trash Location"),
+                  trashTitle("Lokasi Sampah"),
                   trashDetailsData(trashPickUpsModel.trashLocationAddress),
                   SizedBox(
                     height: 20.0,
                   ),
-                  trashTitle("Trash Description"),
+                  trashTitle("Deskripsi Sampah"),
                   trashDetailsData(trashPickUpsModel.trashDescription),
                   SizedBox(
                     height: 20.0,
                   ),
-                  trashTitle("Trash Types"),
+                  trashTitle("Jenis Sampah"),
                   trashDetailsData(trashPickUpsModel.trashTypes.toString()),
                   trashTypesFilter(trashPickUpsModel),
                   trashAvailableDatesTimes(
                       true,
-                      "Start Date",
+                      "Tanggal Mulai",
                       trashPickUpsModel.startDate,
-                      "Return Date",
+                      "Tanggal Kembali",
                       trashPickUpsModel.returnDate),
                   SizedBox(
                     height: 20.0,
                   ),
                   trashAvailableDatesTimes(
                       false,
-                      "Start Time",
+                      "Tanggal Mulai",
                       trashPickUpsModel.startTime,
-                      "Return Time",
+                      "Tanggal Kembali",
                       trashPickUpsModel.returnTime),
                   SizedBox(
                     height: 20.0,
                   ),
-                  trashTitle("Posted Date"),
+                  trashTitle("Tanggal Diposting"),
                   trashDetailsData(trashPickUpsModel.postedDate),
                   SizedBox(
                     height: 20.0,
@@ -243,10 +243,10 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                   Center(
                     child: widget.accountType == "Trash Picker"
                         ? MinButtonWidget(
-                            text: "Edit Trash Pick Up",
+                            text: "Edit Pengambilan Sampah",
                             color: Theme.of(context).colorScheme.background,
                             onClicked: () =>
-                                {print("Edit Trash Pick Ups Pressed!")},
+                                {print("Edit Pengambilan Sampah Selesai!")},
                           )
                         : Container(),
                   ),
@@ -263,7 +263,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SecondaryAppBar(
-        title: "About Trash",
+        title: "Tentang Sampah",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
