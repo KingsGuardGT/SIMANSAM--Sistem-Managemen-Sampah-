@@ -253,7 +253,7 @@ class _SignInPageState extends State<SignInPage> {
           );
         },
         child: Scaffold(
-            backgroundColor: AppThemeData().whiteColor,
+            backgroundColor: AppThemeData().greenAccentColor,
             body: SafeArea(
                 child: SingleChildScrollView(
               child: Padding(

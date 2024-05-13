@@ -29,6 +29,7 @@ class AppThemeData {
   final Color yellowColor = Colors.yellow;
   final Color whiteColor = Colors.white;
   final Color greyColor = Colors.grey;
+  final Color greenAccentColor = Colors.greenAccent;
   final Color grey200Color = Colors.grey.shade200;
 
   static final lightTheme = ThemeData(

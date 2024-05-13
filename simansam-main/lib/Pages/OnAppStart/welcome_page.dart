@@ -14,7 +14,7 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppThemeData().whiteColor,
+      backgroundColor: AppThemeData().greenAccentColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

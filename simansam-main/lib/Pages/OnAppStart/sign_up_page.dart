@@ -359,7 +359,7 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       },
       child: Scaffold(
-        backgroundColor: AppThemeData().whiteColor,
+        backgroundColor: AppThemeData().greenAccentColor,
         body: SafeArea(
           child: SingleChildScrollView(
               child: Padding(

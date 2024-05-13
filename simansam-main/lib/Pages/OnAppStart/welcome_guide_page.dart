@@ -17,7 +17,7 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppThemeData().whiteColor,
+      backgroundColor: AppThemeData().greenAccentColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
