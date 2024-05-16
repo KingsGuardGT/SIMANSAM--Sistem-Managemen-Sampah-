@@ -192,7 +192,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
       onWillPop: () async => showDialog<bool>(
           context: context,
           builder: (c) => AlertDialog(
-                title: Text('Exit from TrashPick'),
+                title: Text('Exit from SIMANSAM'),
                 content: Text('Do you really want to exit'),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),

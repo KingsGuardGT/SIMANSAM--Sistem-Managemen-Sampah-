@@ -177,21 +177,29 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   // -------------------------------- CHANGE IMAGE -------------------------------- \\
 
   _imgFromCamera() async {
-    File fileImage = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+    );
 
-    setState(() {
-      _userSelectedFileImage = fileImage;
-    });
+    if (pickedFile != null) {
+      setState(() {
+        _userSelectedFileImage = File(pickedFile.path);
+      });
+    }
   }
 
   _imgFromGallery() async {
-    File fileImage = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
 
-    setState(() {
-      _userSelectedFileImage = fileImage;
-    });
+    if (pickedFile != null) {
+      setState(() {
+        _userSelectedFileImage = File(pickedFile.path);
+      });
+    }
   }
 
   changeProfilePicture(context) {

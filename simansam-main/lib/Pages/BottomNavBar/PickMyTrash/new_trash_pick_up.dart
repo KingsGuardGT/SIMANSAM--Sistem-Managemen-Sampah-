@@ -15,6 +15,7 @@ import 'package:simansam/Widgets/button_widgets.dart';
 import 'package:simansam/Widgets/secondary_app_bar_widget.dart';
 import 'package:simansam/Widgets/toast_messages.dart';
 
+import '../../../Models/user_model.dart';
 import '../bottom_nav_bar.dart';
 
 class NewTrashPickUp extends StatefulWidget {
@@ -152,21 +153,29 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   _imgFromCamera() async {
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.camera, imageQuality: 50);
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+    );
 
-    setState(() {
-      _image = image;
-    });
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
   }
 
   _imgFromGallery() async {
-    File image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 50);
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    );
 
-    setState(() {
-      _image = image;
-    });
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
   }
 
   void _showPicker(context) {
@@ -722,7 +731,8 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       );
     }
 
-    /*Widget getMyHomeAddress(){
+    // ignore: unused_element
+    Widget getMyHomeAddress(){
       return FutureBuilder(
         future: userReference.doc(auth.currentUser.uid).get(),
         builder: (context, dataSnapshot) {
@@ -767,7 +777,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
           }
         },
       );
-    }*/
+    }
 
     Widget trashLocation() {
       Widget widget;

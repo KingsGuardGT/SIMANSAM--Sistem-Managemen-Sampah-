@@ -104,8 +104,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       onWillPop: () async => showDialog<bool>(
           context: context,
           builder: (c) => AlertDialog(
-                title: Text('Exit from TrashPick'),
-                content: Text('Do you really want to exit'),
+                title: Text('Exit from SIMANSAM'),
+                content: Text('Do you really want to exit?'),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(10.0))),
                 actions: [
