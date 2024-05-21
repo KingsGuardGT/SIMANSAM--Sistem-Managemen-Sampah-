@@ -17,65 +17,65 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
   bool storagePermission = false;
 
   _requestLocationPermission() async {
-    print("----------------------- REQUEST LOCATION PERMISSION CALLED!");
+    print("----------------------- MEMINTA IJIN LOKASI!");
     final serviceStatus = await Permission.locationWhenInUse.serviceStatus;
     final isGpsOn = serviceStatus == ServiceStatus.enabled;
     if (!isGpsOn) {
-      print('TURN ON LOCATION SERVICE BEFORE REQUESTING PERMISSION.');
+      print('HIDUPKAN LAYANAN LOKASI SEBELUM MEMINTA IJIN.');
       return;
     }
 
     final status = await Permission.locationWhenInUse.request();
     if (status == PermissionStatus.granted) {
-      print('LOCATION PERMISSION GRANTED!');
+      print('IJIN LOKASI DITERIMA!');
       setState(() {
         locationPermission = true;
       });
     } else if (status == PermissionStatus.denied) {
-      print('LOCATION PERMISSION DENIED!');
-      displayPermissionAlert(context, "Location");
+      print('IJIN LOKASI DITOLAK!');
+      displayPermissionAlert(context, "Lokasi");
       print(
-          "----------------------- DISPLAY_PERMISSION_ALERT - LOCATION CALLED!");
+          "----------------------- MENAMPILKAN_ALERT_IJIN - LOKASI DIPANGGIL!");
     } else if (status == PermissionStatus.permanentlyDenied) {
-      print('TAKE THE USER TO APP SETTINGS');
+      print('BUKA PENGGATURAN APLIKASI');
       await openAppSettings();
     }
   }
 
   _requestCameraPermission() async {
-    print("----------------------- REQUEST CAMERA PERMISSION CALLED!");
+    print("----------------------- MEMINTA IJIN KAMERA!");
     final status = await Permission.camera.request();
     if (status == PermissionStatus.granted) {
-      print('CAMERA PERMISSION GRANTED!');
+      print('IJIN KAMERA DITERIMA!');
       setState(() {
         cameraPermission = true;
       });
     } else if (status == PermissionStatus.denied) {
-      print('CAMERA PERMISSION DENIED!');
-      displayPermissionAlert(context, "Camera");
+      print('IJIN KAMERA DITOLAK!');
+      displayPermissionAlert(context, "Kamera");
       print(
-          "----------------------- DISPLAY_PERMISSION_ALERT - CAMERA CALLED!");
+          "----------------------- MENAMPILKAN_ALERT_IJIN - KAMERA DIPANGGIL!");
     } else if (status == PermissionStatus.permanentlyDenied) {
-      print('TAKE THE USER TO APP SETTINGS');
+      print('BUKA PENGGATURAN APLIKASI');
       await openAppSettings();
     }
   }
 
   _requestStoragePermission() async {
-    print("----------------------- REQUEST STORAGE PERMISSION CALLED!");
+    print("----------------------- MEMINTA IJIN PENYIMPANAN!");
     final status = await Permission.storage.request();
     if (status == PermissionStatus.granted) {
-      print('Storage Permission granted.');
+      print('Ijin penyimpanan diterima.');
       setState(() {
         storagePermission = true;
       });
     } else if (status == PermissionStatus.denied) {
-      print('Storage Permission denied.');
-      displayPermissionAlert(context, "Storage");
+      print('Ijin penyimpanan ditolak.');
+      displayPermissionAlert(context, "Penyimpanan");
       print(
-          "----------------------- DISPLAY_PERMISSION_ALERT - STORAGE CALLED!");
+          "----------------------- MENAMPILKAN_ALERT_IJIN - PENYIMPANAN DIPANGGIL!");
     } else if (status == PermissionStatus.permanentlyDenied) {
-      print('TAKE THE USER TO APP SETTINGS');
+      print('BUKA PENGGATURAN APLIKASI');
       await openAppSettings();
     }
   }
@@ -87,22 +87,22 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
   displayPermissionAlert(
       BuildContext contextDisplayPermissionAlert, String permissionName) {
     Widget cancelButton = TextButton(
-      child: Text("Cancel"),
+      child: Text("Batal"),
       onPressed: () {
-        print('DISPLAY PERMISSION ALERT - CANCELED!');
+        print('MENAMPILKAN_ALERT_IJIN - DIBATALKAN!');
         Navigator.pop(contextDisplayPermissionAlert);
         displayPermissionRequest(context);
       },
     );
     Widget continueButton = TextButton(
-      child: Text("Give Permission"),
+      child: Text("Berikan Izin"),
       onPressed: () {
-        print("DISPLAY PERMISSION ALERT - GIVE PERMISSION!");
-        if (permissionName == "Location") {
+        print("MENAMPILKAN_ALERT_IJIN - BERIKAN IZIN!");
+        if (permissionName == "Lokasi") {
           _requestLocationPermission();
-        } else if (permissionName == "Camera") {
+        } else if (permissionName == "Kamera") {
           _requestCameraPermission();
-        } else if (permissionName == "Storage") {
+        } else if (permissionName == "Penyimpanan") {
           _requestStoragePermission();
         }
 
@@ -111,8 +111,8 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("$permissionName Permission Required"),
-      content: Text("You must have to grant the $permissionName for continue."),
+      title: Text("Izin $permissionName Diperlukan"),
+      content: Text("Anda harus memberikan izin $permissionName untuk melanjutkan."),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
       actions: [
@@ -136,28 +136,28 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
 
   displayPermissionRequest(BuildContext contextDisplayPermissionRequest) {
     Widget denyButton = TextButton(
-      child: Text("Quite From App"),
+      child: Text("Keluar dari Aplikasi"),
       onPressed: () {
-        print("----------------------- QUITE FROM APP!");
+        print("----------------------- KELUAR DARI APLIKASI!");
         SystemNavigator.pop();
       },
     );
     Widget allowButton = TextButton(
-      child: Text("Allow Permission"),
+      child: Text("Izinkan Izin"),
       onPressed: () async {
-        print("----------------------- ALLOW PERMISSION PRESSED!");
+        print("----------------------- TOMBOL IZIN DITEKAN!");
         Navigator.pop(contextDisplayPermissionRequest);
         _requestLocationPermission();
       },
     );
 
     AlertDialog alert = AlertDialog(
-      title: Text("Permission Required"),
+      title: Text("Izin Diperlukan"),
       content: Text(
-          "We request access to your location, camera, and storage space. "
-          "The app will capture your location in order to locate you and give you access to the map. "
-          "The camera will be used to capture photographs for use in postings and events. "
-          "Storage access is looking for photos to use in your picker."),
+          "Kami meminta akses ke lokasi, kamera, dan ruang penyimpanan Anda. "
+              "Aplikasi akan mengambil lokasi Anda untuk menemukan Anda dan memberi Anda akses ke peta. "
+              "Kamera akan digunakan untuk mengambil foto untuk digunakan dalam postingan dan acara. "
+              "Akses penyimpanan mencari foto untuk digunakan dalam pemilih Anda."),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
       actions: [
@@ -182,7 +182,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
   @override
   void initState() {
     print(
-        "----------------------- CHECK PERMISSION PAGE INITIALIZED -----------------------");
+        "----------------------- HALAMAN PENGECEKAN IZIN DIINISIALISASI -----------------------");
     super.initState();
   }
 
@@ -192,21 +192,21 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
       onWillPop: () async => showDialog<bool>(
           context: context,
           builder: (c) => AlertDialog(
-                title: Text('Exit from SIMANSAM'),
-                content: Text('Do you really want to exit'),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                actions: [
-                  TextButton(
-                    child: Text('Yes'),
-                    onPressed: () => Navigator.pop(c, true),
-                  ),
-                  TextButton(
-                    child: Text('No'),
-                    onPressed: () => Navigator.pop(c, false),
-                  ),
-                ],
-              )),
+            title: Text('Keluar dari SIMANSAM'),
+            content: Text('Apakah Anda benar-benar ingin keluar'),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            actions: [
+              TextButton(
+                child: Text('Ya'),
+                onPressed: () => Navigator.pop(c, true),
+              ),
+              TextButton(
+                child: Text('Tidak'),
+                onPressed: () => Navigator.pop(c, false),
+              ),
+            ],
+          )),
       child: Scaffold(
         backgroundColor: AppThemeData().greenAccentColor,
         body: SafeArea(
@@ -225,9 +225,9 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                   ),
                   SizedBox(height: 30),
                   Text(
-                    'Permission required ',
+                    'Izin diperlukan ',
                     style:
-                        TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 20.0,
@@ -246,7 +246,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                             height: 10.0,
                           ),
                           Text(
-                            "Location",
+                            "Lokasi",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: Theme.of(context)
@@ -266,7 +266,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                             height: 10.0,
                           ),
                           Text(
-                            "Camera",
+                            "Kamera",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: Theme.of(context)
@@ -286,7 +286,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                             height: 10.0,
                           ),
                           Text(
-                            "Storage",
+                            "Penyimpanan",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: Theme.of(context)
@@ -301,13 +301,13 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      "We request access to your location, camera, and storage space. "
-                      "The app will capture your location in order to locate you and give you access to the map. "
-                      "The camera will be used to capture photographs for use in postings and events. "
-                      "Storage access is looking for photos to use in your picker.",
+                      "Kami meminta akses ke lokasi, kamera, dan ruang penyimpanan Anda. "
+                          "Aplikasi akan mengambil lokasi Anda untuk menemukan Anda dan memberi Anda akses ke peta. "
+                          "Kamera akan digunakan untuk mengambil foto untuk digunakan dalam postingan dan acara. "
+                          "Akses penyimpanan mencari foto untuk digunakan dalam pemilih Anda.",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.titleMedium.fontSize),
+                          Theme.of(context).textTheme.titleMedium.fontSize),
                     ),
                   ),
                   Padding(
@@ -318,16 +318,16 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                           children: [
                             locationPermission
                                 ? Image.asset(
-                                    'assets/icons/icon_approval.png',
-                                    scale: 4.0,
-                                  )
+                              'assets/icons/icon_approval.png',
+                              scale: 4.0,
+                            )
                                 : Image.asset(
-                                    'assets/icons/icon_access_denied.png',
-                                    scale: 4.0,
-                                  ),
+                              'assets/icons/icon_access_denied.png',
+                              scale: 4.0,
+                            ),
                             TextButton(
                               child: Text(
-                                'Click to allow location permission',
+                                'Klik untuk mengizinkan izin lokasi',
                                 style: TextStyle(
                                     color: AppThemeData().secondaryColor),
                               ),
@@ -339,16 +339,16 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                           children: [
                             cameraPermission
                                 ? Image.asset(
-                                    'assets/icons/icon_approval.png',
-                                    scale: 4.0,
-                                  )
+                              'assets/icons/icon_approval.png',
+                              scale: 4.0,
+                            )
                                 : Image.asset(
-                                    'assets/icons/icon_access_denied.png',
-                                    scale: 4.0,
-                                  ),
+                              'assets/icons/icon_access_denied.png',
+                              scale: 4.0,
+                            ),
                             TextButton(
                               child: Text(
-                                'Click to allow camera permission',
+                                'Klik untuk mengizinkan izin kamera',
                                 style: TextStyle(
                                     color: AppThemeData().secondaryColor),
                               ),
@@ -360,16 +360,16 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                           children: [
                             storagePermission
                                 ? Image.asset(
-                                    'assets/icons/icon_approval.png',
-                                    scale: 4.0,
-                                  )
+                              'assets/icons/icon_approval.png',
+                              scale: 4.0,
+                            )
                                 : Image.asset(
-                                    'assets/icons/icon_access_denied.png',
-                                    scale: 4.0,
-                                  ),
+                              'assets/icons/icon_access_denied.png',
+                              scale: 4.0,
+                            ),
                             TextButton(
                               child: Text(
-                                'Click to allow storage permission',
+                                'Klik untuk mengizinkan izin penyimpanan',
                                 style: TextStyle(
                                     color: AppThemeData().secondaryColor),
                               ),
@@ -385,22 +385,22 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                   ),
                   locationPermission && cameraPermission && storagePermission
                       ? ButtonWidget(
-                          color: AppThemeData().secondaryColor,
-                          onClicked: () {
-                            print(
-                                "----------------------- Continue to App -----------------------");
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    WelcomePage(),
-                              ),
-                              (route) => false,
-                            );
-                          },
-                          text: "Continue to App",
-                          textColor: AppThemeData().whiteColor,
-                        )
+                    color: AppThemeData().secondaryColor,
+                    onClicked: () {
+                      print(
+                          "----------------------- Lanjutkan ke Aplikasi -----------------------");
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              WelcomePage(),
+                        ),
+                            (route) => false,
+                      );
+                    },
+                    text: "Lanjutkan ke Aplikasi",
+                    textColor: AppThemeData().whiteColor,
+                  )
                       : Container(),
                 ],
               ),

@@ -108,7 +108,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
         stream: FirebaseFirestore.instance
             .collection("Users")
             .doc(userProfileID)
-            .collection('Trash Pick Ups')
+            .collection('Pengambilan Sampah')
             .orderBy('postedDate', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -124,7 +124,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                             height: 30.0,
                           ),
                           Text(
-                            "You have no scheduled trash pick ups yet",
+                            "You have no scheduled Pengambilan Sampah yet",
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
@@ -210,7 +210,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                   height: 20.0,
                 ),
                 Text(
-                  "My Scheduled Trash Pick Ups",
+                  "My Scheduled Pengambilan Sampah",
                   style: TextStyle(
                       fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                       fontWeight: FontWeight.bold),

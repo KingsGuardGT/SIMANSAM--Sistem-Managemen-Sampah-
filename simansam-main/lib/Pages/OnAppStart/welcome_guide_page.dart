@@ -25,7 +25,7 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Hi " + widget.userName,
+                Text("Hai " + widget.userName,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                             fontFamily: 'Montserrat',
@@ -44,7 +44,7 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                Text("Welcome to TrashPick",
+                Text("Selamat datang di SIMANSAM",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0)
                         .copyWith(color: Colors.grey.shade900)),
@@ -54,7 +54,7 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
                 new ButtonWidget(
                   color: AppThemeData().secondaryColor,
                   textColor: AppThemeData().whiteColor,
-                  text: "Continue to Home",
+                  text: "Kembali ke Beranda",
                   onClicked: () {
                     Navigator.pushAndRemoveUntil(
                       context,

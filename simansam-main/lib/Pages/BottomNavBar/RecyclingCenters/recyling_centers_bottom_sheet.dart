@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:simansam/Models/recycling_center_model.dart';
 
 class RecyclingCentersBottomSheet {
-  detailsTitle(BuildContext context, String detailsTitle) {
+  judulDetail(BuildContext context, String judulDetail) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Text(
-        detailsTitle,
+        judulDetail,
         style: TextStyle(
             color: Theme.of(context).textTheme.titleSmall.color,
             fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
@@ -15,11 +15,11 @@ class RecyclingCentersBottomSheet {
     );
   }
 
-  detailsName(BuildContext context, String detailsName) {
+  namaDetail(BuildContext context, String namaDetail) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Text(
-        detailsName,
+        namaDetail,
         style: TextStyle(
             color: Theme.of(context).textTheme.titleSmall.color,
             fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
@@ -50,10 +50,10 @@ class RecyclingCentersBottomSheet {
                           height: 14.0,
                         ),
                         Text(
-                          "Recycling Center",
+                          "Pusat Daur Ulang",
                           style: TextStyle(
                               color:
-                                  Theme.of(context).textTheme.titleLarge.color,
+                              Theme.of(context).textTheme.titleLarge.color,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .titleLarge
@@ -71,78 +71,78 @@ class RecyclingCentersBottomSheet {
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Name"),
-                detailsName(context, recyclingCenterModel.name),
+                judulDetail(context, "Nama"),
+                namaDetail(context, recyclingCenterModel.name),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Phone"),
-                detailsName(context, recyclingCenterModel.phone),
+                judulDetail(context, "Telepon"),
+                namaDetail(context, recyclingCenterModel.phone),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Address"),
-                detailsName(context, recyclingCenterModel.address),
+                judulDetail(context, "Alamat"),
+                namaDetail(context, recyclingCenterModel.address),
                 SizedBox(
                   height: 10.0,
                 ),
-                detailsTitle(context, "Latitude"),
-                detailsName(context, latitude.toString()),
+                judulDetail(context, "Lintang"),
+                namaDetail(context, latitude.toString()),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Longitude"),
-                detailsName(context, longitude.toString()),
+                judulDetail(context, "Bujur"),
+                namaDetail(context, longitude.toString()),
 /*                SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Street"),
-                detailsName(context, street),
+                judulDetail(context, "Jalan"),
+                namaDetail(context, street),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Postal Code"),
-                detailsName(context, postalCode),
+                judulDetail(context, "Kode Pos"),
+                namaDetail(context, postalCode),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Administrative Area"),
-                detailsName(context, administrativeArea),
+                judulDetail(context, "Area Administratif"),
+                namaDetail(context, administrativeArea),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Sub Administrative Area"),
-                detailsName(context, subAdministrativeArea),
+                judulDetail(context, "Sub Area Administratif"),
+                namaDetail(context, subAdministrativeArea),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Thoroughfare"),
-                detailsName(context, thoroughfare),
+                judulDetail(context, "Jalan Raya"),
+                namaDetail(context, thoroughfare),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Sub Thoroughfare"),
-                detailsName(context, subThoroughfare),
+                judulDetail(context, "Sub Jalan Raya"),
+                namaDetail(context, subThoroughfare),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Locality"),
-                detailsName(context, locality),
+                judulDetail(context, "Kota"),
+                namaDetail(context, locality),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Sub Locality"),
-                detailsName(context, subLocality),
+                judulDetail(context, "Sub Kota"),
+                namaDetail(context, subLocality),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Country"),
-                detailsName(context, country),
+                judulDetail(context, "Negara"),
+                namaDetail(context, country),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "ISO Country Code"),
-                detailsName(context, isoCountryCode),*/
+                judulDetail(context, "Kode Negara ISO"),
+                namaDetail(context, isoCountryCode),*/
                 SizedBox(
                   height: 80.0,
                 ),

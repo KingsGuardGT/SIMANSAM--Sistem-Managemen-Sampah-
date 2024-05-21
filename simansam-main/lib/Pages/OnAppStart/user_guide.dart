@@ -12,17 +12,17 @@ class _UserGuidePageState extends State<UserGuidePage> {
   final _key = UniqueKey();
   bool isLoading = true;
   String siteLink =
-      "https://sites.google.com/view/simansam-user-guide";
+      "https://sites.google.com/view/simansam-panduan-pengguna";
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          print("test");
+          print("tes");
           return Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => WelcomePage()),
-            (Route<dynamic> route) => false,
+                (Route<dynamic> route) => false,
           );
         },
         child: Scaffold(
@@ -32,16 +32,16 @@ class _UserGuidePageState extends State<UserGuidePage> {
               icon: Icon(Icons.arrow_back_ios_rounded,
                   color: Theme.of(context).iconTheme.color),
               onPressed: () {
-                print("Go to Welcome Page");
+                print("Kembali ke Halaman Selamat Datang");
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => WelcomePage()),
-                  (Route<dynamic> route) => false,
+                      (Route<dynamic> route) => false,
                 );
               },
             ),
             title: Text(
-              "User Guide",
+              "Panduan Pengguna",
               style: Theme.of(context).textTheme.titleLarge,
             ),
             elevation: Theme.of(context).appBarTheme.elevation,
@@ -50,16 +50,16 @@ class _UserGuidePageState extends State<UserGuidePage> {
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
                 child: TextButton(
                   child: Text(
-                    "Continue to Sign Up",
+                    "Lanjutkan ke Pendaftaran",
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => SignUpPage()),
-                      (Route<dynamic> route) => false,
+                          (Route<dynamic> route) => false,
                     );
-                    print("Switch to Sign Up");
+                    print("Beralih ke Pendaftaran");
                   },
                 ),
               )
@@ -80,8 +80,8 @@ class _UserGuidePageState extends State<UserGuidePage> {
                 ),
                 isLoading
                     ? Center(
-                        child: CircularProgressIndicator(),
-                      )
+                  child: CircularProgressIndicator(),
+                )
                     : Stack(),
               ],
             ),

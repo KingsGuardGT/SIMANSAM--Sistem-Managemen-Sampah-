@@ -30,19 +30,19 @@ class NewTrashPickUp extends StatefulWidget {
 class _NewTrashPickUpState extends State<NewTrashPickUp> {
   TextEditingController _trashNameController = new TextEditingController();
   TextEditingController _trashDescriptionController =
-      new TextEditingController();
+  new TextEditingController();
   TextEditingController _trashLocationController = new TextEditingController();
   int charLength = 0;
   File _image;
   final String userProfileID = FirebaseAuth.instance.currentUser.uid.toString();
 
-  // Uploading Process
+  // Proses Mengunggah
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
   double circularProgressVal;
 
-  // Temp until delete
+  // Sementara hingga dihapus
   CollectionReference imgRef;
   firebase_storage.Reference ref;
   String imageURL;
@@ -52,15 +52,15 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
 
   String trashID = new UUIDGenerator().uuidV4();
 
-  // ------------------------------ Trash Type Selector ------------------------------ \\
+  // ------------------------------ Pemilih Jenis Sampah ------------------------------ \\
 
   Map<String, bool> trashTypeValues = {
-    'Plastic & Polythene': false,
-    'Glass': false,
-    'Paper': false,
-    'Metal & Coconut Shell': false,
-    'Clinical Waste': false,
-    'E-Waste': false,
+    'Plastik & Polietilena': false,
+    'Kaca': false,
+    'Kertas': false,
+    'Logam & Tempurung Kelapa': false,
+    'Limbah Klinis': false,
+    'Limbah Elektronik': false,
   };
 
   List trashTypeArray = [];
@@ -78,10 +78,10 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
     //print(trashTypes);
   }
 
-  // ------------------------------ Location Picker ------------------------------ \\
+  // ------------------------------ Pemilih Lokasi ------------------------------ \\
 
-  String locationName = "My Location";
-  String userHomeLocation = "My Home";
+  String locationName = "Lokasi Saya";
+  String userHomeLocation = "Rumah Saya";
   int locationTypeID;
 
   final userReference = FirebaseFirestore.instance.collection('Users');
@@ -89,34 +89,56 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   Position _currentPosition;
 
   List _trashLocationDetails;
-  String userCurrentAddress = "No Location Selected!";
-  String selectedFromMapAddress = "No Location Selected!";
-  String trashLocationAddress = "No Location Selected!";
+  String userCurrentAddress = "Tidak Ada Lokasi yang Dipilih!";
+  String selectedFromMapAddress = "Tidak Ada Lokasi yang Dipilih!";
+  String trashLocationAddress = "Tidak Ada Lokasi yang Dipilih!";
   double trashLocationLatitude, trashLocationLongitude;
 
-  // ------------------------------ Date Picker ------------------------------ \\
+  // ------------------------------ Pemilih Tanggal ------------------------------ \\
 
-  String startDate = DateTime.now().day.toString() +
+  String startDate = DateTime
+      .now()
+      .day
+      .toString() +
       "/" +
-      DateTime.now().month.toString() +
+      DateTime
+          .now()
+          .month
+          .toString() +
       "/" +
-      DateTime.now().year.toString();
-  String returnDate = DateTime.now().day.toString() +
+      DateTime
+          .now()
+          .year
+          .toString();
+  String returnDate = DateTime
+      .now()
+      .day
+      .toString() +
       "/" +
-      DateTime.now().month.toString() +
+      DateTime
+          .now()
+          .month
+          .toString() +
       "/" +
-      DateTime.now().year.toString();
+      DateTime
+          .now()
+          .year
+          .toString();
   DateTime _dateS = DateTime(2021, 07, 17);
   DateTime _dateR = DateTime(2021, 07, 18);
 
-  // ------------------------------ Time Picker ------------------------------ \\
+  // ------------------------------ Pemilih Waktu ------------------------------ \\
 
-  String startTime = "7:15 AM";
-  String returnTime = "8:15 AM";
+  String startTime = "7:15 PAGI";
+  String returnTime = "8:15 PAGI";
   TimeOfDay _timeS = TimeOfDay(hour: 7, minute: 15);
   TimeOfDay _timeR = TimeOfDay(hour: 8, minute: 15);
-  var now = DateTime.now().hour;
-  var nowt = DateTime.now().minute;
+  var now = DateTime
+      .now()
+      .hour;
+  var nowt = DateTime
+      .now()
+      .minute;
   TimeOfDay releaseTime = TimeOfDay(hour: 15, minute: 0);
   String nowTime = TimeOfDay(hour: 15, minute: 0).toString();
 
@@ -188,14 +210,14 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text('Galeri Foto'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text('Kamera'),
                     onTap: () {
                       _imgFromCamera();
                       Navigator.of(context).pop();
@@ -225,7 +247,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   void sendSuccessCode() {
-    print("Post Add Success!");
+    print("Posting Sukses!");
     Navigator.pop(context);
     setState(() {
       isStartToUpload = false;
@@ -235,7 +257,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   showAlertDialog(BuildContext context) {
-    // show the dialog
+    // tampilkan dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -244,57 +266,57 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
           builder: (context, setState) {
             return AlertDialog(
               title: !isUploadComplete
-                  ? Center(child: Text("Uploading Post"))
-                  : Center(child: Text("Upload Success")),
+                  ? Center(child: Text("Mengunggah Posting"))
+                  : Center(child: Text("Unggah Sukses")),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (!isUploadComplete)
                     !isAnError
                         ? Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              CircularProgressIndicator(
-                                value: circularProgressVal,
-                                strokeWidth: 6,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.teal.shade700),
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Text("Please wait until your post is upload.",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 16.0)
-                                      .copyWith(color: Colors.grey.shade900)),
-                            ],
-                          )
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        CircularProgressIndicator(
+                          value: circularProgressVal,
+                          strokeWidth: 6,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.teal.shade700),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Text("Harap tunggu hingga postingan Anda diunggah.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 16.0)
+                                .copyWith(color: Colors.grey.shade900)),
+                      ],
+                    )
                         : Container(
-                            child: Column(
-                            children: [
-                              Text("Error!",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              SizedBox(
-                                height: 50.0,
-                              ),
-                              new ButtonWidget(
-                                  text: "Try Again",
-                                  textColor: AppThemeData().whiteColor,
-                                  color: AppThemeData().redColor,
-                                  onClicked: () {
-                                    Navigator.pop(context);
-                                  }),
-                            ],
-                          ))
+                        child: Column(
+                          children: [
+                            Text("Kesalahan!",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            new ButtonWidget(
+                                text: "Coba Lagi",
+                                textColor: AppThemeData().whiteColor,
+                                color: AppThemeData().redColor,
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                }),
+                          ],
+                        ))
                   else
                     Center(
                       child: Padding(
@@ -307,17 +329,17 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                               width: 50,
                             ),
                             SizedBox(height: 30),
-                            Text("Post has uploaded!",
+                            Text("Posting telah diunggah!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 22.0)
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 22.0)
                                     .copyWith(
-                                        color: Colors.grey.shade900,
-                                        fontWeight: FontWeight.bold)),
+                                    color: Colors.grey.shade900,
+                                    fontWeight: FontWeight.bold)),
                             SizedBox(height: 50),
                             new ButtonWidget(
-                                text: "Continue",
+                                text: "Lanjutkan",
                                 textColor: AppThemeData().whiteColor,
                                 color: AppThemeData().primaryColor,
                                 onClicked: () {
@@ -327,7 +349,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                                       builder: (BuildContext context) =>
                                           BottomNavBar(widget.accountType),
                                     ),
-                                    (route) => false,
+                                        (route) => false,
                                   );
                                 }),
                           ],
@@ -349,18 +371,18 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
     try {
       ref = firebase_storage.FirebaseStorage.instance
           .ref()
-          //.child('Posts/$userProfileID/$postID/${Path.basename(_image.path)}');
-          .child('Trash Pick Ups/$userProfileID/$trashID/$trashID');
+      //.child('Posts/$userProfileID/$postID/${Path.basename(_image.path)}');
+          .child('Pengambilan Sampah/$userProfileID/$trashID/$trashID');
       await ref.putFile(_image);
 
       String downloadURL = await firebase_storage.FirebaseStorage.instance
           .ref()
-          //.child('Posts/$userProfileID/$postID/${Path.basename(_image.path)}')
-          .child('Trash Pick Ups/$userProfileID/$trashID/$trashID')
+      //.child('Posts/$userProfileID/$postID/${Path.basename(_image.path)}')
+          .child('Pengambilan Sampah/$userProfileID/$trashID/$trashID')
           .getDownloadURL();
       imageURL = downloadURL.toString();
-      print("Image Uploaded to Firebase Storage!");
-      print("Image URL: " + imageURL);
+      print("Gambar Diunggah ke Firebase Storage!");
+      print("URL Gambar: " + imageURL);
       addPostToFireStore(imageURL);
     } catch (e) {
       print(e.toString());
@@ -372,35 +394,35 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
     firestoreInstance
         .collection('Users')
         .doc(userProfileID)
-        .collection('Trash Pick Ups')
+        .collection('Pengambilan Sampah')
         .doc(trashID)
         .set({
-          'trashID': trashID,
-          'postedDate': formattedDate + ", " + formattedTime,
-          'trashName': _trashNameController.text,
-          'trashDescription': _trashDescriptionController.text,
-          'trashImage': trashImage,
-          'trashTypes': trashTypes,
-          'trashLocationAddress': trashLocationAddress,
-          'trashLocationLocation':
-              new GeoPoint(trashLocationLatitude, trashLocationLongitude),
-          'startDate': startDate,
-          'returnDate': returnDate,
-          'startTime': startTime,
-          'returnTime': returnTime,
-        })
+      'trashID': trashID,
+      'postedDate': formattedDate + ", " + formattedTime,
+      'trashName': _trashNameController.text,
+      'trashDescription': _trashDescriptionController.text,
+      'trashImage': trashImage,
+      'trashTypes': trashTypes,
+      'trashLocationAddress': trashLocationAddress,
+      'trashLocationLocation':
+      new GeoPoint(trashLocationLatitude, trashLocationLongitude),
+      'startDate': startDate,
+      'returnDate': returnDate,
+      'startTime': startTime,
+      'returnTime': returnTime,
+    })
         .then(
           (value) => sendSuccessCode(),
-        )
+    )
         .catchError((error) => sendErrorCode(error.toString()));
   }
 
   /*void validatePost() {
     if (_newPostCaptionController.text.isEmpty ||
         _newPostCaptionController.text == null) {
-      ToastMessages().toastError("Please enter trash caption", context);
+      ToastMessages().toastError("Harap masukkan caption sampah", context);
     } else if (_image == null) {
-      ToastMessages().toastError("Please select image", context);
+      ToastMessages().toastError("Harap pilih gambar", context);
     } else {
       showAlertDialog(context);
       uploadImagesToStorage();
@@ -410,8 +432,8 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   _getCurrentUserLocation() async {
     try {
       Geolocator.getCurrentPosition(
-              desiredAccuracy: LocationAccuracy.high,
-              forceAndroidLocationManager: true)
+          desiredAccuracy: LocationAccuracy.high,
+          forceAndroidLocationManager: true)
           .then((Position position) {
         setState(() {
           _currentPosition = position;
@@ -466,10 +488,10 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               "${_trashLocationDetails[11].toString()}, "
               "${_trashLocationDetails[12].toString()}";
 
-          /*ToastMessages().toastSuccess("Location Selected: \n"
+          /*ToastMessages().toastSuccess("Lokasi Dipilih: \n"
               "$_trashLocationAddress", context);*/
         } else {
-          ToastMessages().toastSuccess("No Address", context);
+          ToastMessages().toastSuccess("Tidak Ada Alamat", context);
         }
       });
     } catch (error) {
@@ -484,7 +506,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       initialDate: _dateS,
       firstDate: DateTime(2021, 1),
       lastDate: DateTime(2031, 1),
-      helpText: 'Select a date',
+      helpText: 'Pilih tanggal',
     );
     if (newDate != null) {
       setState(() {
@@ -504,7 +526,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       initialDate: _dateR,
       firstDate: DateTime(2017, 1),
       lastDate: DateTime(2022, 7),
-      helpText: 'Select a date',
+      helpText: 'Pilih tanggal',
     );
     if (newDate != null) {
       setState(() {
@@ -520,62 +542,66 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
 
   printTrashPickUpDetails() {
     String info =
-        "------------------------- Trash Pick Up Details -------------------------\n"
-                "Trash Name: " +
+        "------------------------- Detail Pengambilan Sampah -------------------------\n"
+            "Nama Sampah: " +
             _trashNameController.text +
             "\n" +
-            "Trash Description: " +
+            "Deskripsi Sampah: " +
             _trashDescriptionController.text +
             "\n" +
-            "Trash Image: " +
+            "Gambar Sampah: " +
             _image.toString() +
             "\n" +
-            "Trash Types: " +
+            "Jenis Sampah: " +
             trashTypes.toString() +
             "\n" +
-            "Trash Location Address: " +
+            "Alamat Lokasi Sampah: " +
             trashLocationAddress.toString() +
             "\n" +
-            "Trash Location Latitude: " +
+            "Garis Lintang Lokasi Sampah: " +
             trashLocationLatitude.toString() +
             "\n" +
-            "Trash Location Longitude: " +
+            "Garis Bujur Lokasi Sampah: " +
             trashLocationLongitude.toString() +
             "\n" +
-            "Start Date: $startDate\n" +
-            "Return Date: $returnDate\n" +
-            "Start Time: $startTime\n" +
-            "Return Time: $returnTime\n";
+            "Tanggal Mulai: $startDate\n" +
+            "Tanggal Kembali: $returnDate\n" +
+            "Waktu Mulai: $startTime\n" +
+            "Waktu Kembali: $returnTime\n";
     print(info);
   }
 
   void validatePickUp() {
     if (_trashNameController.text.isEmpty) {
-      new ToastMessages().toastError("Cannot leave trash name", context);
+      new ToastMessages().toastError(
+          "Tidak bisa meninggalkan nama sampah", context);
     } else if (_trashDescriptionController.text.isEmpty) {
-      new ToastMessages().toastError("Cannot leave trash description", context);
+      new ToastMessages().toastError(
+          "Tidak bisa meninggalkan deskripsi sampah", context);
     } else if (_image == null) {
-      new ToastMessages().toastError("Please select an image", context);
+      new ToastMessages().toastError("Harap pilih gambar", context);
     } else if (trashTypes.isEmpty) {
       new ToastMessages()
-          .toastError("Please select at least one type", context);
-    } else if (trashLocationAddress == "No Location Selected!") {
-      new ToastMessages().toastError("Please select a location", context);
+          .toastError("Harap pilih setidaknya satu jenis", context);
+    } else if (trashLocationAddress == "Tidak Ada Lokasi Dipilih!") {
+      new ToastMessages().toastError("Harap pilih lokasi", context);
     } else if (startDate.isEmpty) {
-      new ToastMessages().toastError("Please select Start Date", context);
+      new ToastMessages().toastError("Harap pilih Tanggal Mulai", context);
     } else if (returnDate.isEmpty) {
-      new ToastMessages().toastError("Please select Return Date", context);
+      new ToastMessages().toastError("Harap pilih Tanggal Kembali", context);
     } else if (_dateS.day + _dateS.month + _dateS.year >
         _dateR.day + _dateR.month + _dateR.year) {
       new ToastMessages()
-          .toastError("Return date cannot be early than Start Date", context);
+          .toastError(
+          "Tanggal Kembali tidak bisa lebih awal dari Tanggal Mulai", context);
     } else if (startTime.isEmpty) {
-      new ToastMessages().toastError("Please Select Start Time", context);
+      new ToastMessages().toastError("Harap Pilih Waktu Mulai", context);
     } else if (returnTime.isEmpty) {
-      new ToastMessages().toastError("Please select Return Time", context);
+      new ToastMessages().toastError("Harap pilih Waktu Kembali", context);
     } else if (startDate == returnDate && _timeS.hour > _timeR.hour) {
       new ToastMessages().toastError(
-          "Return Time cannot be early than Start Time on same day", context);
+          "Waktu Kembali tidak bisa lebih awal dari Waktu Mulai pada hari yang sama",
+          context);
     } else {
       printTrashPickUpDetails();
       showAlertDialog(context);
@@ -600,7 +626,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       );
       setState(() {
         if (result == null) {
-          selectedFromMapAddress = "No Location Selected!";
+          selectedFromMapAddress = "Tidak Ada Lokasi Dipilih!";
         } else {
           _trashLocationDetails = result;
           selectedFromMapAddress = ""
@@ -623,9 +649,9 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
     }
 
     showInfoAlert(BuildContext context) {
-      String infoTitle = "Guide to select location";
+      String infoTitle = "Panduan untuk memilih lokasi";
       String infoMessage =
-          "To select a location, just press on the map and selected place will marked with this marker.";
+          "Untuk memilih lokasi, cukup tekan pada peta dan tempat yang dipilih akan ditandai dengan penanda ini.";
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -650,7 +676,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
             actions: <Widget>[
               TextButton(
                 child: Text(
-                  "Ok and Select Location",
+                  "Ok dan Pilih Lokasi",
                   style: TextStyle(color: AppThemeData().primaryColor),
                 ),
                 onPressed: () {
@@ -682,33 +708,33 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
             String description;
 
             switch (key) {
-              case "Plastic & Polythene":
+              case "Plastik & Politena":
                 color = Colors.orange.shade700;
-                description = "Plastic & Polythene";
+                description = "Plastik & Politena";
                 break;
-              case "Glass":
+              case "Kaca":
                 color = Colors.red;
-                description = "Glass";
+                description = "Kaca";
                 break;
-              case "Paper":
+              case "Kertas":
                 color = Colors.blue;
-                description = "Paper";
+                description = "Kertas";
                 break;
-              case "Metal & Coconut Shell":
+              case "Logam & Tempurung Kelapa":
                 color = Colors.black;
-                description = "Metal & Coconut Shell";
+                description = "Logam & Tempurung Kelapa";
                 break;
-              case "Clinical Waste":
+              case "Limbah Klinis":
                 color = Colors.yellow;
-                description = "Clinical Waste";
+                description = "Limbah Klinis";
                 break;
-              case "E-Waste":
+              case "Limbah Elektronik":
                 color = Colors.grey.shade200;
-                description = "E-Waste";
+                description = "Limbah Elektronik";
                 break;
               default:
                 color = Colors.grey.shade100;
-                description = "Other";
+                description = "Lainnya";
             }
 
             return new CheckboxListTile(
@@ -732,20 +758,23 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
     }
 
     // ignore: unused_element
-    Widget getMyHomeAddress(){
+    Widget getMyHomeAddress() {
       return FutureBuilder(
         future: userReference.doc(auth.currentUser.uid).get(),
         builder: (context, dataSnapshot) {
           if (!dataSnapshot.hasData) {
             _trashLocationController =
-            new TextEditingController(text: "No Location Selected!");
+            new TextEditingController(text: "Tidak Ada Lokasi Dipilih!");
             return TextFormField(
               controller: _trashLocationController,
               style: TextStyle(fontWeight: FontWeight.normal),
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.home_rounded,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme
+                      .of(context)
+                      .iconTheme
+                      .color,
                   size: 35.0,
                 ),
                 focusedBorder: UnderlineInputBorder(
@@ -765,7 +794,10 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               decoration: InputDecoration(
                 prefixIcon: Icon(
                   Icons.home_rounded,
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme
+                      .of(context)
+                      .iconTheme
+                      .color,
                   size: 35.0,
                 ),
                 focusedBorder: UnderlineInputBorder(
@@ -783,31 +815,41 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       Widget widget;
 
       switch (locationName) {
-        case "Current Location":
+        case "Lokasi Saat Ini":
           widget = Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.location_on_rounded,
-                color: Theme.of(context).iconTheme.color,
+                color: Theme
+                    .of(context)
+                    .iconTheme
+                    .color,
                 size: 35.0,
               ),
               Text(
-                "Current Location",
+                "Lokasi Saat Ini",
                 style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+                    fontSize: Theme
+                        .of(context)
+                        .textTheme
+                        .titleLarge
+                        .fontSize,
                     fontWeight: FontWeight.bold),
               ),
             ],
           );
           break;
-        case "Select from Map":
+        case "Pilih dari Peta":
           widget = Center(
             child: MinButtonWidget(
-              text: "Select from Map",
-              color: Theme.of(context).colorScheme.background,
+              text: "Pilih dari Peta",
+              color: Theme
+                  .of(context)
+                  .colorScheme
+                  .background,
               onClicked: () {
-                print("Pressed: Select from Map");
+                print("Ditekan: Pilih dari Peta");
                 showInfoAlert(context);
               },
             ),
@@ -831,32 +873,40 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                 groupValue: locationTypeID,
                 onChanged: (val) {
                   setState(() {
-                    locationName = 'Current Location';
+                    locationName = 'Lokasi Saat Ini';
                     locationTypeID = 1;
                     trashLocationAddress = userCurrentAddress;
                   });
                 },
               ),
               Text(
-                'Current Location',
+                'Lokasi Saat Ini',
                 style: new TextStyle(
-                    fontSize: Theme.of(context).textTheme.titleMedium.fontSize),
+                    fontSize: Theme
+                        .of(context)
+                        .textTheme
+                        .titleMedium
+                        .fontSize),
               ),
               Radio(
                 value: 2,
                 groupValue: locationTypeID,
                 onChanged: (val) {
                   setState(() {
-                    locationName = 'Select from Map';
+                    locationName = 'Pilih dari Peta';
                     locationTypeID = 2;
                     trashLocationAddress = selectedFromMapAddress;
                   });
                 },
               ),
               Text(
-                'Select from Map',
+                'Pilih dari Peta',
                 style: new TextStyle(
-                  fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+                  fontSize: Theme
+                      .of(context)
+                      .textTheme
+                      .titleMedium
+                      .fontSize,
                 ),
               ),
             ],
@@ -894,21 +944,21 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                         color: Colors.white,
                         child: Center(
                             child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.calendar_today_rounded,
-                              size: 20.0,
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              dateType,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        )),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.calendar_today_rounded,
+                                  size: 20.0,
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Text(
+                                  dateType,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )),
                       ))),
             ),
           ],
@@ -945,21 +995,21 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                         color: Colors.white,
                         child: Center(
                             child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.access_time_rounded,
-                              size: 20.0,
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Text(
-                              timeType,
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        )),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.access_time_rounded,
+                                  size: 20.0,
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Text(
+                                  timeType,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )),
                       ))),
             ),
           ],
@@ -969,7 +1019,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
 
     return Scaffold(
       appBar: SecondaryAppBar(
-        title: "Schedule a Trash Pick Up",
+        title: "Jadwalkan Pengambilan Sampah",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
@@ -993,8 +1043,8 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   style: TextStyle(fontWeight: FontWeight.normal),
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                    hintText: "Give a name to the trash",
-                    labelText: 'Trash Name',
+                    hintText: "Berikan nama pada sampah",
+                    labelText: 'Nama Sampah',
                     focusedBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(color: Colors.black),
                     ),
@@ -1013,8 +1063,8 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
                     helperText: "$charLength",
-                    hintText: "Say something about trash",
-                    labelText: 'Trash Description',
+                    hintText: "Deskripsikan sesuatu tentang sampah",
+                    labelText: 'Deskripsi Sampah',
                     focusedBorder: UnderlineInputBorder(
                       borderSide: const BorderSide(color: Colors.black),
                     ),
@@ -1030,9 +1080,13 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   height: 20.0,
                 ),
                 Text(
-                  "Pick Trash Image",
+                  "Pilih Gambar Sampah",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+                      fontSize: Theme
+                          .of(context)
+                          .textTheme
+                          .titleMedium
+                          .fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1050,46 +1104,53 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                       alignment: Alignment.center,
                       child: _image != null
                           ? Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white,
-                              ),
-                              child: Image.file(
-                                _image,
-                                width: MediaQuery.of(context).size.width,
-                                height: 300,
-                                fit: BoxFit.cover,
-                              ),
-                            )
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                        ),
+                        child: Image.file(
+                          _image,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
+                          height: 300,
+                          fit: BoxFit.cover,
+                        ),
+                      )
                           : Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  borderRadius: BorderRadius.circular(10)),
-                              width: MediaQuery.of(context).size.width,
-                              height: 300,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "Press to select image",
-                                    style: TextStyle(
-                                      fontSize: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          .fontSize,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Icon(
-                                    Icons.camera_alt_rounded,
-                                    size: 80.0,
-                                    color: Colors.grey.shade700,
-                                  ),
-                                ],
+                        decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(10)),
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        height: 300,
+                        child: Column(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Tekan untuk memilih gambar",
+                              style: TextStyle(
+                                fontSize: Theme
+                                    .of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    .fontSize,
+                                fontWeight: FontWeight.normal,
                               ),
+                              textAlign: TextAlign.center,
                             ),
+                            Icon(
+                              Icons.camera_alt_rounded,
+                              size: 80.0,
+                              color: Colors.grey.shade700,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -1097,9 +1158,13 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   height: 20.0,
                 ),
                 Text(
-                  "Select Trash Types",
+                  "Pilih Jenis Sampah",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+                      fontSize: Theme
+                          .of(context)
+                          .textTheme
+                          .titleMedium
+                          .fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 garbageTypes(),
@@ -1107,9 +1172,13 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   height: 20.0,
                 ),
                 Text(
-                  "Select Location",
+                  "Pilih Lokasi",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+                      fontSize: Theme
+                          .of(context)
+                          .textTheme
+                          .titleMedium
+                          .fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 radioButtonList(),
@@ -1121,10 +1190,14 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Trash Location",
+                      "Lokasi Sampah",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.titleMedium.fontSize,
+                          Theme
+                              .of(context)
+                              .textTheme
+                              .titleMedium
+                              .fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -1134,7 +1207,11 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                       "$trashLocationAddress",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.titleMedium.fontSize,
+                          Theme
+                              .of(context)
+                              .textTheme
+                              .titleMedium
+                              .fontSize,
                           fontWeight: FontWeight.normal),
                     ),
                   ],
@@ -1143,9 +1220,13 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   height: 20.0,
                 ),
                 Text(
-                  "Select Available Date Period",
+                  "Pilih Periode Tanggal Tersedia",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+                      fontSize: Theme
+                          .of(context)
+                          .textTheme
+                          .titleMedium
+                          .fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1157,8 +1238,9 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        dateSelectCard("Start Date", _startDate, startDate),
-                        dateSelectCard("Return Date", _returnDate, returnDate),
+                        dateSelectCard("Tanggal Mulai", _startDate, startDate),
+                        dateSelectCard(
+                            "Tanggal Pengembalian", _returnDate, returnDate),
                       ],
                     ),
                   ),
@@ -1167,9 +1249,13 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                   height: 20.0,
                 ),
                 Text(
-                  "Select Available Time Period",
+                  "Pilih Periode Waktu Tersedia",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+                      fontSize: Theme
+                          .of(context)
+                          .textTheme
+                          .titleMedium
+                          .fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1182,9 +1268,10 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         timeSelectCard(
-                            "Start Time", _startTime, _timeS.format(context)),
+                            "Waktu Mulai", _startTime, _timeS.format(context)),
                         timeSelectCard(
-                            "Return Time", _returnTime, _timeR.format(context)),
+                            "Waktu Pengembalian", _returnTime,
+                            _timeR.format(context)),
                       ],
                     ),
                   ),

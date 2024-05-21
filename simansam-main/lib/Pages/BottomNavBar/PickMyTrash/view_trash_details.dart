@@ -159,7 +159,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
       stream: FirebaseFirestore.instance
           .collection("Users")
           .doc(widget.userID)
-          .collection('Trash Pick Ups')
+          .collection('Pengambilan Sampah')
           .where('trashID', isEqualTo: widget.trashID)
           .snapshots(),
       builder: (context, snapshot) {
@@ -241,7 +241,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                     height: 20.0,
                   ),
                   Center(
-                    child: widget.accountType == "Trash Picker"
+                    child: widget.accountType == "Pengumpul Sampah"
                         ? MinButtonWidget(
                             text: "Edit Pengambilan Sampah",
                             color: Theme.of(context).colorScheme.background,

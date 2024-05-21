@@ -28,8 +28,8 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
 
   @override
   void initState() {
-    _childMap = loadingMap("Loading Map...");
-    //checkLocationPermission();
+    _childMap = loadingMap("Memuat Peta...");
+    checkLocationPermission();
     _getCurrentUserLocation();
     setCurrentUserMarkerIcon();
     setMapRecyclingCentersMarkerIcon();
@@ -37,13 +37,13 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
     super.initState();
   }
 
-  // ---------------------------------- CURRENT USER ---------------------------------- \\
+  // ---------------------------------- PENGGUNA SAAT INI ---------------------------------- \\
 
   _getCurrentUserLocation() {
     try {
       Geolocator.getCurrentPosition(
-              desiredAccuracy: LocationAccuracy.high,
-              forceAndroidLocationManager: true)
+          desiredAccuracy: LocationAccuracy.high,
+          forceAndroidLocationManager: true)
           .then((Position position) {
         setState(() {
           _currentPosition = position;
@@ -71,7 +71,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
               "${place.locality}, "
               "${place.country}";
         } else {
-          _currentAddress = "No Address";
+          _currentAddress = "Tidak Ada Alamat";
         }
         _childMap = mapWidget();
       });
@@ -91,17 +91,17 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
       Marker(
           markerId: MarkerId('MyCurrentLocation'),
           position:
-              LatLng(_currentPosition.latitude, _currentPosition.longitude),
+          LatLng(_currentPosition.latitude, _currentPosition.longitude),
           icon: currentUserMarkerIcon,
           onTap: () {
-            print('My Location');
+            print('Lokasi Saya');
           },
           infoWindow:
-              InfoWindow(title: 'My Location', snippet: _currentAddress))
+          InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress))
     ].toSet();
   }
 
-  // ---------------------------------- Recycling Centers ---------------------------------- \\
+  // ---------------------------------- Pusat Daur Ulang ---------------------------------- \\
 
   setMapRecyclingCentersMarkerIcon() async {
     mapRecyclingCenterMarkerIcon = await BitmapDescriptor.fromAssetImage(
@@ -111,18 +111,18 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
 
   getRecyclingCentersLocation() {
     FirebaseFirestore.instance
-        .collection("Recycling Centers")
+        .collection("Pusat Daur Ulang")
         .get()
         .then((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
         querySnapshot.docs.forEach((result) {
           RecyclingCenterModel recyclingCenterModel =
-              RecyclingCenterModel.fromDocument(result);
-          print("--------------------- Recycling Center ---------------------\n"
+          RecyclingCenterModel.fromDocument(result);
+          print("--------------------- Pusat Daur Ulang ---------------------\n"
               "id: ${recyclingCenterModel.id}\n"
-              "name: ${recyclingCenterModel.name}\n"
-              "latitude: ${recyclingCenterModel.location.latitude}\n"
-              "longitude: ${recyclingCenterModel.location.longitude}");
+              "nama: ${recyclingCenterModel.name}\n"
+              "garis lintang: ${recyclingCenterModel.location.latitude}\n"
+              "garis bujur: ${recyclingCenterModel.location.longitude}");
           setRecyclingCentersMarkers(
             recyclingCenterModel,
             recyclingCenterModel.location.latitude,
@@ -134,10 +134,10 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
   }
 
   setRecyclingCentersMarkers(
-    RecyclingCenterModel recyclingCenterModel,
-    latitude,
-    longitude,
-  ) async {
+      RecyclingCenterModel recyclingCenterModel,
+      latitude,
+      longitude,
+      ) async {
     final MarkerId markerID = MarkerId(recyclingCenterModel.id);
     final Marker marker = Marker(
       markerId: markerID,
@@ -154,20 +154,20 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
               },
             );
             print("id: ${recyclingCenterModel.id}\n"
-                "name:${recyclingCenterModel.name}\n"
-                "latitude: $latitude\n"
-                "longitude: $longitude");
+                "nama: ${recyclingCenterModel.name}\n"
+                "garis lintang: $latitude\n"
+                "garis bujur: $longitude");
           }),
     );
     setState(() {
       recyclingCentersMarkers[markerID] = marker;
       _displayMapMarkers = Set<Marker>.of(recyclingCentersMarkers.values);
       _childMap = mapWidget();
-      //print("Recycling Center MarkerID: $markerID");
+      print("Recycling Center MarkerID: $markerID");
     });
   }
 
-  // ---------------------------------- COMMON MAP ---------------------------------- \\
+  // ---------------------------------- PETA UMUM ---------------------------------- \\
 
   loadingMap(String m) {
     return Center(
@@ -190,7 +190,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
       await Geolocator.openLocationSettings();
     } else {
       _getCurrentUserLocation();
-      //ToastMessages().toastInfo("Location Permission Granted!");
+      //ToastMessages().toastInfo("Izin Lokasi Diberikan!");
     }
   }
 
@@ -220,7 +220,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           automaticallyImplyLeading: false,
           title: Text(
-            "Recycling Centers",
+            "Pusat Daur Ulang",
             style: Theme.of(context).textTheme.titleLarge,
           ),
           elevation: Theme.of(context).appBarTheme.elevation,
@@ -241,7 +241,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Centers List",
+                      "Daftar Pusat",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(
@@ -256,7 +256,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Map View",
+                      "Tampilan Peta",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(Icons.map_rounded,

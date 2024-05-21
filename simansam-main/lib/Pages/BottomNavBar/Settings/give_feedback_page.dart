@@ -19,7 +19,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   String formattedDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   String formattedTime = DateFormat('kk:mm:a').format(DateTime.now());
 
-  // Uploading Process
+  // Proses Pengunggahan
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
@@ -31,7 +31,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
     });
   }
 
-  // -------------------------------- UPLOADING PROCESS -------------------------------- \\
+  // -------------------------------- PROSES PENGUNGGAHAN -------------------------------- \\
 
   void ifAnError() {
     Navigator.pop(context);
@@ -50,7 +50,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   }
 
   void sendSuccessCode() {
-    print("Feedback Send Success!");
+    print("Umpan Balik Berhasil Dikirim!");
     Navigator.pop(context);
     setState(() {
       isStartToUpload = false;
@@ -60,7 +60,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   }
 
   showAlertDialog(BuildContext context) {
-    // show the dialog
+    // tampilkan dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -69,57 +69,57 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
           builder: (context, setState) {
             return AlertDialog(
               title: !isUploadComplete
-                  ? Center(child: Text("Sending Feedback"))
-                  : Center(child: Text("Feedback Send Success")),
+                  ? Center(child: Text("Mengirim Umpan Balik"))
+                  : Center(child: Text("Umpan Balik Berhasil Dikirim")),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (!isUploadComplete)
                     !isAnError
                         ? Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              CircularProgressIndicator(
-                                value: circularProgressVal,
-                                strokeWidth: 6,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.teal.shade700),
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Text("Please wait until your feedback send.",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 16.0)
-                                      .copyWith(color: Colors.grey.shade900)),
-                            ],
-                          )
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        CircularProgressIndicator(
+                          value: circularProgressVal,
+                          strokeWidth: 6,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.teal.shade700),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Text("Tolong tunggu hingga umpan balik Anda terkirim.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 16.0)
+                                .copyWith(color: Colors.grey.shade900)),
+                      ],
+                    )
                         : Container(
-                            child: Column(
-                            children: [
-                              Text("Error!",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              SizedBox(
-                                height: 50.0,
-                              ),
-                              new ButtonWidget(
-                                  text: "Try Again",
-                                  textColor: AppThemeData().whiteColor,
-                                  color: AppThemeData().primaryColor,
-                                  onClicked: () {
-                                    Navigator.pop(context);
-                                  }),
-                            ],
-                          ))
+                        child: Column(
+                          children: [
+                            Text("Kesalahan!",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            new ButtonWidget(
+                                text: "Coba Lagi",
+                                textColor: AppThemeData().whiteColor,
+                                color: AppThemeData().primaryColor,
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                }),
+                          ],
+                        ))
                   else
                     Center(
                       child: Padding(
@@ -132,14 +132,14 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
                               width: 50,
                             ),
                             SizedBox(height: 30),
-                            Text("Feedback Successfully Send!",
+                            Text("Umpan Balik Berhasil Dikirim!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 22.0)
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 22.0)
                                     .copyWith(
-                                        color: Colors.grey.shade900,
-                                        fontWeight: FontWeight.bold)),
+                                    color: Colors.grey.shade900,
+                                    fontWeight: FontWeight.bold)),
                             SizedBox(height: 50),
                             new ButtonWidget(
                               textColor: AppThemeData().whiteColor,
@@ -167,22 +167,22 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   sendFeedback() {
     FirebaseFirestore.instance
         .collection('Feedbacks')
-        .doc("User Feedbacks")
+        .doc("Umpan Balik Pengguna")
         .collection(FirebaseAuth.instance.currentUser.uid)
         .doc(UUIDGenerator().uuidV1())
         .set({
-          'feedback': _giveFeedbackController.text,
-          'postedDate': formattedDate + ", " + formattedTime,
-        })
+      'umpan balik': _giveFeedbackController.text,
+      'tanggal diposting': formattedDate + ", " + formattedTime,
+    })
         .then(
           (value) => sendSuccessCode(),
-        )
+    )
         .catchError((error) => sendErrorCode(error.toString()));
   }
 
   void validateEdits() {
     if (_giveFeedbackController.text.isEmpty) {
-      ToastMessages().toastError("Please enter feedback to send", context);
+      ToastMessages().toastError("Tolong masukkan umpan balik untuk dikirim", context);
     } else {
       print(_giveFeedbackController.text);
       sendFeedback();
@@ -193,7 +193,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SecondaryAppBar(
-        title: "Give Feedback",
+        title: "Beri Umpan Balik",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
@@ -223,9 +223,9 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
               style: TextStyle(fontWeight: FontWeight.normal),
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 10.0),
-                helperText: "No of letters: $charLength",
-                hintText: "Say something about your idea",
-                labelText: 'Type Your Feedback',
+                helperText: "Jumlah huruf: $charLength",
+                hintText: "Katakan sesuatu tentang ide Anda",
+                labelText: 'Tulis Umpan Balik Anda',
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
                     color: Colors.black,
@@ -249,7 +249,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: MinButtonWidget(
-              text: "Send Feedback",
+              text: "Kirim Umpan Balik",
               color: AppThemeData().secondaryColor,
               onClicked: () {
                 validateEdits();

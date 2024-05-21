@@ -9,34 +9,34 @@ class SignOutAlertDialog {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm for Sign Out'),
-          content: Text("Are You Sure Want To Sign Out ?"),
+          title: Text('Konfirmasi Logout'),
+          content: Text("Apakah Anda Yakin Ingin Logout ?"),
           actions: <Widget>[
             TextButton(
               child: Text(
-                "NO",
+                "TIDAK",
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
-                print("Cancel Sign Out");
+                print("Batal Logout");
               },
             ),
             TextButton(
               child: Text(
-                "YES",
+                "YA",
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
-                ToastMessages().toastSuccess("Sign Out Success", context);
-                print("Sign Out Success");
+                ToastMessages().toastSuccess("Logout Berhasil", context);
+                print("Logout Berhasil");
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                     builder: (BuildContext context) => WelcomePage(),
                   ),
-                  (route) => false,
+                      (route) => false,
                 );
               },
             ),

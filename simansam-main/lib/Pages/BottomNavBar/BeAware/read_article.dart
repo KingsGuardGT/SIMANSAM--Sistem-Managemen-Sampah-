@@ -28,7 +28,7 @@ class _ReadArticleState extends State<ReadArticle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SecondaryAppBar(
-        title: "Article from Website",
+        title: "Artikel dari Website",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(

@@ -22,10 +22,10 @@ class _BeAwareState extends State<BeAware> {
 
   getTotalArticles() async {
     final QuerySnapshot qSnap =
-        await FirebaseFirestore.instance.collection('Articles').get();
+    await FirebaseFirestore.instance.collection('Articles').get();
     documents = qSnap.docs.length;
     print(
-        "----------------------- TOTAL ARTICLES: $documents -----------------------");
+        "----------------------- JUMLAH ARTIKEL: $documents -----------------------");
   }
 
   @override
@@ -43,7 +43,7 @@ class _BeAwareState extends State<BeAware> {
             child: InkWell(
               splashColor: Colors.blue.withAlpha(30),
               onTap: () {
-                print('Selected Article: ${articlesModel.articleID}');
+                print('Artikel yang dipilih: ${articlesModel.articleID}');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -54,53 +54,53 @@ class _BeAwareState extends State<BeAware> {
               child: snapshot.data.docs.length == null
                   ? Container()
                   : Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(
-                            articlesModel.articleImage,
-                            fit: BoxFit.cover,
-                            height: 150,
-                            width: 150,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Expanded(
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  articlesModel.articleTitle,
-                                  style: TextStyle(
-                                      fontSize: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          .fontSize,
-                                      fontWeight: FontWeight.w500,
-                                      color: Theme.of(context).primaryColor),
-                                ),
-                                Divider(
-                                  color: Theme.of(context).iconTheme.color,
-                                ),
-                                Text(
-                                  articlesModel.articleDescription,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      color: AppThemeData
-                                          .lightTheme.iconTheme.color),
-                                ),
-                                //Text(trashPickUpsModel.trashLocationAddress),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10.0),
+                    child: Image.network(
+                      articlesModel.articleImage,
+                      fit: BoxFit.cover,
+                      height: 150,
+                      width: 150,
                     ),
+                  ),
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            articlesModel.articleTitle,
+                            style: TextStyle(
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    .fontSize,
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).primaryColor),
+                          ),
+                          Divider(
+                            color: Theme.of(context).iconTheme.color,
+                          ),
+                          Text(
+                            articlesModel.articleDescription,
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: AppThemeData
+                                    .lightTheme.iconTheme.color),
+                          ),
+                          //Text(trashPickUpsModel.trashLocationAddress),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -117,49 +117,49 @@ class _BeAwareState extends State<BeAware> {
           return !snapshot.hasData
               ? Container()
               : snapshot.data.docs.length.toString() == "0"
-                  ? Container(
-                      height: 250.0,
-                      width: 200.0,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 30.0,
-                          ),
-                          Text(
-                            "You have no articles yet",
-                            style: TextStyle(
-                                fontSize: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    .fontSize),
-                          ),
-                          Image.asset(
-                            'assets/icons/icon_broom.png',
-                            height: 100.0,
-                            width: 100.0,
-                          ),
-                        ],
-                      ),
-                    )
-                  : ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data.docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        ArticlesModel articlesModel =
-                            ArticlesModel.fromDocument(
-                                snapshot.data.docs[index]);
-                        return articleDetailsCard(snapshot, articlesModel);
-                      },
-                    );
+              ? Container(
+            height: 250.0,
+            width: 200.0,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30.0,
+                ),
+                Text(
+                  "Belum ada artikel",
+                  style: TextStyle(
+                      fontSize: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          .fontSize),
+                ),
+                Image.asset(
+                  'assets/icons/icon_broom.png',
+                  height: 100.0,
+                  width: 100.0,
+                ),
+              ],
+            ),
+          )
+              : ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
+            itemCount: snapshot.data.docs.length,
+            itemBuilder: (BuildContext context, int index) {
+              ArticlesModel articlesModel =
+              ArticlesModel.fromDocument(
+                  snapshot.data.docs[index]);
+              return articleDetailsCard(snapshot, articlesModel);
+            },
+          );
         },
       );
     }
 
     return Scaffold(
       appBar: PrimaryAppBar(
-        title: "Be Aware",
+        title: "Sadarlah akan...",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
@@ -181,7 +181,7 @@ class _BeAwareState extends State<BeAware> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "TrashPick Articles",
+                  "Artikel SIMANSAM",
                   style: TextStyle(
                       fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                       fontWeight: FontWeight.bold),

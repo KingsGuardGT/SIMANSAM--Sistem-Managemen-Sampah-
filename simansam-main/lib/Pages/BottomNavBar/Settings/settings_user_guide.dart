@@ -21,12 +21,12 @@ class _SettingsUserGuideState extends State<SettingsUserGuide> {
           icon: Icon(Icons.arrow_back_ios_rounded,
               color: Theme.of(context).iconTheme.color),
           onPressed: () {
-            print("Go to Welcome Page");
+            print("Pergi ke Welcome Page");
             Navigator.pop(context);
           },
         ),
         title: Text(
-          "User Guide",
+          "Panduan Pengguna",
           style: Theme.of(context).textTheme.titleLarge,
         ),
         elevation: Theme.of(context).appBarTheme.elevation,
@@ -46,8 +46,8 @@ class _SettingsUserGuideState extends State<SettingsUserGuide> {
             ),
             isLoading
                 ? Center(
-                    child: CircularProgressIndicator(),
-                  )
+              child: CircularProgressIndicator(),
+            )
                 : Stack(),
           ],
         ),

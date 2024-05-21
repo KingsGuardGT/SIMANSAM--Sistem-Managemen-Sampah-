@@ -33,14 +33,14 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (context, dataSnapshot) {
         if (!dataSnapshot.hasData) {
           return Text(
-            "Hi! ",
+            "Hai! ",
             style: TextStyle(
                 fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
           UserModelClass userModelClass =
-              UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
+          UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
           return Row(
             children: [
               ImageFramesWidgets().userProfileFrame(
@@ -52,14 +52,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     "${userModelClass.name}",
                     style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.titleLarge.fontSize,
+                        Theme.of(context).textTheme.titleLarge.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "${userModelClass.accountType}",
                     style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.titleMedium.fontSize,
+                        Theme.of(context).textTheme.titleMedium.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -80,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
       SizedBox(
         width: 10.0,
       ),
-      Text("About Us",
+      Text("Tentang Kami",
           style: TextStyle(
             fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
             color: Theme.of(context).textTheme.labelLarge.color,
@@ -120,17 +120,17 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final themeText =
-        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.light
-            ? 'Light Theme'
-            : 'Dark Theme';
+    Provider.of<ThemeProvider>(context).themeMode == ThemeMode.light
+        ? 'Tema Terang'
+        : 'Tema Gelap';
     final IconData themeIcon =
-        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.light
-            ? Icons.wb_sunny_rounded
-            : Icons.nightlight_round;
+    Provider.of<ThemeProvider>(context).themeMode == ThemeMode.light
+        ? Icons.wb_sunny_rounded
+        : Icons.nightlight_round;
 
     return Scaffold(
       appBar: PrimaryAppBar(
-        title: "Settings",
+        title: "Pengaturan",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
@@ -156,7 +156,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 20.0,
                 ),
                 TextWithIconButtonWidget(
-                  text: "Sign Out",
+                  text: "Keluar",
                   icon: Icons.logout,
                   iconToLeft: true,
                   onClicked: () => SignOutAlertDialog().showAlert(context),
@@ -176,8 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Text(
                           "$themeText",
                           style: TextStyle(
-                              fontSize:
-                                  Theme.of(context).textTheme.labelLarge.fontSize,
+                              fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -189,11 +188,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 5.0,
                 ),
                 TextWithIconButtonWidget(
-                  text: "Profile Info",
+                  text: "Info Profil",
                   icon: Icons.account_circle_rounded,
                   iconToLeft: true,
                   onClicked: () {
-                    print('Switch to Profile Info');
+                    print('Beralih ke Info Profil');
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -205,7 +204,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 15.0,
                 ),
                 TextWithIconButtonWidget(
-                  text: "User Guide",
+                  text: "Panduan Pengguna",
                   icon: Icons.assistant_rounded,
                   iconToLeft: true,
                   onClicked: () {
@@ -220,11 +219,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   height: 15.0,
                 ),
                 TextWithIconButtonWidget(
-                  text: "Give Feedback",
+                  text: "Berikan Umpan Balik",
                   icon: Icons.feedback_rounded,
                   iconToLeft: true,
                   onClicked: () {
-                    print('Switch to Give Feedback');
+                    print('Beralih ke Berikan Feedback');
                     Navigator.push(
                       context,
                       MaterialPageRoute(

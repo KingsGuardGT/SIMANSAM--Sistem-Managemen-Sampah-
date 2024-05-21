@@ -26,13 +26,13 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   String firebaseStorageUploadedImageURL;
   String _userLatestProfileImage;
 
-  // Uploading Process
+  // Proses Pengunggahan
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
   double circularProgressVal;
 
-  // -------------------------------- UPLOADING PROCESS -------------------------------- \\
+  // -------------------------------- PROSES PENGUNGGAHAN -------------------------------- \\
 
   void ifAnError() {
     Navigator.pop(context);
@@ -40,7 +40,6 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
       isStartToUpload = false;
       isUploadComplete = false;
       isAnError = true;
-      //Navigator.pop(context);
       showAlertDialog(context);
     });
   }
@@ -51,7 +50,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   }
 
   void sendSuccessCode() {
-    print("Profile Update Success!");
+    print("Berhasil Memperbarui Profil!");
     Navigator.pop(context);
     setState(() {
       isStartToUpload = false;
@@ -61,7 +60,6 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   }
 
   showAlertDialog(BuildContext context) {
-    // show the dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -70,57 +68,57 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
           builder: (context, setState) {
             return AlertDialog(
               title: !isUploadComplete
-                  ? Center(child: Text("Updating Profile"))
-                  : Center(child: Text("Profile Updated")),
+                  ? Center(child: Text("Memperbarui Profil"))
+                  : Center(child: Text("Profil Diperbarui")),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (!isUploadComplete)
                     !isAnError
                         ? Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              CircularProgressIndicator(
-                                value: circularProgressVal,
-                                strokeWidth: 6,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.teal.shade700),
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Text("Please wait until your profile is update.",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 16.0)
-                                      .copyWith(color: Colors.grey.shade900)),
-                            ],
-                          )
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        CircularProgressIndicator(
+                          value: circularProgressVal,
+                          strokeWidth: 6,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.teal.shade700),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Text("Tunggu sampai profil Anda diperbarui.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 16.0)
+                                .copyWith(color: Colors.grey.shade900)),
+                      ],
+                    )
                         : Container(
-                            child: Column(
-                            children: [
-                              Text("Error!",
-                                  style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              SizedBox(
-                                height: 50.0,
-                              ),
-                              new ButtonWidget(
-                                  text: "Try Again",
-                                  textColor: AppThemeData().whiteColor,
-                                  color: AppThemeData().primaryColor,
-                                  onClicked: () {
-                                    Navigator.pop(context);
-                                  }),
-                            ],
-                          ))
+                        child: Column(
+                          children: [
+                            Text("Error!",
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            new ButtonWidget(
+                                text: "Coba Lagi",
+                                textColor: AppThemeData().whiteColor,
+                                color: AppThemeData().primaryColor,
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                }),
+                          ],
+                        ))
                   else
                     Center(
                       child: Padding(
@@ -133,14 +131,14 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                               width: 50,
                             ),
                             SizedBox(height: 30),
-                            Text("Profile has uploaded!",
+                            Text("Profil telah diunggah!",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                        fontFamily: 'Montserrat',
-                                        fontSize: 22.0)
+                                    fontFamily: 'Montserrat',
+                                    fontSize: 22.0)
                                     .copyWith(
-                                        color: Colors.grey.shade900,
-                                        fontWeight: FontWeight.bold)),
+                                    color: Colors.grey.shade900,
+                                    fontWeight: FontWeight.bold)),
                             SizedBox(height: 50),
                             new ButtonWidget(
                               textColor: AppThemeData().whiteColor,
@@ -167,14 +165,14 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
 
   void validateEdits() {
     if (_userSelectedFileImage == null) {
-      ToastMessages().toastError("Please select an image", context);
+      ToastMessages().toastError("Silakan pilih gambar", context);
     } else {
       showAlertDialog(context);
       uploadImagesToStorage();
     }
   }
 
-  // -------------------------------- CHANGE IMAGE -------------------------------- \\
+  // -------------------------------- UBAH GAMBAR -------------------------------- \\
 
   _imgFromCamera() async {
     final pickedFile = await ImagePicker().getImage(
@@ -212,14 +210,14 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                 children: <Widget>[
                   new ListTile(
                       leading: new Icon(Icons.photo_library),
-                      title: new Text('Photo Library'),
+                      title: new Text('Perpustakaan Foto'),
                       onTap: () {
                         _imgFromGallery();
                         Navigator.of(context).pop();
                       }),
                   new ListTile(
                     leading: new Icon(Icons.photo_camera),
-                    title: new Text('Camera'),
+                    title: new Text('Kamera'),
                     onTap: () {
                       _imgFromCamera();
                       Navigator.of(context).pop();
@@ -238,17 +236,17 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
 
       try {
         ref = firebase_storage.FirebaseStorage.instance.ref().child(
-            'User Profile Images/${FirebaseAuth.instance.currentUser.uid}/${FirebaseAuth.instance.currentUser.uid}');
+            'Gambar Profil Pengguna/${FirebaseAuth.instance.currentUser.uid}/${FirebaseAuth.instance.currentUser.uid}');
         await ref.putFile(_userSelectedFileImage);
 
         String downloadURL = await firebase_storage.FirebaseStorage.instance
             .ref()
             .child(
-                'User Profile Images/${FirebaseAuth.instance.currentUser.uid}/${FirebaseAuth.instance.currentUser.uid}')
+            'Gambar Profil Pengguna/${FirebaseAuth.instance.currentUser.uid}/${FirebaseAuth.instance.currentUser.uid}')
             .getDownloadURL();
         firebaseStorageUploadedImageURL = downloadURL.toString();
-        print("Image Uploaded to Firebase Storage!");
-        print("Image URL: " + firebaseStorageUploadedImageURL);
+        print("Gambar Diunggah ke Firebase Storage!");
+        print("URL Gambar: " + firebaseStorageUploadedImageURL);
         saveEditProfileToFireStore(firebaseStorageUploadedImageURL);
       } catch (e) {
         print(e.toString());
@@ -260,21 +258,21 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   }
 
   saveEditProfileToFireStore(String firebaseStorageUploadedImageURL) {
-    print("IMAGE: " + firebaseStorageUploadedImageURL);
+    print("GAMBAR: " + firebaseStorageUploadedImageURL);
 
     FirebaseFirestore.instance
-        .collection('Users')
+        .collection('Pengguna')
         .doc(currentUserID.toString())
         .update({
-          'profileImage': firebaseStorageUploadedImageURL,
-        })
+      'gambarProfil': firebaseStorageUploadedImageURL,
+    })
         .then(
           (value) => sendSuccessCode(),
-        )
+    )
         .catchError((error) => sendErrorCode(error.toString()));
   }
 
-  // -------------------------------- PROFILE DETAILS -------------------------------- \\
+  // -------------------------------- DETAIL PROFIL -------------------------------- \\
 
   _columnTitle(String title) {
     return Padding(
@@ -307,20 +305,20 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("Users")
+            .collection("Pengguna")
             .where('uuid', isEqualTo: "${currentUserID.toString()}")
             .snapshots(),
         builder: (context, dataSnapshot) {
           if (!dataSnapshot.hasData) {
             return Text(
-              "Hi! ",
+              "Hai! ",
               style: TextStyle(
                   fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                   fontWeight: FontWeight.bold),
             );
           } else {
             UserModelClass userModelClass =
-                UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
+            UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
 
             _userLatestProfileImage = userModelClass.profileImage;
 
@@ -333,20 +331,20 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                 Center(
                   child: _userSelectedFileImage != null
                       ? new ImageFramesWidgets().userProfileFrame(
-                          _userSelectedFileImage, 150.0, 65.0, false)
+                      _userSelectedFileImage, 150.0, 65.0, false)
                       : new ImageFramesWidgets().userProfileFrame(
-                          _userLatestProfileImage, 150.0, 65.0, true),
+                      _userLatestProfileImage, 150.0, 65.0, true),
                 ),
                 SizedBox(
                   height: 20.0,
                 ),
                 Center(
                   child: TextWithIconButtonWidget(
-                    text: "Click to Change Image",
+                    text: "Klik untuk Mengubah Gambar",
                     icon: Icons.camera_alt_rounded,
                     iconToLeft: true,
                     onClicked: () {
-                      print('Change Profile Image');
+                      print('Ubah Gambar Profil');
                       changeProfilePicture(context);
                     },
                   ),
@@ -354,15 +352,15 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _columnTitle("Name"),
+                    _columnTitle("Nama"),
                     _columnDetail(userModelClass.name),
-                    _columnTitle("Account Type"),
+                    _columnTitle("Jenis Akun"),
                     _columnDetail(userModelClass.accountType),
-                    _columnTitle("Contact Number"),
+                    _columnTitle("Nomor Kontak"),
                     _columnDetail(userModelClass.contactNumber),
                     _columnTitle("Email"),
                     _columnDetail(userModelClass.email),
-                    _columnTitle("Home Address"),
+                    _columnTitle("Alamat Rumah"),
                     _columnDetail(userModelClass.homeAddress),
                   ],
                 ),
@@ -370,7 +368,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                   height: 20.0,
                 ),
                 MinButtonWidget(
-                  text: "Update Profile",
+                  text: "Perbarui Profil",
                   color: AppThemeData().secondaryColor,
                   onClicked: () {
                     validateEdits();
@@ -387,13 +385,13 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
     );
   }
 
-  // -------------------------------- BUILD -------------------------------- \\
+  // -------------------------------- BANGUNAN -------------------------------- \\
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SecondaryAppBar(
-        title: "Profile Info",
+        title: "Informasi Profil",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(

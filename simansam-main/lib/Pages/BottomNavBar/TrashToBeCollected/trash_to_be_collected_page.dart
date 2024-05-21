@@ -28,8 +28,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
 
   @override
   void initState() {
-    _childMap = loadingMap("Loading Map...");
-    //checkLocationPermission();
+    _childMap = loadingMap("Memuat Peta...");
     _getCurrentUserLocation();
     setCurrentUserMarkerIcon();
     setMapRecyclingCentersMarkerIcon();
@@ -37,13 +36,11 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
     super.initState();
   }
 
-  // ---------------------------------- CURRENT USER ---------------------------------- \\
-
   _getCurrentUserLocation() {
     try {
       Geolocator.getCurrentPosition(
-              desiredAccuracy: LocationAccuracy.high,
-              forceAndroidLocationManager: true)
+          desiredAccuracy: LocationAccuracy.high,
+          forceAndroidLocationManager: true)
           .then((Position position) {
         setState(() {
           _currentPosition = position;
@@ -71,7 +68,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
               "${place.locality}, "
               "${place.country}";
         } else {
-          _currentAddress = "No Address";
+          _currentAddress = "Tidak Ada Alamat";
         }
         _childMap = mapWidget();
       });
@@ -89,19 +86,17 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
   _setCurrentUserMarker() {
     return <Marker>[
       Marker(
-          markerId: MarkerId('MyCurrentLocation'),
+          markerId: MarkerId('LokasiSayaSaatIni'),
           position:
-              LatLng(_currentPosition.latitude, _currentPosition.longitude),
+          LatLng(_currentPosition.latitude, _currentPosition.longitude),
           icon: currentUserMarkerIcon,
           onTap: () {
-            print('My Location');
+            print('Lokasi Saya');
           },
           infoWindow:
-              InfoWindow(title: 'My Location', snippet: _currentAddress))
+          InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress))
     ].toSet();
   }
-
-  // ---------------------------------- Recycling Centers ---------------------------------- \\
 
   setMapRecyclingCentersMarkerIcon() async {
     mapRecyclingCenterMarkerIcon = await BitmapDescriptor.fromAssetImage(
@@ -115,19 +110,19 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
         FirebaseFirestore.instance
             .collection("Users")
             .doc(result.id)
-            .collection("Trash Pick Ups")
+            .collection("Pengambilan Sampah")
             .get()
             .then((querySnapshot) {
           if (querySnapshot.docs.isNotEmpty) {
             querySnapshot.docs.forEach((result) {
               TrashPickUpsModel trashPickUpsModel =
-                  TrashPickUpsModel.fromDocument(result);
+              TrashPickUpsModel.fromDocument(result);
               print(
-                  "--------------------- Recycling Center ---------------------\n"
-                  "id: ${trashPickUpsModel.trashID}\n"
-                  "name: ${trashPickUpsModel.trashName}\n"
-                  "latitude: ${trashPickUpsModel.trashLocationLocation.latitude}\n"
-                  "longitude: ${trashPickUpsModel.trashLocationLocation.longitude}");
+                  "--------------------- Pusat Daur Ulang ---------------------\n"
+                      "id: ${trashPickUpsModel.trashID}\n"
+                      "nama: ${trashPickUpsModel.trashName}\n"
+                      "garis lintang: ${trashPickUpsModel.trashLocationLocation.latitude}\n"
+                      "garis bujur: ${trashPickUpsModel.trashLocationLocation.longitude}");
               setRecyclingCentersMarkers(
                 trashPickUpsModel.trashID,
                 trashPickUpsModel.trashName,
@@ -142,11 +137,11 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
   }
 
   setRecyclingCentersMarkers(
-    id,
-    name,
-    latitude,
-    longitude,
-  ) async {
+      id,
+      name,
+      latitude,
+      longitude,
+      ) async {
     final MarkerId markerID = MarkerId(id);
     final Marker marker = Marker(
       markerId: markerID,
@@ -155,31 +150,18 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
       infoWindow: InfoWindow(
           title: name,
           onTap: () {
-            /*showModalBottomSheet<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return MarkerDetailsCard().showEventDetails(
-                    id,
-                    name,
-                    location
-                    context);
-              },
-            );*/
             print("id: $id\n"
-                "name:$name\n"
-                "latitude: $latitude\n"
-                "longitude: $longitude");
+                "nama: $name\n"
+                "garis lintang: $latitude\n"
+                "garis bujur: $longitude");
           }),
     );
     setState(() {
       recyclingCentersMarkers[markerID] = marker;
       _displayMapMarkers = Set<Marker>.of(recyclingCentersMarkers.values);
       _childMap = mapWidget();
-      //print("Recycling Center MarkerID: $markerID");
     });
   }
-
-  // ---------------------------------- COMMON MAP ---------------------------------- \\
 
   loadingMap(String m) {
     return Center(
@@ -202,7 +184,6 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
       await Geolocator.openLocationSettings();
     } else {
       _getCurrentUserLocation();
-      //ToastMessages().toastInfo("Location Permission Granted!");
     }
   }
 
@@ -232,7 +213,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           automaticallyImplyLeading: false,
           title: Text(
-            "Trash To Be Collected",
+            "Sampah yang Akan Dikumpulkan",
             style: Theme.of(context).textTheme.titleLarge,
           ),
           elevation: Theme.of(context).appBarTheme.elevation,
@@ -253,7 +234,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Trash List",
+                      "Daftar Sampah",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(
@@ -268,7 +249,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "Map View",
+                      "Tampilan Peta",
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     Icon(Icons.map_rounded,

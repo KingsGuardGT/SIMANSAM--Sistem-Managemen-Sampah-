@@ -43,79 +43,79 @@ class MarkerDetailsCard {
         isoCountryCode;
 
     if (_trashLocationDetails[0] == "") {
-      latitude = "No latitude found";
+      latitude = "Tidak ditemukan latitude";
     } else {
       latitude = _trashLocationDetails[0].toString();
     }
 
     if (_trashLocationDetails[1] == "") {
-      longitude = "No longitude found";
+      longitude = "Tidak ditemukan longitude";
     } else {
       longitude = _trashLocationDetails[1].toString();
     }
 
     if (_trashLocationDetails[2] == "") {
-      name = "No name found";
+      name = "Tidak ditemukan nama";
     } else {
       name = _trashLocationDetails[2].toString();
     }
 
     if (_trashLocationDetails[3] == "") {
-      street = "No street found";
+      street = "Tidak ditemukan jalan";
     } else {
       street = _trashLocationDetails[3].toString();
     }
 
     if (_trashLocationDetails[4] == "") {
-      postalCode = "No postal code found";
+      postalCode = "Tidak ditemukan kode pos";
     } else {
       postalCode = _trashLocationDetails[4].toString();
     }
 
     if (_trashLocationDetails[5] == "") {
-      administrativeArea = "No administrative area found";
+      administrativeArea = "Tidak ditemukan daerah administratif";
     } else {
       administrativeArea = _trashLocationDetails[5].toString();
     }
 
     if (_trashLocationDetails[6] == "") {
-      subAdministrativeArea = "No sub administrative area found";
+      subAdministrativeArea = "Tidak ditemukan sub daerah administratif";
     } else {
       subAdministrativeArea = _trashLocationDetails[6].toString();
     }
 
     if (_trashLocationDetails[7] == "") {
-      thoroughfare = "No thoroughfare found";
+      thoroughfare = "Tidak ditemukan jalan utama";
     } else {
       thoroughfare = _trashLocationDetails[7].toString();
     }
 
     if (_trashLocationDetails[8] == "") {
-      subThoroughfare = "No sub thoroughfare found";
+      subThoroughfare = "Tidak ditemukan sub jalan utama";
     } else {
       subThoroughfare = _trashLocationDetails[8].toString();
     }
 
     if (_trashLocationDetails[9] == "") {
-      locality = "No locality found";
+      locality = "Tidak ditemukan lokasi";
     } else {
       locality = _trashLocationDetails[9].toString();
     }
 
     if (_trashLocationDetails[10] == "") {
-      subLocality = "No sub locality found";
+      subLocality = "Tidak ditemukan sub lokasi";
     } else {
       subLocality = _trashLocationDetails[10].toString();
     }
 
     if (_trashLocationDetails[11] == "") {
-      country = "No country found";
+      country = "Tidak ditemukan negara";
     } else {
       country = _trashLocationDetails[11].toString();
     }
 
     if (_trashLocationDetails[12] == "") {
-      isoCountryCode = "No ISO country code found";
+      isoCountryCode = "Tidak ditemukan kode negara ISO";
     } else {
       isoCountryCode = _trashLocationDetails[12].toString();
     }
@@ -140,10 +140,10 @@ class MarkerDetailsCard {
                           height: 14.0,
                         ),
                         Text(
-                          "Location Address",
+                          "Alamat Lokasi",
                           style: TextStyle(
                               color:
-                                  Theme.of(context).textTheme.titleLarge.color,
+                              Theme.of(context).textTheme.titleLarge.color,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .titleLarge
@@ -162,8 +162,7 @@ class MarkerDetailsCard {
                   height: 10.0,
                 ),
                 detailsTitle(context, "Latitude"),
-                detailsName(context, latitude),
-                SizedBox(
+                detailsName(context, latitude),SizedBox(
                   height: 5.0,
                 ),
                 detailsTitle(context, "Longitude"),
@@ -171,57 +170,57 @@ class MarkerDetailsCard {
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Name"),
+                detailsTitle(context, "Nama"),
                 detailsName(context, name),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Street"),
+                detailsTitle(context, "Jalan"),
                 detailsName(context, street),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Postal Code"),
+                detailsTitle(context, "Kode Pos"),
                 detailsName(context, postalCode),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Administrative Area"),
+                detailsTitle(context, "Daerah Administratif"),
                 detailsName(context, administrativeArea),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Sub Administrative Area"),
+                detailsTitle(context, "Sub Daerah Administratif"),
                 detailsName(context, subAdministrativeArea),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Thoroughfare"),
+                detailsTitle(context, "Jalan Utama"),
                 detailsName(context, thoroughfare),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Sub Thoroughfare"),
+                detailsTitle(context, "Sub Jalan Utama"),
                 detailsName(context, subThoroughfare),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Locality"),
+                detailsTitle(context, "Lokasi"),
                 detailsName(context, locality),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Sub Locality"),
+                detailsTitle(context, "Sub Lokasi"),
                 detailsName(context, subLocality),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "Country"),
+                detailsTitle(context, "Negara"),
                 detailsName(context, country),
                 SizedBox(
                   height: 5.0,
                 ),
-                detailsTitle(context, "ISO Country Code"),
+                detailsTitle(context, "Kode Negara ISO"),
                 detailsName(context, isoCountryCode),
                 SizedBox(
                   height: 80.0,

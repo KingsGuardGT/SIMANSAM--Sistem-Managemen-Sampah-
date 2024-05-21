@@ -116,7 +116,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection("Users")
-            .where('accountType', isEqualTo: "Trash Picker")
+            .where('accountType', isEqualTo: "Pengumpul Sampah")
             //.orderBy('name',descending: false)
             .snapshots(),
         builder: (context, snapshot) {
@@ -175,14 +175,14 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
         FirebaseFirestore.instance
             .collection("Users")
             .doc(result.id)
-            .collection("Trash Pick Ups")
+            .collection("Pengambilan Sampah")
             .get()
             .then((querySnapshot) {
           querySnapshot.docs.forEach((result) {
             TrashPickUpsModel trashPickUpsModel =
                 TrashPickUpsModel.fromDocument(result);
 
-            print("--------------------- Trash Pick Ups ---------------------\n"
+            print("--------------------- Pengambilan Sampah ---------------------\n"
                 "id: ${trashPickUpsModel.trashID}\n"
                 "name: ${trashPickUpsModel.trashName}\n"
                 "image: ${trashPickUpsModel.trashImage}");
@@ -209,7 +209,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
               },
             ),
             Text(
-              "${selectedTrashPickerModel.name}'s Trash Pick Ups",
+              "${selectedTrashPickerModel.name}'s Pengambilan Sampah",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
@@ -302,7 +302,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
         stream: FirebaseFirestore.instance
             .collection("Users")
             .doc(userID)
-            .collection('Trash Pick Ups')
+            .collection('Pengambilan Sampah')
             .orderBy('postedDate', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
@@ -318,7 +318,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                             height: 30.0,
                           ),
                           Text(
-                            "$userName has no scheduled trash pick ups yet",
+                            "$userName has no scheduled Pengambilan Sampah yet",
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme

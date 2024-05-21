@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String formattedDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   String formattedTime = DateFormat('kk:mm:a').format(DateTime.now());
 
-  String accountTypeName = "Trash Picker";
+  String accountTypeName = "Pengumpul Sampah";
   int accountTypeID;
 
   void _togglePasswordView() {
@@ -71,26 +71,26 @@ class _SignUpPageState extends State<SignUpPage> {
         homeAddressController.text.isEmpty &&
         passwordController.text.isEmpty &&
         confirmPasswordController.text.isEmpty) {
-      _toastMessages.toastInfo('Please fill details', context);
+      _toastMessages.toastInfo('Harap isi detail', context);
     } else if (nameController.text.isEmpty) {
-      _toastMessages.toastInfo('Name is empty', context);
+      _toastMessages.toastInfo('Nama kosong', context);
     } else if (emailController.text.isEmpty) {
-      _toastMessages.toastInfo('Email is empty', context);
+      _toastMessages.toastInfo('Email kosong', context);
     } else if (!regExp.hasMatch(emailController.text)) {
-      _toastMessages.toastInfo('Email pattern is wrong', context);
+      _toastMessages.toastInfo('Polanya email salah', context);
     } else if (phoneNumberController.text.isEmpty) {
-      _toastMessages.toastInfo('Phone Number is empty', context);
+      _toastMessages.toastInfo('Nomor telepon kosong', context);
     } else if (homeAddressController.text.isEmpty) {
-      _toastMessages.toastInfo('Home Address is empty', context);
+      _toastMessages.toastInfo('Alamat rumah kosong', context);
     } else if (passwordController.text.length < 6) {
       _toastMessages.toastInfo(
-          'Password Should Be At Least 6 Characters!', context);
+          'Password Harus Setidaknya 6 Karakter!', context);
     } else if (passwordController.text.isEmpty) {
-      _toastMessages.toastInfo('Password is empty', context);
+      _toastMessages.toastInfo('Password kosong', context);
     } else if (confirmPasswordController.text != passwordController.text) {
-      _toastMessages.toastInfo('Confirm Password is wrong', context);
+      _toastMessages.toastInfo('Konfirmasi password salah', context);
     } else {
-      print('Validation Success!');
+      print('Validasi Sukses!');
       return true;
     }
 
@@ -98,7 +98,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   showAlertDialog(BuildContext context) {
-    // show the dialog
+    // menampilkan dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -107,95 +107,95 @@ class _SignUpPageState extends State<SignUpPage> {
           builder: (context, setState) {
             return AlertDialog(
               title: !isUserCreated
-                  ? Center(child: Text("Creating Account"))
-                  : Center(child: Text("Account Created")),
+                  ? Center(child: Text("Membuat Akun"))
+                  : Center(child: Text("Akun Dibuat")),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (!isUserCreated)
                     !isAnError
                         ? Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              CircularProgressIndicator(
-                                value: circularProgressVal,
-                                strokeWidth: 6,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    AppThemeData().primaryColor),
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Text(
-                                  "Hi " +
-                                      nameController.text +
-                                      ", Please wait until we create your account!",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 16.0)
-                                      .copyWith(color: Colors.grey.shade900)),
-                            ],
-                          )
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        CircularProgressIndicator(
+                          value: circularProgressVal,
+                          strokeWidth: 6,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              AppThemeData().primaryColor),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Text(
+                            "Hai " +
+                                nameController.text +
+                                ", Mohon tunggu sampai kami membuat akun Anda!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontSize: 16.0)
+                                .copyWith(color: Colors.grey.shade900)),
+                      ],
+                    )
                         : Container(
-                            child: Column(
-                            children: [
-                              Text("Error!",
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              SizedBox(
-                                height: 50.0,
-                              ),
-                              new ButtonWidget(
-                                  text: "Try Again",
-                                  textColor: AppThemeData().whiteColor,
-                                  color: AppThemeData().redColor,
-                                  onClicked: () {
-                                    Navigator.pop(context);
-                                  }),
-                            ],
-                          ))
+                        child: Column(
+                          children: [
+                            Text("Error!",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            new ButtonWidget(
+                                text: "Coba Lagi",
+                                textColor: AppThemeData().whiteColor,
+                                color: AppThemeData().redColor,
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                }),
+                          ],
+                        ))
                   else
                     Container(
                         child: Column(
-                      children: [
-                        Text("Welcome!",
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(
-                          height: 50.0,
-                        ),
-                        Image.asset(
-                          'assets/images/welcome.png',
-                          height: 100,
-                          width: 100,
-                        ),
-                        SizedBox(
-                          height: 50.0,
-                        ),
-                        new ButtonWidget(
-                            text: "Continue",
-                            textColor: AppThemeData().whiteColor,
-                            color: AppThemeData().primaryColor,
-                            onClicked: () {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => WelcomeGuidePage(
-                                          nameController.text.toString(),
-                                          accountTypeName)),
-                                  ModalRoute.withName("/WelcomeScreen"));
-                            }),
-                      ],
-                    )),
+                          children: [
+                            Text("Selamat Datang!",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            Image.asset(
+                              'assets/images/welcome.png',
+                              height: 100,
+                              width: 100,
+                            ),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            new ButtonWidget(
+                                text: "Lanjutkan",
+                                textColor: AppThemeData().whiteColor,
+                                color: AppThemeData().primaryColor,
+                                onClicked: () {
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => WelcomeGuidePage(
+                                              nameController.text.toString(),
+                                              accountTypeName)),
+                                      ModalRoute.withName("/WelcomeScreen"));
+                                }),
+                          ],
+                        )),
                 ],
               ),
               shape: RoundedRectangleBorder(
@@ -217,14 +217,15 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
+
   void printSignUpData() {
-    print("ACCOUNT TYPE: " + "$accountTypeName");
-    print("NAME: " + nameController.text.toString());
+    print("JENIS AKUN: " + "$accountTypeName");
+    print("NAMA: " + nameController.text.toString());
     print("EMAIL: " + emailController.text.toString());
-    print("CONTACT NUMBER: " + phoneNumberController.text.toString());
-    print("HOME ADDRESS: " + homeAddressController.text.toString());
-    print("PASSWORD: " + passwordController.text.toString());
-    print("CONFIRM PASSWORD: " + confirmPasswordController.text.toString());
+    print("NOMOR KONTAK: " + phoneNumberController.text.toString());
+    print("ALAMAT RUMAH: " + homeAddressController.text.toString());
+    print("KATA SANDI: " + passwordController.text.toString());
+    print("KONFIRMASI KATA SANDI: " + confirmPasswordController.text.toString());
   }
 
   void authenticateUser() async {
@@ -240,13 +241,13 @@ class _SignUpPageState extends State<SignUpPage> {
           email: emailController.text, password: passwordController.text);
 
       if (FirebaseAuth.instance.currentUser.uid != null) {
-        print('User Account Authenticated!');
+        print('Akun Pengguna Terotentikasi!');
 
         User user = FirebaseAuth.instance.currentUser;
 
         if (!user.emailVerified) {
           await user.sendEmailVerification();
-          print('Verification Email Send!');
+          print('Email Verifikasi Dikirim!');
         }
         try {
           FirebaseFirestore.instance
@@ -261,11 +262,11 @@ class _SignUpPageState extends State<SignUpPage> {
             "homeAddress": homeAddressController.text,
             'password': passwordController.text,
             'appearedLocation': new GeoPoint(7.8731, 80.7718),
-            'lastAppeared': "Not Set",
+            'lastAppeared': "Tidak Ditetapkan",
             'accountCreated': "$formattedDate, $formattedTime",
             'profileImage': "$defaultUserAvatar",
           }).then((value) {
-            print("User Added to Firestore success");
+            print("Pengguna Ditambahkan ke Firestore dengan Sukses");
             Navigator.pop(context);
             setState(() {
               isUserCreated = true;
@@ -274,20 +275,20 @@ class _SignUpPageState extends State<SignUpPage> {
             });
           });
         } catch (e) {
-          print("Failed to Add User to Firestore!: $e");
+          print("Gagal Menambahkan Pengguna ke Firestore!: $e");
           ifAnError();
         }
       } else {
-        print('Failed to User Account Authenticated!');
+        print('Gagal Mengotentikasi Akun Pengguna!');
         ifAnError();
       }
     } catch (e) {
       print(e.toString());
       if (e.toString() ==
-          "[firebase_auth/email-already-in-use] The email address is already in use by another account.") {
+          "[firebase_auth/email-already-in-use] Alamat email sudah digunakan oleh akun lain.") {
         ifAnError();
         new ToastMessages().toastError(
-            "The email address is already in use by another account", context);
+            "Alamat email sudah digunakan oleh akun lain", context);
       } else {
         ifAnError();
         print(e.toString());
@@ -300,7 +301,7 @@ class _SignUpPageState extends State<SignUpPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Select Account Type",
+          "Pilih Jenis Akun",
           style: TextStyle(
               fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
               fontWeight: FontWeight.bold),
@@ -316,13 +317,13 @@ class _SignUpPageState extends State<SignUpPage> {
               groupValue: accountTypeID,
               onChanged: (val) {
                 setState(() {
-                  accountTypeName = 'Trash Picker';
+                  accountTypeName = 'Pengumpul Sampah';
                   accountTypeID = 1;
                 });
               },
             ),
             Text(
-              'Trash Picker',
+              'Pengumpul Sampah',
               style: new TextStyle(fontSize: 17.0),
             ),
             Radio(
@@ -330,13 +331,13 @@ class _SignUpPageState extends State<SignUpPage> {
               groupValue: accountTypeID,
               onChanged: (val) {
                 setState(() {
-                  accountTypeName = 'Trash Collector';
+                  accountTypeName = 'Pengambil Sampah';
                   accountTypeID = 2;
                 });
               },
             ),
             Text(
-              'Trash Collector',
+              'Pengambil Sampah',
               style: new TextStyle(
                 fontSize: 17.0,
               ),
@@ -355,7 +356,7 @@ class _SignUpPageState extends State<SignUpPage> {
         return Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => UserGuidePage()),
-          (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
         );
       },
       child: Scaffold(
@@ -375,7 +376,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => UserGuidePage()),
-                                  (Route<dynamic> route) => false,
+                                      (Route<dynamic> route) => false,
                                 );
                               })),
                       Row(
@@ -387,7 +388,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             width: 120,
                           ),
                           SizedBox(width: 10),
-                          Text("Create an account \nwith sign up",
+                          Text("Buat akun \ndengan mendaftar",
                               style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
@@ -410,7 +411,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 contentPadding: EdgeInsets.zero,
                                 prefixIcon: Icon(Icons.account_circle_outlined),
                                 border: OutlineInputBorder(),
-                                labelText: 'Name',
+                                labelText: 'Nama',
                               ),
                             ),
                             SizedBox(
@@ -435,7 +436,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 contentPadding: EdgeInsets.zero,
                                 prefixIcon: Icon(Icons.phone_android_rounded),
                                 border: OutlineInputBorder(),
-                                labelText: 'Contact Number',
+                                labelText: 'Nomor Kontak',
                               ),
                             ),
                             SizedBox(
@@ -448,7 +449,45 @@ class _SignUpPageState extends State<SignUpPage> {
                               decoration: InputDecoration(
                                 prefixIcon: Icon(Icons.home_rounded),
                                 border: OutlineInputBorder(),
-                                labelText: 'Home Address',
+                                labelText: 'Alamat Rumah',
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            TextFormField(
+                              controller: emailController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.zero,
+                                prefixIcon: Icon(Icons.email_outlined),
+                                border: OutlineInputBorder(),
+                                labelText: 'Surel',
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            TextFormField(
+                              controller: phoneNumberController,
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.zero,
+                                prefixIcon: Icon(Icons.phone_android_rounded),
+                                border: OutlineInputBorder(),
+                                labelText: 'Nomor Kontak',
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20.0,
+                            ),
+                            TextFormField(
+                              controller: homeAddressController,
+                              keyboardType: TextInputType.multiline,
+                              maxLines: null,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(Icons.home_rounded),
+                                border: OutlineInputBorder(),
+                                labelText: 'Alamat Rumah',
                               ),
                             ),
                             SizedBox(
@@ -460,10 +499,10 @@ class _SignUpPageState extends State<SignUpPage> {
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                 contentPadding:
-                                    EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+                                EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
                                 prefixIcon: Icon(Icons.lock_outline_rounded),
                                 border: OutlineInputBorder(),
-                                labelText: 'Password',
+                                labelText: 'Kata Sandi',
                                 suffix: InkWell(
                                   onTap: _togglePasswordView,
                                   child: Icon(
@@ -484,10 +523,10 @@ class _SignUpPageState extends State<SignUpPage> {
                               keyboardType: TextInputType.visiblePassword,
                               decoration: InputDecoration(
                                 contentPadding:
-                                    EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+                                EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
                                 prefixIcon: Icon(Icons.lock_outline_rounded),
                                 border: OutlineInputBorder(),
-                                labelText: 'Confirm Password',
+                                labelText: 'Konfirmasi Kata Sandi',
                                 suffix: InkWell(
                                   onTap: _toggleConfirmPasswordView,
                                   child: Icon(
@@ -506,14 +545,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       new ButtonWidget(
                         textColor: AppThemeData().whiteColor,
                         color: AppThemeData().secondaryColor,
-                        text: "Sign Up",
+                        text: "Daftar",
                         onClicked: () {
                           if (validateUser()) {
                             printSignUpData();
                             authenticateUser();
                           } else {
                             /*_toastMessages.toastInfo(
-                                'Try again with correct details!');*/
+                                'Coba lagi dengan detail yang benar!');*/
                           }
                         },
                       ),
@@ -523,22 +562,22 @@ class _SignUpPageState extends State<SignUpPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Already User?",
+                            Text("Sudah Punya Akun?",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 )),
                             SizedBox(width: 10),
                             new RadiusFlatButtonWidget(
-                              text: "Sign In",
+                              text: "Masuk",
                               onClicked: () {
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => SignInPage()),
-                                  (Route<dynamic> route) => false,
+                                      (Route<dynamic> route) => false,
                                 );
-                                print("Switch to Sign In");
+                                print("Beralih ke Masuk");
                               },
                             ),
                           ],

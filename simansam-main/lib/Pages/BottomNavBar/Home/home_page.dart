@@ -26,10 +26,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   _setBadgeType() {
-    if (widget.accountType == "Trash Picker") {
-      badgeType = "Picker";
-    } else if (widget.accountType == "Trash Collector") {
-      badgeType = "Collector";
+    if (widget.accountType == "Pengumpul Sampah") {
+      badgeType = "Pengumpul";
+    } else if (widget.accountType == "Pemungut Sampah") {
+      badgeType = "Pemungut";
     }
   }
 
@@ -100,19 +100,19 @@ class _HomePageState extends State<HomePage> {
         if (!dataSnapshot.hasData) {
           //return profileHeaderShimmer();
           return Text(
-            "Hi! ",
+            "Hai! ",
             style: TextStyle(
                 fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
           UserModelClass userModelClass =
-              UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
+          UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Hi! ${userModelClass.name}",
+                "Hai! ${userModelClass.name}",
                 style: TextStyle(
                     fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
                     fontWeight: FontWeight.normal),
@@ -134,11 +134,11 @@ class _HomePageState extends State<HomePage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _statTitle("Total Trash Pick Ups"),
+                _statTitle("Total Pengumpulan Sampah"),
                 SizedBox(
                   height: 10.0,
                 ),
-                _statTitle("Total Points"),
+                _statTitle("Total Poin"),
               ],
             ),
             SizedBox(
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 5.0,
             ),
-            _statTitle("Starter\n$badgeType"),
+            _statTitle("Pemula\n$badgeType"),
           ],
         )
       ],
@@ -177,24 +177,24 @@ class _HomePageState extends State<HomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        widget.accountType == "Trash Picker"
-            ? _statTitle("Schedule more trash pick ups to unlock the,")
-            : _statTitle("Collect more trash to unlock the,"),
+        widget.accountType == "Pengumpul Sampah"
+            ? _statTitle("Jadwalkan pengumpulan sampah lebih banyak untuk membuka,")
+            : _statTitle("Kumpulkan sampah lebih banyak untuk membuka,"),
         SizedBox(
           height: 10.0,
         ),
         _badgeDesignsWidget('assets/images/badge_bronze.png',
-            "Bronze $badgeType", "100 Points"),
+            "Perunggu $badgeType", "100 Poin"),
         SizedBox(
           height: 10.0,
         ),
         _badgeDesignsWidget('assets/images/badge_silver.png',
-            "Silver $badgeType", "1000 Points"),
+            "Perak $badgeType", "1000 Poin"),
         SizedBox(
           height: 10.0,
         ),
         _badgeDesignsWidget(
-            'assets/images/badge_gold.png', "Gold $badgeType", "10000 Points"),
+            'assets/images/badge_gold.png', "Emas $badgeType", "10000 Poin"),
       ],
     );
   }
@@ -203,7 +203,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PrimaryAppBar(
-        title: "TrashPick",
+        title: "SIMANSAM",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
@@ -235,10 +235,10 @@ class _HomePageState extends State<HomePage> {
                 welcomeHeader(),
                 Center(
                   child: Text(
-                    "Welcome",
+                    "Selamat Datang!",
                     style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.headlineSmall.fontSize,
+                        Theme.of(context).textTheme.headlineSmall.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

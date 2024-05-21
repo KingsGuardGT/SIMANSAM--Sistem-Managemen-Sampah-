@@ -32,7 +32,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   showAlertDialog(BuildContext context) {
-    // show the dialog
+    // tampilkan dialog
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -41,88 +41,88 @@ class _SignInPageState extends State<SignInPage> {
           builder: (context, setState) {
             return AlertDialog(
               title: !isUserSigned
-                  ? Center(child: Text("Sign In"))
-                  : Center(child: Text("Welcome Back")),
+                  ? Center(child: Text("Masuk"))
+                  : Center(child: Text("Selamat Datang Kembali")),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (!isUserSigned)
                     !isInValidaAccount
                         ? Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              CircularProgressIndicator(
-                                value: circularProgressVal,
-                                strokeWidth: 6,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                    AppThemeData().primaryColor),
-                              ),
-                              SizedBox(
-                                height: 30.0,
-                              ),
-                              Text("Signing to your account...",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 16.0)
-                                      .copyWith(color: Colors.grey.shade900)),
-                            ],
-                          )
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        CircularProgressIndicator(
+                          value: circularProgressVal,
+                          strokeWidth: 6,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              AppThemeData().primaryColor),
+                        ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        Text("Masuk ke akun anda...",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 16.0)
+                                .copyWith(color: Colors.grey.shade900)),
+                      ],
+                    )
                         : Container(
-                            child: Column(
-                            children: [
-                              Text("Error!",
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              SizedBox(
-                                height: 50.0,
-                              ),
-                              new ButtonWidget(
-                                  text: "Try Again",
-                                  color: AppThemeData().redColor,
-                                  textColor: AppThemeData().whiteColor,
-                                  onClicked: () {
-                                    setState(() {
-                                      isUserSigned = false;
-                                      isInValidaAccount = false;
-                                      Navigator.pop(context);
-                                    });
-                                  }),
-                            ],
-                          ))
+                        child: Column(
+                          children: [
+                            Text("Error!",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            new ButtonWidget(
+                                text: "Coba Lagi",
+                                color: AppThemeData().redColor,
+                                textColor: AppThemeData().whiteColor,
+                                onClicked: () {
+                                  setState(() {
+                                    isUserSigned = false;
+                                    isInValidaAccount = false;
+                                    Navigator.pop(context);
+                                  });
+                                }),
+                          ],
+                        ))
                   else
                     Container(
                         child: Column(
-                      children: [
-                        Text("Welcome!",
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            )),
-                        SizedBox(
-                          height: 50.0,
-                        ),
-                        Image.asset(
-                          'assets/images/welcome.png',
-                          height: 100,
-                          width: 100,
-                        ),
-                        SizedBox(
-                          height: 50.0,
-                        ),
-                        new ButtonWidget(
-                            text: "Continue",
-                            textColor: AppThemeData().whiteColor,
-                            color: AppThemeData().primaryColor,
-                            onClicked: () {
-                              Navigator.pop(context);
-                            }),
-                      ],
-                    )),
+                          children: [
+                            Text("Selamat Datang!",
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            Image.asset(
+                              'assets/images/welcome.png',
+                              height: 100,
+                              width: 100,
+                            ),
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            new ButtonWidget(
+                                text: "Lanjutkan",
+                                textColor: AppThemeData().whiteColor,
+                                color: AppThemeData().primaryColor,
+                                onClicked: () {
+                                  Navigator.pop(context);
+                                }),
+                          ],
+                        )),
                 ],
               ),
               shape: RoundedRectangleBorder(
@@ -149,15 +149,15 @@ class _SignInPageState extends State<SignInPage> {
     final regExp = RegExp(pattern);
 
     if (emailController.text.isEmpty && passwordController.text.isEmpty) {
-      _toastMessages.toastInfo('Please fill details', context);
+      _toastMessages.toastInfo('Harap isi detail', context);
     } else if (emailController.text.isEmpty) {
-      _toastMessages.toastInfo('Email is empty', context);
+      _toastMessages.toastInfo('Email kosong', context);
     } else if (!regExp.hasMatch(emailController.text)) {
-      _toastMessages.toastInfo('Email pattern is wrong', context);
+      _toastMessages.toastInfo('Polanya email salah', context);
     } else if (passwordController.text.isEmpty) {
-      _toastMessages.toastInfo('Password is empty', context);
+      _toastMessages.toastInfo('Password kosong', context);
     } else {
-      print('Validation Success!');
+      print('Validasi Berhasil!');
       return true;
     }
 
@@ -165,19 +165,19 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   geAccountType(String userID) async {
-    print("----------------------- CHECK ACCOUNT TYPE -----------------------");
+    print("----------------------- CEK TIPE AKUN -----------------------");
     await FirebaseFirestore.instance
         .collection('Users')
         .doc(userID)
         .get()
         .then((value) {
       if (value.exists && value.data() != null) {
-        // Check if the document exists and the data is not null
+        // Periksa jika dokumen ada dan data tidak null
         accountType = value.data()['accountType'] ?? 'default';
-        // Use the null-aware operator '??' to provide a default value if accountType is null
+        // Gunakan operator null-aware '??' untuk memberikan nilai default jika accountType null
       } else {
-        print('Document does not exist or has no data');
-        accountType = 'default'; // Set a default value if the document doesn't exist or has no data
+        print('Dokumen tidak ada atau tidak memiliki data');
+        accountType = 'default'; // Tetapkan nilai default jika dokumen tidak ada atau tidak memiliki data
       }
     });
   }
@@ -193,7 +193,7 @@ class _SignInPageState extends State<SignInPage> {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text);
+          email: emailController.text, password: passwordController.text);
       print(userCredential.user.uid.toString());
       await geAccountType(userCredential.user.uid.toString());
       Navigator.pushAndRemoveUntil(
@@ -201,21 +201,21 @@ class _SignInPageState extends State<SignInPage> {
         MaterialPageRoute(
           builder: (BuildContext context) => BottomNavBar(accountType),
         ),
-        (route) => false,
+            (route) => false,
       );
       //Navigator.pop(context);
-      print('User is signed in!');
+      print('Pengguna masuk!');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ifAnError();
-        print('No user found for that email.');
-        _toastMessages.toastError("No user found for that email", context);
+        print('Tidak ada pengguna ditemukan untuk email tersebut.');
+        _toastMessages.toastError("Tidak ada pengguna ditemukan untuk email tersebut", context);
       } else if (e.code == 'wrong-password') {
         ifAnError();
-        print('Wrong password provided for that user.');
-        _toastMessages.toastError("Wrong password provided!", context);
+        print('Kata sandi yang salah.');
+        _toastMessages.toastError("Kata sandi salah!", context);
       } else {
-        _toastMessages.toastError("Something Went Wrong.", context);
+        _toastMessages.toastError("Ada Kesalahan.", context);
         _toastMessages.toastError(e.toString(), context);
         print(e.toString());
       }
@@ -226,15 +226,15 @@ class _SignInPageState extends State<SignInPage> {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      _toastMessages.toastSuccess("Signed In", context);
+      _toastMessages.toastSuccess("Masuk", context);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        _toastMessages.toastError("No user found for that email.", context);
+        _toastMessages.toastError("Tidak ada pengguna ditemukan untuk email tersebut.", context);
       } else if (e.code == 'wrong-password') {
         _toastMessages.toastError(
-            "Wrong password provided for that user.", context);
+            "Kata sandi yang salah diberikan untuk pengguna tersebut.", context);
       } else {
-        _toastMessages.toastError("Something Went Wrong.", context);
+        _toastMessages.toastError("Ada Kesalahan.", context);
         _toastMessages.toastError(e.toString(), context);
         print(e.toString());
       }
@@ -249,87 +249,87 @@ class _SignInPageState extends State<SignInPage> {
           return Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => WelcomePage()),
-            (Route<dynamic> route) => false,
+                (Route<dynamic> route) => false,
           );
         },
         child: Scaffold(
             backgroundColor: AppThemeData().greenAccentColor,
             body: SafeArea(
                 child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    Container(
-                        alignment: Alignment.topLeft,
-                        child: IconButton(
-                            icon: Icon(Icons.arrow_back_ios_rounded),
-                            onPressed: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => WelcomePage()),
-                                (Route<dynamic> route) => false,
-                              );
-                            })),
-                    SizedBox(height: 20),
-                    Image.asset(
-                      'assets/logos/trashpick_logo_banner.png',
-                      height: 200,
-                      width: 200,
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      height: 70.0,
-                      child: TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.zero,
-                          prefixIcon: Icon(Icons.email_outlined),
-                          border: OutlineInputBorder(),
-                          labelText: 'Email',
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      children: [
+                        Container(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                                icon: Icon(Icons.arrow_back_ios_rounded),
+                                onPressed: () {
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => WelcomePage()),
+                                        (Route<dynamic> route) => false,
+                                  );
+                                })),
+                        SizedBox(height: 20),
+                        Image.asset(
+                          'assets/logos/trashpick_logo_banner.png',
+                          height: 200,
+                          width: 200,
                         ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      height: 70.0,
-                      child: TextFormField(
-                        obscureText: _isHidden,
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Password',
-                          prefixIcon: Icon(Icons.lock_outline_rounded),
-                          suffix: InkWell(
-                            onTap: _togglePasswordView,
-                            child: Icon(
-                              _isHidden
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.grey.shade800,
+                        SizedBox(height: 20),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          height: 70.0,
+                          child: TextFormField(
+                            controller: emailController,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.zero,
+                              prefixIcon: Icon(Icons.email_outlined),
+                              border: OutlineInputBorder(),
+                              labelText: 'Email',
                             ),
                           ),
-                        ).copyWith(isDense: true),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    new ButtonWidget(
-                      textColor: AppThemeData().whiteColor,
-                      color: AppThemeData().secondaryColor,
-                      text: "Sign In",
-                      onClicked: () {
-                        if (validateUser()) {
-                          _signInWithEmailAndPassword();
-                          print("Sign In");
-                        } else {
-                          _toastMessages.toastInfo(
-                              'Try again with correct details!', context);
-                        }
-                      },
-                    ),
-                    SizedBox(height: 20),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10),
+                          height: 70.0,
+                          child: TextFormField(
+                            obscureText: _isHidden,
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Kata Sandi',
+                              prefixIcon: Icon(Icons.lock_outline_rounded),
+                              suffix: InkWell(
+                                onTap: _togglePasswordView,
+                                child: Icon(
+                                  _isHidden
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Colors.grey.shade800,
+                                ),
+                              ),
+                            ).copyWith(isDense: true),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        new ButtonWidget(
+                          textColor: AppThemeData().whiteColor,
+                          color: AppThemeData().secondaryColor,
+                          text: "Masuk",
+                          onClicked: () {
+                            if (validateUser()) {
+                              _signInWithEmailAndPassword();
+                              print("Masuk");
+                            } else {
+                              _toastMessages.toastInfo(
+                                  'Coba lagi dengan detail yang benar!', context);
+                            }
+                          },
+                        ),
+                        SizedBox(height: 20),
 /*                    new TextButtonWidget(
                         onClicked: () {
 */ /*                            Navigator.pushAndRemoveUntil(
@@ -341,36 +341,36 @@ class _SignInPageState extends State<SignInPage> {
                           print("Switch to Forgot Password!");
                         },
                         text: "Forgot Password?"),*/
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("New to SIMANSAM?",
-                              style: TextStyle(
-                                fontSize:
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text("Baru di SIMANSAM?",
+                                  style: TextStyle(
+                                    fontSize:
                                     Theme.of(context).textTheme.labelLarge.fontSize,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          SizedBox(width: 10),
-                          new RadiusFlatButtonWidget(
-                            text: "Sign Up",
-                            onClicked: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => UserGuidePage()),
-                                (Route<dynamic> route) => false,
-                              );
-                              print("Switch to Sign Up");
-                            },
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              SizedBox(width: 10),
+                              new RadiusFlatButtonWidget(
+                                text: "Daftar",
+                                onClicked: () {
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UserGuidePage()),
+                                        (Route<dynamic> route) => false,
+                                  );
+                                  print("Beralih ke Pendaftaran");
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ))));
+                        )
+                      ],
+                    ),
+                  ),
+                ))));
   }
 }

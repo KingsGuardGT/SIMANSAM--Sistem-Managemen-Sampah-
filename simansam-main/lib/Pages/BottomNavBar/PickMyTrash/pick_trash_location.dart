@@ -30,7 +30,7 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
     super.initState();
   }
 
-  // ---------------------------------- CURRENT USER ---------------------------------- \\
+  // ---------------------------------- PENGGUNA SAAT INI ---------------------------------- \\
 
   _getCurrentUserAddressFromLatLng() async {
     try {
@@ -44,7 +44,7 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
               "${place.locality}, "
               "${place.country}";
         } else {
-          _currentAddress = "No Address";
+          _currentAddress = "Tidak Ada Alamat";
         }
         _googleMapWidget = mapWidget();
       });
@@ -53,7 +53,7 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
     }
   }
 
-  // ---------------------------------- COMMON MAP ---------------------------------- \\
+  // ---------------------------------- PETA UMUM ---------------------------------- \\
 
   Widget loadingMap() {
     return Center(
@@ -87,10 +87,10 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
             "${place.country}",
             "${place.isoCountryCode}",
           ];
-          /*ToastMessages().toastSuccess("Location Selected: \n"
+          /*ToastMessages().toastSuccess("Lokasi Dipilih: \n"
               "$_trashLocationAddress", context);*/
         } else {
-          ToastMessages().toastSuccess("No Address", context);
+          ToastMessages().toastSuccess("Tidak Ada Alamat", context);
         }
       });
     } catch (error) {
@@ -116,7 +116,7 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
       tiltGesturesEnabled: false,
       onLongPress: (latLang) {
         _addMarkerLongPressed(latLang);
-        print("Long Pressed");
+        print("Tekan Lama");
         print("$latLang");
       },
       markers: Set<Marker>.of(trashLocationMarker.values),
@@ -131,8 +131,8 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
         draggable: true,
         position: latLang,
         infoWindow: InfoWindow(
-          title: "Trash here",
-          snippet: 'This place has trash',
+          title: "Sampah di sini",
+          snippet: 'Tempat ini memiliki sampah',
           onTap: () {
             showModalBottomSheet<void>(
               context: context,
@@ -164,7 +164,7 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SecondaryAppBar(
-        title: "Select Location",
+        title: "Pilih Lokasi",
         appBar: AppBar(),
         widgets: <Widget>[
           Padding(
@@ -177,11 +177,11 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
               color: Theme.of(context).iconTheme.color,
               onPressed: () {
                 ToastMessages().toastSuccess(
-                    "Location Selected: \n"
-                    "${_trashLocationDetails[0].toString()}, "
-                    "${_trashLocationDetails[0].toString()}, "
-                    "${_trashLocationDetails[6].toString()}, "
-                    "${_trashLocationDetails[5].toString()}",
+                    "Lokasi Dipilih: \n"
+                        "${_trashLocationDetails[0].toString()}, "
+                        "${_trashLocationDetails[0].toString()}, "
+                        "${_trashLocationDetails[6].toString()}, "
+                        "${_trashLocationDetails[5].toString()}",
                     context);
                 print(_trashLocationDetails);
 
