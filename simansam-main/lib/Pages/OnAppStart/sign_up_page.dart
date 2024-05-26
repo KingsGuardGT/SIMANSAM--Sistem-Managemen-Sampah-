@@ -331,13 +331,13 @@ class _SignUpPageState extends State<SignUpPage> {
               groupValue: accountTypeID,
               onChanged: (val) {
                 setState(() {
-                  accountTypeName = 'Pengambil Sampah';
+                  accountTypeName = 'ADMIN Dinas Lingkungan Hidup';
                   accountTypeID = 2;
                 });
               },
             ),
             Text(
-              'Pengambil Sampah',
+              'Admin',
               style: new TextStyle(
                 fontSize: 17.0,
               ),
@@ -462,32 +462,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                 prefixIcon: Icon(Icons.email_outlined),
                                 border: OutlineInputBorder(),
                                 labelText: 'Surel',
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            TextFormField(
-                              controller: phoneNumberController,
-                              keyboardType: TextInputType.phone,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.zero,
-                                prefixIcon: Icon(Icons.phone_android_rounded),
-                                border: OutlineInputBorder(),
-                                labelText: 'Nomor Kontak',
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            TextFormField(
-                              controller: homeAddressController,
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.home_rounded),
-                                border: OutlineInputBorder(),
-                                labelText: 'Alamat Rumah',
                               ),
                             ),
                             SizedBox(

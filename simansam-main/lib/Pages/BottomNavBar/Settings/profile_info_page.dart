@@ -261,10 +261,10 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
     print("GAMBAR: " + firebaseStorageUploadedImageURL);
 
     FirebaseFirestore.instance
-        .collection('Pengguna')
+        .collection('Users')
         .doc(currentUserID.toString())
         .update({
-      'gambarProfil': firebaseStorageUploadedImageURL,
+      'profileImage': firebaseStorageUploadedImageURL,
     })
         .then(
           (value) => sendSuccessCode(),
@@ -305,7 +305,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("Pengguna")
+            .collection("Users")
             .where('uuid', isEqualTo: "${currentUserID.toString()}")
             .snapshots(),
         builder: (context, dataSnapshot) {

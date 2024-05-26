@@ -44,7 +44,7 @@ dependencies:
 
   # ------ Firebase (Jan 12, 2021| Min Dart SDK 2.1)  ------ #
   firebase_core: ^0.7.0
-  firebase_auth: ^0.20.0
+  firebase_auth: ^0.20.1
   firebase_database: ^6.0.0
   cloud_firestore: ^0.16.0
   firebase_storage: ^7.0.0

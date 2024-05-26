@@ -14,7 +14,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
   final firestoreInstance = FirebaseFirestore.instance;
   TrashPickUpsModel trashPickUpsModel;
   UserModelClass selectedTrashPickerModel;
-  String accountType = "Trash Collector";
+  String accountType = "Admin SIMANSAM";
   bool viewTrashPicker = false;
 
   @override
@@ -236,7 +236,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
               context,
               MaterialPageRoute(
                   builder: (context) => ViewTrashDetails(
-                      userID, trashPickUpsModel.trashID, "Trash Collector")),
+                      userID, trashPickUpsModel.trashID, "Admin SIMANSAM")),
             );
           },
           child: snapshot.data.docs.length == null
@@ -366,7 +366,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                       height: 10.0,
                     ),
                     Text(
-                      "Trash Pickers",
+                      "Pengumpul Sampah",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     _trashPickersList(),
