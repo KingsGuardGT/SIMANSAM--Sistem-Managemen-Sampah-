@@ -394,7 +394,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
     firestoreInstance
         .collection('Users')
         .doc(userProfileID)
-        .collection('Pengambilan Sampah')
+        .collection('PengambilanSampah')
         .doc(trashID)
         .set({
       'trashID': trashID,

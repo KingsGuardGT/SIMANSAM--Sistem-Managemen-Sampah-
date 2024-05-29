@@ -108,7 +108,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
         stream: FirebaseFirestore.instance
             .collection("Users")
             .doc(userProfileID)
-            .collection('Pengambilan Sampah')
+            .collection('PengambilanSampah')
             .orderBy('postedDate', descending: true)
             .snapshots(),
         builder: (context, snapshot) {

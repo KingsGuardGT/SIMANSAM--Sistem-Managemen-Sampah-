@@ -122,7 +122,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
       height: MediaQuery.of(context).size.height * 0.75,
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection("Pusat Daur Ulang")
+            .collection("PusatDaurUlang")
             .orderBy('name', descending: false)
             .snapshots(),
         builder: (context, snapshot) {

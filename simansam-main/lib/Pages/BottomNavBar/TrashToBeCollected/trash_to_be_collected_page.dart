@@ -110,7 +110,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
         FirebaseFirestore.instance
             .collection("Users")
             .doc(result.id)
-            .collection("Pengambilan Sampah")
+            .collection("PengambilanSampah")
             .get()
             .then((querySnapshot) {
           if (querySnapshot.docs.isNotEmpty) {

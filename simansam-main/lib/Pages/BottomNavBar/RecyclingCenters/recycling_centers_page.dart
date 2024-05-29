@@ -111,7 +111,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
 
   getRecyclingCentersLocation() {
     FirebaseFirestore.instance
-        .collection("Pusat Daur Ulang")
+        .collection("PusatDaurUlang")
         .get()
         .then((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
@@ -220,7 +220,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           automaticallyImplyLeading: false,
           title: Text(
-            "Pusat Daur Ulang",
+            "PusatDaurUlang",
             style: Theme.of(context).textTheme.titleLarge,
           ),
           elevation: Theme.of(context).appBarTheme.elevation,

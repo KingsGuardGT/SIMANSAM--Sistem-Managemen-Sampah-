@@ -159,7 +159,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
       stream: FirebaseFirestore.instance
           .collection("Users")
           .doc(widget.userID)
-          .collection('Pengambilan Sampah')
+          .collection('PengambilanSampah')
           .where('trashID', isEqualTo: widget.trashID)
           .snapshots(),
       builder: (context, snapshot) {

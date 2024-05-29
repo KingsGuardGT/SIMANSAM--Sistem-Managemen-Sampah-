@@ -175,7 +175,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
         FirebaseFirestore.instance
             .collection("Users")
             .doc(result.id)
-            .collection("Pengambilan Sampah")
+            .collection("PengambilanSampah")
             .get()
             .then((querySnapshot) {
           querySnapshot.docs.forEach((result) {
@@ -302,7 +302,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
         stream: FirebaseFirestore.instance
             .collection("Users")
             .doc(userID)
-            .collection('Pengambilan Sampah')
+            .collection('PengambilanSampah')
             .orderBy('postedDate', descending: true)
             .snapshots(),
         builder: (context, snapshot) {

@@ -50,7 +50,7 @@ class RecyclingCentersBottomSheet {
                           height: 14.0,
                         ),
                         Text(
-                          "Pusat Daur Ulang",
+                          "PusatDaurUlang",
                           style: TextStyle(
                               color:
                               Theme.of(context).textTheme.titleLarge.color,

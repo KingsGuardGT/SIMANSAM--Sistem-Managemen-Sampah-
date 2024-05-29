@@ -167,7 +167,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   sendFeedback() {
     FirebaseFirestore.instance
         .collection('Feedbacks')
-        .doc("Umpan Balik Pengguna")
+        .doc("UmpanBalikPengguna")
         .collection(FirebaseAuth.instance.currentUser.uid)
         .doc(UUIDGenerator().uuidV1())
         .set({
