@@ -5,6 +5,8 @@ import 'package:simansam/Models/trash_pick_ups_model.dart';
 import 'package:simansam/Widgets/button_widgets.dart';
 import 'package:simansam/Widgets/secondary_app_bar_widget.dart';
 
+import 'edit_trash_details.dart';
+
 class ViewTrashDetails extends StatefulWidget {
   final String userID, trashID, accountType;
 
@@ -245,8 +247,21 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
                         ? MinButtonWidget(
                             text: "Edit Pengambilan Sampah",
                             color: Theme.of(context).colorScheme.background,
-                            onClicked: () =>
-                                {print("Edit Pengambilan Sampah Selesai!")},
+                      onClicked: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => EditTrashDetails(
+                              widget.userID,
+                              trashPickUpsModel.trashID,
+                              widget.accountType,
+                            ),
+                          ),
+                        );
+
+                        // Refresh the trash details screen after editing
+                        setState(() {});
+                      },
                           )
                         : Container(),
                   ),

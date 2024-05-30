@@ -456,18 +456,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               height: 20.0,
                             ),
                             TextFormField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.zero,
-                                prefixIcon: Icon(Icons.email_outlined),
-                                border: OutlineInputBorder(),
-                                labelText: 'Surel',
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            TextFormField(
                               obscureText: _isHidden,
                               controller: passwordController,
                               keyboardType: TextInputType.visiblePassword,

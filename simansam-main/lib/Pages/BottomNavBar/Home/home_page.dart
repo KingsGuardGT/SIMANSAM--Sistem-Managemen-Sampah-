@@ -43,53 +43,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _statDetail(double numberValue, bool isDouble) {
-    String detailString;
-    if (isDouble) {
-      detailString = numberValue.toString();
-    } else {
-      detailString = numberValue.toInt().toString();
-    }
-
-    return Text(
-      detailString,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
-          fontWeight: FontWeight.bold),
-    );
-  }
-
-  _badgeRequiresPoints(String points) {
-    return Text(
-      points,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
-          fontWeight: FontWeight.normal),
-    );
-  }
-
-  _badgeDesignsWidget(String image, String badgeName, String badgePoints) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.asset(
-          image,
-          height: 60.0,
-          width: 60.0,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _statTitle(badgeName),
-            _badgeRequiresPoints(badgePoints),
-          ],
-        )
-      ],
-    );
-  }
-
   welcomeHeader() {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
@@ -121,81 +74,6 @@ class _HomePageState extends State<HomePage> {
           );
         }
       },
-    );
-  }
-
-  _profileStats() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _statTitle("Total Pengumpulan Sampah"),
-                SizedBox(
-                  height: 10.0,
-                ),
-                _statTitle("Total Poin"),
-              ],
-            ),
-            SizedBox(
-              width: 20.0,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _statDetail(4, false),
-                SizedBox(
-                  height: 10.0,
-                ),
-                _statDetail(52, false),
-              ],
-            )
-          ],
-        ),
-        Column(
-          children: [
-            Image.asset(
-              'assets/images/badge_starter.png',
-              height: 70.0,
-              width: 70.0,
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            _statTitle("Pemula\n$badgeType"),
-          ],
-        )
-      ],
-    );
-  }
-
-  _badgeDetails() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        widget.accountType == "Pengumpul Sampah"
-            ? _statTitle("Jadwalkan pengumpulan sampah lebih banyak untuk membuka,")
-            : _statTitle("Kumpulkan sampah lebih banyak untuk membuka,"),
-        SizedBox(
-          height: 10.0,
-        ),
-        _badgeDesignsWidget('assets/images/badge_bronze.png',
-            "Perunggu $badgeType", "100 Poin"),
-        SizedBox(
-          height: 10.0,
-        ),
-        _badgeDesignsWidget('assets/images/badge_silver.png',
-            "Perak $badgeType", "1000 Poin"),
-        SizedBox(
-          height: 10.0,
-        ),
-        _badgeDesignsWidget(
-            'assets/images/badge_gold.png', "Emas $badgeType", "10000 Poin"),
-      ],
     );
   }
 
@@ -251,11 +129,6 @@ class _HomePageState extends State<HomePage> {
                       fontSize: Theme.of(context).textTheme.headline4.fontSize,
                       fontWeight: FontWeight.bold),
                 ),*/
-                _profileStats(),
-                SizedBox(
-                  height: 30.0,
-                ),
-                _badgeDetails(),
               ],
             ),
           ),

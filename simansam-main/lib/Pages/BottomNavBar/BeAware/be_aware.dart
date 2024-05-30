@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:simansam/Models/articles_model.dart';
 import 'package:simansam/Pages/BottomNavBar/BeAware/read_article.dart';
 import 'package:simansam/Theme/theme_provider.dart';
+import 'package:simansam/Pages/BottomNavBar/BeAware/create_articles.dart';
 
 import '../../../Widgets/primary_app_bar_widget.dart';
 
@@ -114,7 +115,7 @@ class _BeAwareState extends State<BeAware> {
             .orderBy('articlePostedDate', descending: true)
             .snapshots(),
         builder: (context, snapshot) {
-          return !snapshot.hasData
+          return!snapshot.hasData
               ? Container()
               : snapshot.data.docs.length.toString() == "0"
               ? Container(
@@ -169,7 +170,17 @@ class _BeAwareState extends State<BeAware> {
               color: AppThemeData().secondaryColor,
               size: 35.0,
             ),
-          )
+          ),
+          // Add this button
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder:(context) => CreateArticle()),
+              );
+            },
+          ),
         ],
       ),
       body: SingleChildScrollView(
