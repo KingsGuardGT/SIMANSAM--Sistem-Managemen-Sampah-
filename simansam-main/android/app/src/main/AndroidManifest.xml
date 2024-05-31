@@ -11,7 +11,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:label="SIMANSAM">
+        android:label="SIMANSAM"
+        android:icon="@mipmap/ic_launcher">
     <activity
         android:name=".MainActivity"
         android:exported="true">
