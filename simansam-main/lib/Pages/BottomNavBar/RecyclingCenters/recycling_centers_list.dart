@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simansam/Models/recycling_center_model.dart';
 import 'package:simansam/Theme/theme_provider.dart';
 
@@ -13,10 +14,35 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
   RecyclingCenterModel recyclingCenterModel;
   String accountType = "Pengumpul Sampah";
   bool viewTrashPicker = false;
+  GoogleMapController _mapController;
+  LatLng _initialPosition = LatLng(37.42796133580664, -122.085749655962);
+  LatLng _selectedPosition;
 
-  @override
-  void initState() {
-    super.initState();
+  Future<void> addRecyclingCenter(
+      String name, String address, String phone, GeoPoint location) async {
+    await FirebaseFirestore.instance.collection("PusatDaurUlang").add({
+      "name": name,
+      "address": address,
+      "phone": phone,
+      "location": location,
+    });
+  }
+
+  Future<void> editRecyclingCenter(
+      String id, String name, String address, String phone, GeoPoint location) async {
+    await FirebaseFirestore.instance
+        .collection("PusatDaurUlang")
+        .doc(id)
+        .update({
+      "name": name,
+      "address": address,
+      "phone": phone,
+      "location": location,
+    });
+  }
+
+  Future<void> deleteRecyclingCenter(String id) async {
+    await FirebaseFirestore.instance.collection("PusatDaurUlang").doc(id).delete();
   }
 
   loadingProgress() {
@@ -45,10 +71,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
             splashColor: Colors.blue.withAlpha(30),
             onTap: () {
               print('Sampah Terpilih: ${recyclingCenterModel.id}');
-/*              setState(() {
-                viewTrashPicker = true;
-                selectedTrashPickerModel = userModelClass;
-              });*/
+              _showEditDialog(recyclingCenterModel);
             },
             child: snapshot.data.docs.length == null
                 ? Container()
@@ -129,7 +152,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return loadingProgress();
           }
-          return !snapshot.hasData
+          return!snapshot.hasData
               ? Container()
               : snapshot.data.docs.length.toString() == "0"
               ? Container(
@@ -163,15 +186,112 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
             physics: BouncingScrollPhysics(),
             itemCount: snapshot.data.docs.length,
             itemBuilder: (BuildContext context, int index) {
-              recyclingCenterModel =
-                  RecyclingCenterModel.fromDocument(
-                      snapshot.data.docs[index]);
-              return recyclingCentersDetailsCard(
-                  snapshot, recyclingCenterModel);
+              DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
+              if (documentSnapshot.exists) {
+                recyclingCenterModel = RecyclingCenterModel.fromDocument(
+                    documentSnapshot);
+                return recyclingCentersDetailsCard(
+                    snapshot, recyclingCenterModel);
+              } else {
+                return Container(); // or some other widget to display when the document doesn't exist
+              }
             },
           );
         },
       ),
+    );
+  }
+
+  _selectLocation() async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MapScreen(
+          initialPosition: _initialPosition,
+          onPositionChanged: (position) {
+            setState(() {
+              _selectedPosition = position;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  _showEditDialog(RecyclingCenterModel recyclingCenterModel) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Edit Recycling Center'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                initialValue: recyclingCenterModel.name,
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter a name';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                initialValue: recyclingCenterModel.address,
+                decoration: InputDecoration(
+                  labelText: 'Address',
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter an address';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                initialValue: recyclingCenterModel.phone,
+                decoration: InputDecoration(
+                  labelText: 'Phone',
+                ),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter a phone number';
+                  }
+                  return null;
+                },
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () async {
+                await _selectLocation();
+                if (_selectedPosition!= null) {
+                  await editRecyclingCenter(
+                    recyclingCenterModel.id,
+                    recyclingCenterModel.name,
+                    recyclingCenterModel.address,
+                    recyclingCenterModel.phone,
+                    GeoPoint(_selectedPosition.latitude, _selectedPosition.longitude),
+                  );
+                }
+                Navigator.pop(context);
+              },
+              child: Text('Save'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await deleteRecyclingCenter(recyclingCenterModel.id);
+                Navigator.pop(context);
+              },
+              child: Text('Delete'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -190,6 +310,62 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await _selectLocation();
+          if (_selectedPosition!= null) {
+            await addRecyclingCenter(
+              'New Recycling Center',
+              '123 Example Street',
+              '12345678',
+              GeoPoint(_selectedPosition.latitude, _selectedPosition.longitude),
+            );
+          }
+        },
+        child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class MapScreen extends StatefulWidget {
+  final LatLng initialPosition;
+  final Function(LatLng) onPositionChanged;
+
+  MapScreen({this.initialPosition, this.onPositionChanged});
+
+  @override
+  _MapScreenState createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  GoogleMapController _mapController;
+  Marker _marker;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: widget.initialPosition,
+          zoom: 12,
+        ),
+        onMapCreated: (controller) {
+          setState(() {
+            _mapController = controller;
+          });
+        },
+        onTap: (position) {
+          setState(() {
+            _marker = Marker(
+              markerId: MarkerId('1'),
+              position: position,
+            );
+            widget.onPositionChanged(position);
+          });
+        },
+        markers: _marker!= null? {_marker} : {},
       ),
     );
   }

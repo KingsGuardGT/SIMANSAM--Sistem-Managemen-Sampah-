@@ -17,11 +17,11 @@ class RecyclingCenterModel {
 
   factory RecyclingCenterModel.fromDocument(DocumentSnapshot documentSnapshot) {
     return RecyclingCenterModel(
-      id: documentSnapshot['id'],
-      name: documentSnapshot['name'],
-      address: documentSnapshot['address'],
-      phone: documentSnapshot['phone'],
-      location: documentSnapshot['location'],
+      id: documentSnapshot.id,
+      name: documentSnapshot.get('name'),
+      address: documentSnapshot.get('address'),
+      phone: documentSnapshot.get('phone'),
+      location: documentSnapshot.get('location'),
     );
   }
 }

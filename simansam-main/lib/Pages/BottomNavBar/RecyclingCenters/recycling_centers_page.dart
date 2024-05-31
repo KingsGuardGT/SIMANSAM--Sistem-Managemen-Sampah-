@@ -37,7 +37,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
     super.initState();
   }
 
-  // ---------------------------------- PENGGUNA SAAT INI ---------------------------------- \\
+// ---------------------------------- PENGGUNA SAAT INI ---------------------------------- \\
 
   _getCurrentUserLocation() {
     try {
@@ -47,10 +47,9 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
           .then((Position position) {
         setState(() {
           _currentPosition = position;
-          _displayMapMarkers = Set<Marker>.of(currentUserMarker.values);
-          _childMap = mapWidget();
+          _getCurrentUserAddressFromLatLng();
+          _setCurrentUserMarker();
         });
-        _getCurrentUserAddressFromLatLng();
       }).catchError((e) {
         print(e);
       });
@@ -73,7 +72,6 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
         } else {
           _currentAddress = "Tidak Ada Alamat";
         }
-        _childMap = mapWidget();
       });
     } catch (error) {
       ToastMessages().toastError(error, context);
@@ -87,18 +85,18 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
   }
 
   _setCurrentUserMarker() {
-    return <Marker>[
-      Marker(
+    setState(() {
+      currentUserMarker.clear();
+      currentUserMarker[MarkerId('MyCurrentLocation')] = Marker(
           markerId: MarkerId('MyCurrentLocation'),
-          position:
-          LatLng(_currentPosition.latitude, _currentPosition.longitude),
+          position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
           icon: currentUserMarkerIcon,
           onTap: () {
             print('Lokasi Saya');
           },
-          infoWindow:
-          InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress))
-    ].toSet();
+          infoWindow: InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress));
+      _displayMapMarkers = Set<Marker>.of(currentUserMarker.values);
+    });
   }
 
   // ---------------------------------- Pusat Daur Ulang ---------------------------------- \\
@@ -206,7 +204,9 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
         zoom: 8.5,
       ),
       onMapCreated: (GoogleMapController controller) {
-        _googleMapController = controller;
+        setState(() {
+          _googleMapController = controller;
+        });
       },
     );
   }
