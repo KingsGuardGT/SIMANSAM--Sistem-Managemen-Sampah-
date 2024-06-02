@@ -13,16 +13,16 @@ class UserModelClass {
   final String profileImage;
 
   UserModelClass({
-    this.uuid,
-    this.accountType,
-    this.name,
-    this.email,
-    this.contactNumber,
-    this.homeAddress,
-    this.appearedLocation,
-    this.lastAppeared,
-    this.accountCreated,
-    this.profileImage,
+    required this.uuid,
+    required this.accountType,
+    required this.name,
+    required this.email,
+    required this.contactNumber,
+    required this.homeAddress,
+    required this.appearedLocation,
+    required this.lastAppeared,
+    required this.accountCreated,
+    required this.profileImage,
   });
 
   factory UserModelClass.fromDocument(DocumentSnapshot doc) {

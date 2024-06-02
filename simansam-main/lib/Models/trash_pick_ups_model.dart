@@ -15,18 +15,18 @@ class TrashPickUpsModel {
   final String returnTime;
 
   TrashPickUpsModel({
-    this.trashID,
-    this.postedDate,
-    this.trashName,
-    this.trashDescription,
-    this.trashImage,
-    this.trashTypes,
-    this.trashLocationAddress,
-    this.trashLocationLocation,
-    this.startDate,
-    this.returnDate,
-    this.startTime,
-    this.returnTime,
+    required this.trashID,
+    required this.postedDate,
+    required this.trashName,
+    required this.trashDescription,
+    required this.trashImage,
+    required this.trashTypes,
+    required this.trashLocationAddress,
+    required this.trashLocationLocation,
+    required this.startDate,
+    required this.returnDate,
+    required this.startTime,
+    required this.returnTime,
   });
 
   factory TrashPickUpsModel.fromDocument(DocumentSnapshot documentSnapshot) {

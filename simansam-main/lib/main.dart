@@ -13,16 +13,16 @@ import 'Pages/OnAppStart/welcome_page.dart';
 
 bool allPermissions = false;
 final user = FirebaseAuth.instance.currentUser;
-String accountType;
+String? accountType;
 
 Future<void> geAccountType() async {
   print("----------------------- CHECK ACCOUNT TYPE -----------------------");
   await FirebaseFirestore.instance
       .collection('Users')
-      .doc(user.uid)
+      .doc(user?.uid)
       .get()
       .then((value) {
-    accountType = value.data()["accountType"];
+    accountType = value.data()!["accountType"];
     print("----------------------- $accountType -----------------------");
   });
 }
@@ -34,9 +34,9 @@ _checkPermissionStatus() async {
   var cameraPermissionStatus = await Permission.camera.status;
   var storagePermissionStatus = await Permission.storage.status;
 
-  if (locationPermissionStatus.isUndetermined &&
-      cameraPermissionStatus.isUndetermined &&
-      storagePermissionStatus.isUndetermined) {
+  if (!locationPermissionStatus.isGranted &&
+      !cameraPermissionStatus.isGranted &&
+      !storagePermissionStatus.isGranted) {
     print("ALL (LOCATION, CAMERA, STORAGE) PERMISSION DIDN'T ASK YET");
   } else if (locationPermissionStatus.isGranted &&
       cameraPermissionStatus.isGranted &&
@@ -108,7 +108,7 @@ class _MyAppState extends State<MyApp> {
         return WelcomePage();
       } else {
         print("----------------------- SWITCH: BottomBar ------------------");
-        return BottomNavBar(accountType);
+        return BottomNavBar(accountType!);
         //return PickTrashLocation();
       }
     } else {

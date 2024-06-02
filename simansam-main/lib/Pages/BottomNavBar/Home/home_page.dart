@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final userReference = FirebaseFirestore.instance.collection('Users');
   final FirebaseAuth auth = FirebaseAuth.instance;
-  String badgeType;
+  late String badgeType;
 
   @override
   void initState() {
@@ -33,21 +33,21 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  _statTitle(String title) {
-    return Text(
-      title,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
-          fontWeight: FontWeight.bold),
-    );
-  }
+  // _statTitle(String title) {
+  //   return Text(
+  //     title,
+  //     textAlign: TextAlign.center,
+  //     style: TextStyle(
+  //         fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
+  //         fontWeight: FontWeight.bold),
+  //   );
+  // }
 
   welcomeHeader() {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection("Users")
-          .where('uuid', isEqualTo: "${auth.currentUser.uid}")
+          .where('uuid', isEqualTo: "${auth.currentUser?.uid}")
           .snapshots(),
       builder: (context, dataSnapshot) {
         if (!dataSnapshot.hasData) {
@@ -55,19 +55,19 @@ class _HomePageState extends State<HomePage> {
           return Text(
             "Hai! ",
             style: TextStyle(
-                fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+                fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
           UserModelClass userModelClass =
-          UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
+          UserModelClass.fromDocument(dataSnapshot.data!.docs[0]);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Hai! ${userModelClass.name}",
                 style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+                    fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
                     fontWeight: FontWeight.normal),
               ),
             ],
@@ -93,6 +93,7 @@ class _HomePageState extends State<HomePage> {
             ),
           )
         ],
+         // or any other unique value
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                     "Selamat Datang!",
                     style: TextStyle(
                         fontSize:
-                        Theme.of(context).textTheme.headlineSmall.fontSize,
+                        Theme.of(context).textTheme.headlineSmall?.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ),

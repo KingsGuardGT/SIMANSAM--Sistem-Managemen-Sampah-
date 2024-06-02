@@ -5,7 +5,7 @@ import '../Theme/theme_provider.dart';
 import '../Widgets/change_theme_button_widget.dart';
 
 class TestTheme extends StatefulWidget {
-  TestTheme({Key key, this.title}) : super(key: key);
+  TestTheme({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override

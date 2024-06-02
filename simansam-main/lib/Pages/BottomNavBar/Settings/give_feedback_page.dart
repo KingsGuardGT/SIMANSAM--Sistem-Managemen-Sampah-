@@ -23,7 +23,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
-  double circularProgressVal;
+  late double circularProgressVal;
 
   _onChanged(String value) {
     setState(() {
@@ -168,7 +168,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
     FirebaseFirestore.instance
         .collection('Feedbacks')
         .doc("UmpanBalikPengguna")
-        .collection(FirebaseAuth.instance.currentUser.uid)
+        .collection(FirebaseAuth.instance.currentUser!.uid)
         .doc(UUIDGenerator().uuidV1())
         .set({
       'umpan balik': _giveFeedbackController.text,

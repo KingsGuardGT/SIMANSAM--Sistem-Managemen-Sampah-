@@ -19,7 +19,7 @@ class ViewTrashDetails extends StatefulWidget {
 class _ViewTrashDetailsState extends State<ViewTrashDetails> {
   final userReference = FirebaseFirestore.instance.collection('Users');
   final FirebaseAuth auth = FirebaseAuth.instance;
-  List trashTypesList;
+  late List trashTypesList;
 
   Widget trashTypesFilter(TrashPickUpsModel trashPickUpsModel) {
     return Container(
@@ -86,7 +86,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
     return Text(
       title,
       style: TextStyle(
-          fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+          fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
           fontWeight: FontWeight.bold),
     );
   }
@@ -97,7 +97,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
       child: Text(
         detailsData,
         style: TextStyle(
-            fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+            fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
             fontWeight: FontWeight.normal),
       ),
     );
@@ -170,12 +170,12 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
           return Text(
             "Data tidak tersedia",
             style: TextStyle(
-                fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+                fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
           TrashPickUpsModel trashPickUpsModel =
-              TrashPickUpsModel.fromDocument(snapshot.data.docs[0]);
+              TrashPickUpsModel.fromDocument(snapshot.data!.docs[0]);
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -184,7 +184,7 @@ class _ViewTrashDetailsState extends State<ViewTrashDetails> {
               Text(
                 "${trashPickUpsModel.trashName}",
                 style: TextStyle(
-                    fontSize: Theme.of(context).textTheme.headlineSmall.fontSize,
+                    fontSize: Theme.of(context).textTheme.headlineSmall?.fontSize,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(

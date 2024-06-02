@@ -6,10 +6,10 @@ class TextButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const TextButtonWidget({
-    Key key,
-    this.text,
-    this.onClicked,
-    this.color,
+    Key? key,
+    required this.text,
+    required this.onClicked,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class TextButtonWidget extends StatelessWidget {
         onPressed: onClicked,
         child: Text(text,
             style: TextStyle(
-              fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
+              fontSize: Theme.of(context).textTheme.labelLarge?.fontSize,
               color: Colors.grey.shade900,
               fontWeight: FontWeight.bold,
             )),
@@ -29,9 +29,9 @@ class RadiusFlatButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const RadiusFlatButtonWidget({
-    Key key,
-    this.text,
-    this.onClicked,
+    Key? key,
+    required this.text,
+    required this.onClicked,
   }) : super(key: key);
 
   @override
@@ -46,7 +46,7 @@ class RadiusFlatButtonWidget extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
+            fontSize: Theme.of(context).textTheme.labelLarge?.fontSize,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -62,11 +62,11 @@ class ButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const ButtonWidget({
-    Key key,
-    this.text,
-    this.onClicked,
-    this.textColor,
-    this.color,
+    Key? key,
+    required this.text,
+    required this.onClicked,
+    required this.textColor,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -96,10 +96,10 @@ class MinButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const MinButtonWidget({
-    Key key,
-    this.text,
-    this.onClicked,
-    this.color,
+    Key? key,
+    required this.text,
+    required this.onClicked,
+    required this.color,
   }) : super(key: key);
 
   @override
@@ -114,7 +114,7 @@ class MinButtonWidget extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
+            fontSize: Theme.of(context).textTheme.labelLarge?.fontSize,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -130,11 +130,11 @@ class TextWithIconButtonWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const TextWithIconButtonWidget({
-    Key key,
-    this.text,
-    this.icon,
-    this.iconToLeft,
-    this.onClicked,
+    Key? key,
+    required this.text,
+    required this.icon,
+    required this.iconToLeft,
+    required this.onClicked,
   }) : super(key: key);
 
   @override
@@ -153,8 +153,8 @@ class TextWithIconButtonWidget extends StatelessWidget {
             ),
             Text(text,
                 style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
-                  color: Theme.of(context).textTheme.labelLarge.color,
+                  fontSize: Theme.of(context).textTheme.labelLarge?.fontSize,
+                  color: Theme.of(context).textTheme.labelLarge?.color,
                   fontWeight: FontWeight.bold,
                 )),
           ],
@@ -171,13 +171,13 @@ class ButtonWithIconWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const ButtonWithIconWidget({
-    Key key,
-    this.buttonColor,
-    this.icon,
-    this.iconColor,
-    this.text,
-    this.textColor,
-    this.onClicked,
+    Key? key,
+    required this.buttonColor,
+    required this.icon,
+    required this.iconColor,
+    required this.text,
+    required this.textColor,
+    required this.onClicked,
   }) : super(key: key);
 
   @override
@@ -215,12 +215,12 @@ class ButtonWithImageWidget extends StatelessWidget {
   final VoidCallback onClicked;
 
   const ButtonWithImageWidget({
-    Key key,
-    this.image,
-    this.color,
-    this.text,
-    this.textColor,
-    this.onClicked,
+    Key? key,
+    required this.image,
+    required this.color,
+    required this.text,
+    required this.textColor,
+    required this.onClicked,
   }) : super(key: key);
 
   @override

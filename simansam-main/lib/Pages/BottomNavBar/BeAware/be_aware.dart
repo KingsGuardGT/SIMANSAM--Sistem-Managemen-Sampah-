@@ -1,211 +1,84 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:simansam/Models/articles_model.dart';
-import 'package:simansam/Pages/BottomNavBar/BeAware/read_article.dart';
-import 'package:simansam/Theme/theme_provider.dart';
-import 'package:simansam/Pages/BottomNavBar/BeAware/create_articles.dart';
+import 'package:simansam/Pages//consts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../../Widgets/primary_app_bar_widget.dart';
+import 'package:simansam/Models/articles_model.dart';
 
 class BeAware extends StatefulWidget {
+  const BeAware({super.key});
+
   @override
-  _BeAwareState createState() => _BeAwareState();
+  State<BeAware> createState() => _BeAwareState();
 }
 
 class _BeAwareState extends State<BeAware> {
-  int documents;
+  final Dio dio = Dio();
+
+  List<Article> articles = [];
 
   @override
   void initState() {
-    getTotalArticles();
     super.initState();
-  }
-
-  getTotalArticles() async {
-    final QuerySnapshot qSnap =
-    await FirebaseFirestore.instance.collection('Articles').get();
-    documents = qSnap.docs.length;
-    print(
-        "----------------------- JUMLAH ARTIKEL: $documents -----------------------");
+    _getNews();
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget articleDetailsCard(
-        AsyncSnapshot<QuerySnapshot> snapshot, ArticlesModel articlesModel) {
-      return Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Container(
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            color: Colors.grey.shade100,
-            child: InkWell(
-              splashColor: Colors.blue.withAlpha(30),
-              onTap: () {
-                print('Artikel yang dipilih: ${articlesModel.articleID}');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          ReadArticle(articlesModel.articleLink)),
-                );
-              },
-              child: snapshot.data.docs.length == null
-                  ? Container()
-                  : Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.network(
-                      articlesModel.articleImage,
-                      fit: BoxFit.cover,
-                      height: 150,
-                      width: 150,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10.0,
-                  ),
-                  Expanded(
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            articlesModel.articleTitle,
-                            style: TextStyle(
-                                fontSize: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    .fontSize,
-                                fontWeight: FontWeight.w500,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          Divider(
-                            color: Theme.of(context).iconTheme.color,
-                          ),
-                          Text(
-                            articlesModel.articleDescription,
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                                color: AppThemeData
-                                    .lightTheme.iconTheme.color),
-                          ),
-                          //Text(trashPickUpsModel.trashLocationAddress),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    _articlesList() {
-      return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("Articles")
-            .orderBy('articlePostedDate', descending: true)
-            .snapshots(),
-        builder: (context, snapshot) {
-          return!snapshot.hasData
-              ? Container()
-              : snapshot.data.docs.length.toString() == "0"
-              ? Container(
-            height: 250.0,
-            width: 200.0,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30.0,
-                ),
-                Text(
-                  "Belum ada artikel",
-                  style: TextStyle(
-                      fontSize: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          .fontSize),
-                ),
-                Image.asset(
-                  'assets/icons/icon_broom.png',
-                  height: 100.0,
-                  width: 100.0,
-                ),
-              ],
-            ),
-          )
-              : ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (BuildContext context, int index) {
-              ArticlesModel articlesModel =
-              ArticlesModel.fromDocument(
-                  snapshot.data.docs[index]);
-              return articleDetailsCard(snapshot, articlesModel);
-            },
-          );
-        },
-      );
-    }
-
     return Scaffold(
-      appBar: PrimaryAppBar(
-        title: "Sadarlah akan...",
-        appBar: AppBar(),
-        widgets: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
-            child: Icon(
-              Icons.notifications_rounded,
-              color: AppThemeData().secondaryColor,
-              size: 35.0,
-            ),
-          ),
-          // Add this button
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder:(context) => CreateArticle()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Artikel SIMANSAM",
-                  style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                _articlesList(),
-              ],
-            ),
-          ),
+      appBar: AppBar(
+        title: const Text(
+          "News",
         ),
       ),
+      body: _buildUI(),
     );
+  }
+
+  Widget _buildUI() {
+    return ListView.builder(
+      itemCount: articles.length,
+      itemBuilder: (context, index) {
+        final article = articles[index];
+        return ListTile(
+          onTap: () {
+            _launchUrl(
+              Uri.parse(article.url ?? ""),
+            );
+          },
+          leading: Image.network(
+            article.urlToImage ?? PLACEHOLDER_IMAGE_LINK,
+            height: 250,
+            width: 100,
+            fit: BoxFit.cover,
+          ),
+          title: Text(
+            article.title ?? "",
+          ),
+          subtitle: Text(
+            article.publishedAt ?? "",
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _getNews() async {
+    final response = await dio.get(
+      'https://newsapi.org/v2/everything?country=id&q=sampah&apiKey=${"789a9c334e794ac9ad5bf5d5f003398a"}',
+    );
+    final articlesJson = response.data["articles"] as List;
+    setState(() {
+      List<Article> newsArticle =
+      articlesJson.map((a) => Article.fromJson(a)).toList();
+      newsArticle = newsArticle.where((a) => a.title != "[Removed]").toList();
+      articles = newsArticle;
+    });
+  }
+
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

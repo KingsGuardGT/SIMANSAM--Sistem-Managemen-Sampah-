@@ -19,7 +19,7 @@ class PickMyTrash extends StatefulWidget {
 }
 
 class _PickMyTrashState extends State<PickMyTrash> {
-  final String userProfileID = FirebaseAuth.instance.currentUser.uid.toString();
+  final String userProfileID = FirebaseAuth.instance.currentUser!.uid.toString();
   final firestoreInstance = FirebaseFirestore.instance;
 
 /*  _scheduledTrashPicksList() {
@@ -45,7 +45,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                       trashPickUpsModel.trashID, widget.accountType)),
             );
           },
-          child: snapshot.data.docs.length == null
+          child: snapshot.data?.docs.length == null
               ? Container()
               : Row(
                   children: [
@@ -74,7 +74,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                                   fontSize: Theme.of(context)
                                       .textTheme
                                       .titleLarge
-                                      .fontSize,
+                                      ?.fontSize,
                                   fontWeight: FontWeight.w500,
                                   color: Theme.of(context).primaryColor),
                             ),
@@ -114,7 +114,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
         builder: (context, snapshot) {
           return !snapshot.hasData
               ? Container()
-              : snapshot.data.docs.length.toString() == "0"
+              : snapshot.data?.docs.length.toString() == "0"
                   ? Container(
                       height: 250.0,
                       width: 200.0,
@@ -129,7 +129,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .titleLarge
-                                    .fontSize),
+                                    ?.fontSize),
                           ),
                           Image.asset(
                             'assets/icons/icon_broom.png',
@@ -142,11 +142,11 @@ class _PickMyTrashState extends State<PickMyTrash> {
                   : ListView.builder(
                       scrollDirection: Axis.vertical,
                       physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data.docs.length,
+                      itemCount: snapshot.data?.docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         TrashPickUpsModel trashPickUpsModel =
                             TrashPickUpsModel.fromDocument(
-                                snapshot.data.docs[index]);
+                                snapshot.data!.docs[index]);
                         return trashDetailsCard(snapshot, trashPickUpsModel);
                       },
                     );
@@ -185,7 +185,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                       "Made for ${widget.accountType}",
                       style: TextStyle(
                           fontSize:
-                              Theme.of(context).textTheme.titleMedium.fontSize,
+                              Theme.of(context).textTheme.titleMedium?.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -212,7 +212,7 @@ class _PickMyTrashState extends State<PickMyTrash> {
                 Text(
                   "My Scheduled Pengambilan Sampah",
                   style: TextStyle(
-                      fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+                      fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(

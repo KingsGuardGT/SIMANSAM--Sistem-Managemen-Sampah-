@@ -42,7 +42,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     text: "Continue with Email",
                     textColor: Colors.white,
                     image: 'assets/icons/icon_email.png',
-                    color: AppThemeData().secondaryColor,
+                    color: AppThemeData().secondaryColor, 
                   ),
                   SizedBox(height: 30),
                   Row(
@@ -65,7 +65,7 @@ class _WelcomePageState extends State<WelcomePage> {
                             (Route<dynamic> route) => false,
                           );
                           print("Switch to Sign Up");
-                        },
+                        }, 
                       ),
                     ],
                   ),

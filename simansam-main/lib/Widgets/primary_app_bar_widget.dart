@@ -5,7 +5,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
   final List<Widget> widgets;
 
-  const PrimaryAppBar({Key key, this.title, this.appBar, this.widgets})
+  const PrimaryAppBar({Key? key, required this.title, required this.appBar, required this.widgets})
       : super(key: key);
 
   @override

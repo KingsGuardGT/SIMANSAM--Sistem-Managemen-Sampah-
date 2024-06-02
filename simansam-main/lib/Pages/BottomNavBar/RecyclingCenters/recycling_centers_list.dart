@@ -11,12 +11,12 @@ class RecyclingCentersList extends StatefulWidget {
 
 class _RecyclingCentersListState extends State<RecyclingCentersList> {
   final firestoreInstance = FirebaseFirestore.instance;
-  RecyclingCenterModel recyclingCenterModel;
+  late RecyclingCenterModel recyclingCenterModel;
   String accountType = "Pengumpul Sampah";
   bool viewTrashPicker = false;
-  GoogleMapController _mapController;
+  late GoogleMapController _mapController;
   LatLng _initialPosition = LatLng(37.42796133580664, -122.085749655962);
-  LatLng _selectedPosition;
+  late LatLng _selectedPosition;
 
   Future<void> addRecyclingCenter(
       String name, String address, String phone, GeoPoint location) async {
@@ -73,7 +73,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
               print('Sampah Terpilih: ${recyclingCenterModel.id}');
               _showEditDialog(recyclingCenterModel);
             },
-            child: snapshot.data.docs.length == null
+            child: snapshot.data?.docs.length == null
                 ? Container()
                 : Row(
               children: [
@@ -104,7 +104,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .titleLarge
-                                  .fontSize,
+                                  ?.fontSize,
                               fontWeight: FontWeight.w500,
                               color: Theme.of(context).primaryColor),
                         ),
@@ -154,52 +154,199 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
           }
           return!snapshot.hasData
               ? Container()
-              : snapshot.data.docs.length.toString() == "0"
+              : snapshot.data?.docs.length.toString() == "0"
               ? Container(
-            height: 250.0,
-            width: 200.0,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30.0,
-                ),
-                Text(
-                  "Belum Ada Pusat Daur Ulang",
-                  style: TextStyle(
-                      fontSize: Theme.of(context)
-                          .textTheme
-                          .titleLarge
-                          .fontSize),
-                ),
-                ClipOval(
-                  child: Image.asset(
-                    'assets/images/simansam_user_avatar.png',
-                    height: 60.0,
-                    width: 60.0,
+              height: 250.0,
+              width: 200.0,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 30.0,
                   ),
-                ),
-              ],
-            ),
-          )
+                  Text(
+                    "Belum Ada Data",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                ],
+              ))
               : ListView.builder(
-            scrollDirection: Axis.vertical,
-            physics: BouncingScrollPhysics(),
-            itemCount: snapshot.data.docs.length,
-            itemBuilder: (BuildContext context, int index) {
-              DocumentSnapshot documentSnapshot = snapshot.data.docs[index];
-              if (documentSnapshot.exists) {
-                recyclingCenterModel = RecyclingCenterModel.fromDocument(
-                    documentSnapshot);
-                return recyclingCentersDetailsCard(
-                    snapshot, recyclingCenterModel);
-              } else {
-                return Container(); // or some other widget to display when the document doesn't exist
-              }
+            itemCount: snapshot.data?.docs.length,
+            itemBuilder: (context, index) {
+              RecyclingCenterModel recyclingCenterModel =
+              RecyclingCenterModel.fromDocument(
+                  snapshot.data!.docs[index]);
+              return recyclingCentersDetailsCard(
+                  snapshot, recyclingCenterModel);
             },
           );
         },
       ),
     );
+  }
+
+  _addRecyclingCenterDialog() {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController addressController = TextEditingController();
+    TextEditingController phoneController = TextEditingController();
+
+    return AlertDialog(
+      title: Text("Tambah Pusat Daur Ulang"),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  labelText: "Nama",
+                  hintText: "Masukkan Nama Pusat Daur Ulang",
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: addressController,
+                decoration: InputDecoration(
+                  labelText: "Alamat",
+                  hintText: "Masukkan Alamat Pusat Daur Ulang",
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: phoneController,
+                decoration: InputDecoration(
+                  labelText: "Telepon",
+                  hintText: "Masukkan Nomor Telepon Pusat Daur Ulang",
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            _addRecyclingCenter(nameController.text, addressController.text,
+                phoneController.text);
+            Navigator.of(context).pop();
+          },
+          child: Text("Tambah"),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text("Batal"),
+        ),
+      ],
+    );
+  }
+
+  _showAddDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return _addRecyclingCenterDialog();
+      },
+    );
+  }
+
+  _addRecyclingCenter(String name, String address, String phone) {
+    CollectionReference collectionReference =
+    FirebaseFirestore.instance.collection("PusatDaurUlang");
+    Map<String, dynamic> recyclingCenter = {
+      "name": name,
+      "address": address,
+      "phone": phone,
+    };
+    collectionReference.add(recyclingCenter);
+  }
+
+  _showEditDialog(RecyclingCenterModel recyclingCenterModel) {
+    TextEditingController nameController =
+    TextEditingController(text: recyclingCenterModel.name);
+    TextEditingController addressController =
+    TextEditingController(text: recyclingCenterModel.address);
+    TextEditingController phoneController =
+    TextEditingController(text: recyclingCenterModel.phone);
+
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Ubah Pusat Daur Ulang"),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      labelText: "Nama",
+                      hintText: "Masukkan Nama Pusat Daur Ulang",
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: addressController,
+                    decoration: InputDecoration(
+                      labelText: "Alamat",
+                      hintText: "Masukkan Alamat Pusat Daur Ulang",
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: phoneController,
+                    decoration: InputDecoration(
+                      labelText: "Telepon",
+                      hintText: "Masukkan Nomor Telepon Pusat Daur Ulang",
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                _editRecyclingCenter(recyclingCenterModel.id, nameController.text,
+                    addressController.text, phoneController.text);
+                Navigator.of(context).pop();
+              },
+              child: Text("Ubah"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Batal"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  _editRecyclingCenter(String id, String name, String address, String phone) {
+    DocumentReference documentReference =
+    FirebaseFirestore.instance.collection("PusatDaurUlang").doc(id);
+    Map<String, dynamic> recyclingCenter = {
+      "name": name,
+      "address": address,
+      "phone": phone,
+    };
+    documentReference.update(recyclingCenter);
   }
 
   _selectLocation() async {
@@ -215,83 +362,6 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
           },
         ),
       ),
-    );
-  }
-
-  _showEditDialog(RecyclingCenterModel recyclingCenterModel) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text('Edit Recycling Center'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                initialValue: recyclingCenterModel.name,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                initialValue: recyclingCenterModel.address,
-                decoration: InputDecoration(
-                  labelText: 'Address',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter an address';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                initialValue: recyclingCenterModel.phone,
-                decoration: InputDecoration(
-                  labelText: 'Phone',
-                ),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter a phone number';
-                  }
-                  return null;
-                },
-              ),
-            ],
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () async {
-                await _selectLocation();
-                if (_selectedPosition!= null) {
-                  await editRecyclingCenter(
-                    recyclingCenterModel.id,
-                    recyclingCenterModel.name,
-                    recyclingCenterModel.address,
-                    recyclingCenterModel.phone,
-                    GeoPoint(_selectedPosition.latitude, _selectedPosition.longitude),
-                  );
-                }
-                Navigator.pop(context);
-              },
-              child: Text('Save'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await deleteRecyclingCenter(recyclingCenterModel.id);
-                Navigator.pop(context);
-              },
-              child: Text('Delete'),
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -312,17 +382,7 @@ class _RecyclingCentersListState extends State<RecyclingCentersList> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await _selectLocation();
-          if (_selectedPosition!= null) {
-            await addRecyclingCenter(
-              'New Recycling Center',
-              '123 Example Street',
-              '12345678',
-              GeoPoint(_selectedPosition.latitude, _selectedPosition.longitude),
-            );
-          }
-        },
+        onPressed: _showAddDialog,
         child: Icon(Icons.add),
       ),
     );
@@ -333,15 +393,15 @@ class MapScreen extends StatefulWidget {
   final LatLng initialPosition;
   final Function(LatLng) onPositionChanged;
 
-  MapScreen({this.initialPosition, this.onPositionChanged});
+  MapScreen({required this.initialPosition, required this.onPositionChanged});
 
   @override
   _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
-  GoogleMapController _mapController;
-  Marker _marker;
+  late GoogleMapController _mapController;
+  late Marker _marker;
 
   @override
   Widget build(BuildContext context) {

@@ -21,9 +21,9 @@ class _SignInPageState extends State<SignInPage> {
   bool _isHidden = true;
   bool isUserSigned = false;
   bool isInValidaAccount = false;
-  double circularProgressVal;
+  late double circularProgressVal;
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  String accountType;
+  late String accountType;
 
   void _togglePasswordView() {
     setState(() {
@@ -91,7 +91,7 @@ class _SignInPageState extends State<SignInPage> {
                                     isInValidaAccount = false;
                                     Navigator.pop(context);
                                   });
-                                }),
+                                }, ),
                           ],
                         ))
                   else
@@ -120,7 +120,7 @@ class _SignInPageState extends State<SignInPage> {
                                 color: AppThemeData().primaryColor,
                                 onClicked: () {
                                   Navigator.pop(context);
-                                }),
+                                }, key: null,),
                           ],
                         )),
                 ],
@@ -173,7 +173,7 @@ class _SignInPageState extends State<SignInPage> {
         .then((value) {
       if (value.exists && value.data() != null) {
         // Periksa jika dokumen ada dan data tidak null
-        accountType = value.data()['accountType'] ?? 'default';
+        accountType = value.data()!['accountType'] ?? 'default';
         // Gunakan operator null-aware '??' untuk memberikan nilai default jika accountType null
       } else {
         print('Dokumen tidak ada atau tidak memiliki data');
@@ -194,8 +194,8 @@ class _SignInPageState extends State<SignInPage> {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-      print(userCredential.user.uid.toString());
-      await geAccountType(userCredential.user.uid.toString());
+      print(userCredential.user?.uid.toString());
+      await geAccountType(userCredential.user!.uid.toString());
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -246,11 +246,12 @@ class _SignInPageState extends State<SignInPage> {
     return WillPopScope(
         onWillPop: () async {
           print("test");
-          return Navigator.pushAndRemoveUntil(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => WelcomePage()),
                 (Route<dynamic> route) => false,
           );
+          return true; // Add this line
         },
         child: Scaffold(
             backgroundColor: AppThemeData().greenAccentColor,
@@ -327,7 +328,7 @@ class _SignInPageState extends State<SignInPage> {
                               _toastMessages.toastInfo(
                                   'Coba lagi dengan detail yang benar!', context);
                             }
-                          },
+                          }, key: null,
                         ),
                         SizedBox(height: 20),
 /*                    new TextButtonWidget(
@@ -349,7 +350,7 @@ class _SignInPageState extends State<SignInPage> {
                               Text("Baru di SIMANSAM?",
                                   style: TextStyle(
                                     fontSize:
-                                    Theme.of(context).textTheme.labelLarge.fontSize,
+                                    Theme.of(context).textTheme.labelLarge?.fontSize,
                                     fontWeight: FontWeight.bold,
                                   )),
                               SizedBox(width: 10),
@@ -363,7 +364,7 @@ class _SignInPageState extends State<SignInPage> {
                                         (Route<dynamic> route) => false,
                                   );
                                   print("Beralih ke Pendaftaran");
-                                },
+                                }, key: null,
                               ),
                             ],
                           ),

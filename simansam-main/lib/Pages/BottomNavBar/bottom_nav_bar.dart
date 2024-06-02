@@ -23,7 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedPage = 0;
   List<Widget> pageList = [];
 
-  String uuid = FirebaseAuth.instance.currentUser.uid.toString();
+  String uuid = FirebaseAuth.instance.currentUser!.uid.toString();
 
   @override
   void initState() {
@@ -100,35 +100,40 @@ class _BottomNavBarState extends State<BottomNavBar> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => showDialog<bool>(
-          context: context,
-          builder: (c) => AlertDialog(
-            title: Text('Keluar dari SIMANSAM'),
-            content: Text('Apakah Anda benar-benar ingin keluar?'),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            actions: [
-              TextButton(
-                child: Text('Ya'),
-                onPressed: () => Navigator.pop(c, true),
-              ),
-              TextButton(
-                child: Text('Tidak'),
-                onPressed: () => Navigator.pop(c, false),
-              ),
-            ],
-          )),
-      child: Scaffold(
+    Widget build(BuildContext context) {
+      return WillPopScope(
+        onWillPop: () async {
+          final result = await showDialog<bool>(
+            context: context,
+            builder: (c) => AlertDialog(
+              title: Text('Keluar dari SIMANSAM'),
+              content: Text('Apakah Anda benar-benar ingin keluar?'),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              actions: [
+                TextButton(
+                  child: Text('Ya'),
+                  onPressed: () => Navigator.pop(c, true),
+                ),
+                TextButton(
+                  child: Text('Tidak'),
+                  onPressed: () => Navigator.pop(c, false),
+                ),
+              ],
+            ),
+          );
+          return result?? false; // return false if result is null
+        },
+        child: Scaffold(
           backgroundColor: AppThemeData().whiteColor,
           body: IndexedStack(
             index: _selectedPage,
             children: pageList,
           ),
-          bottomNavigationBar: appBottomNavBar()),
-    );
-  }
+          bottomNavigationBar: appBottomNavBar(),
+        ),
+      );
+    }
 
   void _onItemTapped(int index) {
     setState(() {

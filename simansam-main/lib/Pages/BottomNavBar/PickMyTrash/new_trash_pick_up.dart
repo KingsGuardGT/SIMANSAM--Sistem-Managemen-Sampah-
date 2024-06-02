@@ -33,19 +33,19 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   new TextEditingController();
   TextEditingController _trashLocationController = new TextEditingController();
   int charLength = 0;
-  File _image;
-  final String userProfileID = FirebaseAuth.instance.currentUser.uid.toString();
+  late File _image;
+  final String userProfileID = FirebaseAuth.instance.currentUser!.uid.toString();
 
   // Proses Mengunggah
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
-  double circularProgressVal;
+  late double circularProgressVal;
 
   // Sementara hingga dihapus
-  CollectionReference imgRef;
-  firebase_storage.Reference ref;
-  String imageURL;
+  late CollectionReference imgRef;
+  late firebase_storage.Reference ref;
+  late String imageURL;
   final firestoreInstance = FirebaseFirestore.instance;
   String formattedDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   String formattedTime = DateFormat('kk:mm:a').format(DateTime.now());
@@ -64,7 +64,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   };
 
   List trashTypeArray = [];
-  List trashTypes;
+  late List trashTypes;
 
   getCheckboxItems() {
     trashTypeArray.clear();
@@ -82,17 +82,17 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
 
   String locationName = "Lokasi Saya";
   String userHomeLocation = "Rumah Saya";
-  int locationTypeID;
+  late int locationTypeID;
 
   final userReference = FirebaseFirestore.instance.collection('Users');
   final FirebaseAuth auth = FirebaseAuth.instance;
-  Position _currentPosition;
+  late Position _currentPosition;
 
-  List _trashLocationDetails;
+  late List _trashLocationDetails;
   String userCurrentAddress = "Tidak Ada Lokasi yang Dipilih!";
   String selectedFromMapAddress = "Tidak Ada Lokasi yang Dipilih!";
   String trashLocationAddress = "Tidak Ada Lokasi yang Dipilih!";
-  double trashLocationLatitude, trashLocationLongitude;
+  late double trashLocationLatitude, trashLocationLongitude;
 
   // ------------------------------ Pemilih Tanggal ------------------------------ \\
 
@@ -143,7 +143,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   String nowTime = TimeOfDay(hour: 15, minute: 0).toString();
 
   void _startTime() async {
-    final TimeOfDay newTime = await showTimePicker(
+    final TimeOfDay? newTime = await showTimePicker(
       context: context,
       initialTime: _timeS,
     );
@@ -156,7 +156,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   void _returnTime() async {
-    final TimeOfDay newTime = await showTimePicker(
+    final TimeOfDay? newTime = await showTimePicker(
       context: context,
       initialTime: _timeR,
     );
@@ -175,7 +175,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   _imgFromCamera() async {
-    final pickedFile = await ImagePicker().getImage(
+    final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
       imageQuality: 50,
     );
@@ -188,7 +188,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   _imgFromGallery() async {
-    final pickedFile = await ImagePicker().getImage(
+    final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       imageQuality: 50,
     );
@@ -314,7 +314,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                                 color: AppThemeData().redColor,
                                 onClicked: () {
                                   Navigator.pop(context);
-                                }),
+                                }, ),
                           ],
                         ))
                   else
@@ -351,7 +351,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                                     ),
                                         (route) => false,
                                   );
-                                }),
+                                }, ),
                           ],
                         ),
                       ),
@@ -444,7 +444,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
         print(e);
       });
     } catch (error) {
-      ToastMessages().toastError(error, context);
+      ToastMessages().toastError(error.toString(), context);
     }
   }
 
@@ -453,46 +453,42 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       List<Placemark> p = await placemarkFromCoordinates(latitude, longitude);
       Placemark place = p[0];
       setState(() {
-        if (place != null) {
-          trashLocationLatitude = latitude;
-          trashLocationLongitude = longitude;
+        trashLocationLatitude = latitude;
+        trashLocationLongitude = longitude;
 
-          _trashLocationDetails = [
-            latitude, // 00
-            longitude, // 01
-            "${place.name}", // 02
-            "${place.street}", // 03
-            "${place.postalCode}", // 04
-            "${place.administrativeArea}", // 05
-            "${place.subAdministrativeArea}", // 06
-            "${place.thoroughfare}", // 07
-            "${place.subThoroughfare}", // 08
-            "${place.locality}", // 09
-            "${place.subLocality}", // 10
-            "${place.country}", // 11
-            "${place.isoCountryCode}", // 12
-          ];
+        _trashLocationDetails = [
+          latitude, // 00
+          longitude, // 01
+          "${place.name}", // 02
+          "${place.street}", // 03
+          "${place.postalCode}", // 04
+          "${place.administrativeArea}", // 05
+          "${place.subAdministrativeArea}", // 06
+          "${place.thoroughfare}", // 07
+          "${place.subThoroughfare}", // 08
+          "${place.locality}", // 09
+          "${place.subLocality}", // 10
+          "${place.country}", // 11
+          "${place.isoCountryCode}", // 12
+        ];
 
-          userCurrentAddress = ""
-              "${_trashLocationDetails[0].toString()}, "
-              "${_trashLocationDetails[1].toString()}, "
-              "${_trashLocationDetails[2].toString()}, "
-              "${_trashLocationDetails[3].toString()}, "
-              "${_trashLocationDetails[4].toString()}, "
-              "${_trashLocationDetails[5].toString()}, "
-              "${_trashLocationDetails[6].toString()}, "
-              "${_trashLocationDetails[7].toString()}, "
-              "${_trashLocationDetails[8].toString()}, "
-              "${_trashLocationDetails[9].toString()}, "
-              "${_trashLocationDetails[10].toString()}, "
-              "${_trashLocationDetails[11].toString()}, "
-              "${_trashLocationDetails[12].toString()}";
+        userCurrentAddress = ""
+            "${_trashLocationDetails[0].toString()}, "
+            "${_trashLocationDetails[1].toString()}, "
+            "${_trashLocationDetails[2].toString()}, "
+            "${_trashLocationDetails[3].toString()}, "
+            "${_trashLocationDetails[4].toString()}, "
+            "${_trashLocationDetails[5].toString()}, "
+            "${_trashLocationDetails[6].toString()}, "
+            "${_trashLocationDetails[7].toString()}, "
+            "${_trashLocationDetails[8].toString()}, "
+            "${_trashLocationDetails[9].toString()}, "
+            "${_trashLocationDetails[10].toString()}, "
+            "${_trashLocationDetails[11].toString()}, "
+            "${_trashLocationDetails[12].toString()}";
 
-          /*ToastMessages().toastSuccess("Lokasi Dipilih: \n"
-              "$_trashLocationAddress", context);*/
-        } else {
-          ToastMessages().toastSuccess("Tidak Ada Alamat", context);
-        }
+        ToastMessages().toastSuccess("Lokasi Dipilih: \n"
+          "$trashLocationAddress", context);
       });
     } catch (error) {
       ToastMessages().toastError(error.toString(), context);
@@ -501,7 +497,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   void _startDate() async {
-    final DateTime newDate = await showDatePicker(
+    final DateTime? newDate = await showDatePicker(
       context: context,
       initialDate: _dateS,
       firstDate: DateTime(2021, 1),
@@ -521,7 +517,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   }
 
   void _returnDate() async {
-    final DateTime newDate = await showDatePicker(
+    final DateTime? newDate = await showDatePicker(
       context: context,
       initialDate: _dateR,
       firstDate: DateTime(2017, 1),
@@ -746,9 +742,11 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               title: new Text(key),
               subtitle: Text(description),
               value: trashTypeValues[key],
-              onChanged: (bool value) {
+              onChanged: (bool? value) {
                 setState(() {
-                  trashTypeValues[key] = value;
+                  if (value!= null) {
+                    trashTypeValues[key] = value;
+                  }
                 });
               },
             );
@@ -760,7 +758,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
     // ignore: unused_element
     Widget getMyHomeAddress() {
       return FutureBuilder(
-        future: userReference.doc(auth.currentUser.uid).get(),
+        future: userReference.doc(auth.currentUser?.uid).get(),
         builder: (context, dataSnapshot) {
           if (!dataSnapshot.hasData) {
             _trashLocationController =
@@ -785,7 +783,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
             );
           } else {
             UserModelClass userModelClass =
-            UserModelClass.fromDocument(dataSnapshot.data);
+            UserModelClass.fromDocument(dataSnapshot.data as DocumentSnapshot<Object?>);
             _trashLocationController =
             new TextEditingController(text: userModelClass.homeAddress);
             return TextFormField(
@@ -834,7 +832,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                         .of(context)
                         .textTheme
                         .titleLarge
-                        .fontSize,
+                        ?.fontSize,
                     fontWeight: FontWeight.bold),
               ),
             ],
@@ -851,7 +849,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               onClicked: () {
                 print("Ditekan: Pilih dari Peta");
                 showInfoAlert(context);
-              },
+              }, 
             ),
           );
           break;
@@ -886,7 +884,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                         .of(context)
                         .textTheme
                         .titleMedium
-                        .fontSize),
+                        ?.fontSize),
               ),
               Radio(
                 value: 2,
@@ -906,7 +904,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                       .of(context)
                       .textTheme
                       .titleMedium
-                      .fontSize,
+                      ?.fontSize,
                 ),
               ),
             ],
@@ -1029,7 +1027,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
               size: 30.0,
             ),
           )
-        ],
+        ], 
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -1086,7 +1084,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                           .of(context)
                           .textTheme
                           .titleMedium
-                          .fontSize,
+                          ?.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1138,7 +1136,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                                     .of(context)
                                     .textTheme
                                     .titleLarge
-                                    .fontSize,
+                                    ?.fontSize,
                                 fontWeight: FontWeight.normal,
                               ),
                               textAlign: TextAlign.center,
@@ -1164,7 +1162,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                           .of(context)
                           .textTheme
                           .titleMedium
-                          .fontSize,
+                          ?.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 garbageTypes(),
@@ -1178,7 +1176,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                           .of(context)
                           .textTheme
                           .titleMedium
-                          .fontSize,
+                          ?.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 radioButtonList(),
@@ -1197,7 +1195,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                               .of(context)
                               .textTheme
                               .titleMedium
-                              .fontSize,
+                              ?.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -1211,7 +1209,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                               .of(context)
                               .textTheme
                               .titleMedium
-                              .fontSize,
+                              ?.fontSize,
                           fontWeight: FontWeight.normal),
                     ),
                   ],
@@ -1226,7 +1224,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                           .of(context)
                           .textTheme
                           .titleMedium
-                          .fontSize,
+                          ?.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1255,7 +1253,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                           .of(context)
                           .textTheme
                           .titleMedium
-                          .fontSize,
+                          ?.fontSize,
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
@@ -1283,7 +1281,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                     validatePickUp();
                   },
                   color: AppThemeData().secondaryColor,
-                  text: "OK",
+                  text: "OK", 
                 ),
                 SizedBox(
                   height: 40.0,

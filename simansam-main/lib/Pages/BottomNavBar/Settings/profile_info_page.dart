@@ -18,18 +18,18 @@ class ProfileInfoPage extends StatefulWidget {
 }
 
 class _ProfileInfoPageState extends State<ProfileInfoPage> {
-  var currentUserID = FirebaseAuth.instance.currentUser.uid;
-  CollectionReference imgRef;
-  Reference ref;
-  File _userSelectedFileImage;
-  String firebaseStorageUploadedImageURL;
-  String _userLatestProfileImage;
+  var currentUserID = FirebaseAuth.instance.currentUser?.uid;
+  late CollectionReference imgRef;
+  late Reference ref;
+  late File _userSelectedFileImage;
+  late String firebaseStorageUploadedImageURL;
+  late String _userLatestProfileImage;
 
   // Proses Pengunggahan
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
-  double circularProgressVal;
+  late double circularProgressVal;
 
   // -------------------------------- PROSES PENGUNGGAHAN -------------------------------- \\
 
@@ -165,7 +165,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   // -------------------------------- UBAH GAMBAR -------------------------------- \\
 
   _imgFromCamera() async {
-    final pickedFile = await ImagePicker().getImage(
+    final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.camera,
       imageQuality: 50,
     );
@@ -178,7 +178,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   }
 
   _imgFromGallery() async {
-    final pickedFile = await ImagePicker().getImage(
+    final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       imageQuality: 50,
     );
@@ -227,13 +227,13 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
       try {
         var firebaseStorage;
         ref = firebaseStorage.FirebaseStorage.instance.ref().child(
-            'Gambar Profil Pengguna/${FirebaseAuth.instance.currentUser.uid}/${FirebaseAuth.instance.currentUser.uid}');
+            'Gambar Profil Pengguna/${FirebaseAuth.instance.currentUser?.uid}/${FirebaseAuth.instance.currentUser?.uid}');
         await ref.putFile(_userSelectedFileImage);
 
         String downloadURL = await firebaseStorage.FirebaseStorage.instance
             .ref()
             .child(
-            'Gambar Profil Pengguna/${FirebaseAuth.instance.currentUser.uid}/${FirebaseAuth.instance.currentUser.uid}')
+            'Gambar Profil Pengguna/${FirebaseAuth.instance.currentUser?.uid}/${FirebaseAuth.instance.currentUser?.uid}')
             .getDownloadURL();
         firebaseStorageUploadedImageURL = downloadURL.toString();
         print("Gambar Diunggah ke Firebase Storage!");
@@ -272,7 +272,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+            fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -285,7 +285,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-            fontSize: Theme.of(context).textTheme.titleMedium.fontSize,
+            fontSize: Theme.of(context).textTheme.titleMedium?.fontSize,
             fontWeight: FontWeight.normal),
       ),
     );
@@ -293,7 +293,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String _nama, _nomorKontak, _email, _alamatRumah;
+  late String _nama, _nomorKontak, _email, _alamatRumah;
 
   Widget _profileDetails() {
     return Padding(
@@ -308,12 +308,12 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
             return Text(
               "Hai! ",
               style: TextStyle(
-                  fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+                  fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
                   fontWeight: FontWeight.bold),
             );
           } else {
             UserModelClass userModelClass =
-            UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
+            UserModelClass.fromDocument(dataSnapshot.data!.docs[0]);
 
             _userLatestProfileImage = userModelClass.profileImage;
 
@@ -367,12 +367,12 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                         border: OutlineInputBorder(),
                                       ),
                                       validator: (value) {
-                                        if (value.isEmpty) {
+                                        if (value!.isEmpty) {
                                           return 'Nama tidak boleh kosong';
                                         }
                                         return null;
                                       },
-                                      onSaved: (value) => _nama = value,
+                                      onSaved: (value) => _nama = value!,
                                     ),
                                   ),
                                   actions: [
@@ -389,8 +389,8 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                       textColor: AppThemeData().whiteColor,
                                       color: AppThemeData().secondaryColor,
                                       onClicked: () {
-                                        if (_formKey.currentState.validate()) {
-                                          _formKey.currentState.save();
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState?.save();
                                           FirebaseFirestore.instance
                                               .collection('Users')
                                               .doc(currentUserID.toString())
@@ -431,12 +431,12 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                         border: OutlineInputBorder(),
                                       ),
                                       validator: (value) {
-                                        if (value.isEmpty) {
+                                        if (value!.isEmpty) {
                                           return 'Nomor kontak tidak boleh kosong';
                                         }
                                         return null;
                                       },
-                                      onSaved: (value) => _nomorKontak = value,
+                                      onSaved: (value) => _nomorKontak = value!,
                                     ),
                                   ),
                                   actions: [
@@ -453,8 +453,8 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                       textColor: AppThemeData().whiteColor,
                                       color: AppThemeData().secondaryColor,
                                       onClicked: () {
-                                        if (_formKey.currentState.validate()) {
-                                          _formKey.currentState.save();
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState?.save();
                                           FirebaseFirestore.instance
                                               .collection('Users')
                                               .doc(currentUserID.toString())
@@ -493,12 +493,12 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                         border: OutlineInputBorder(),
                                       ),
                                       validator: (value) {
-                                        if (value.isEmpty) {
+                                        if (value!.isEmpty) {
                                           return 'Email tidak boleh kosong';
                                         }
                                         return null;
                                       },
-                                      onSaved: (value) => _email = value,
+                                      onSaved: (value) => _email = value!,
                                     ),
                                   ),
                                   actions: [
@@ -515,8 +515,8 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                       textColor: AppThemeData().whiteColor,
                                       color: AppThemeData().secondaryColor,
                                       onClicked: () {
-                                        if (_formKey.currentState.validate()) {
-                                          _formKey.currentState.save();
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState?.save();
                                           FirebaseFirestore.instance
                                               .collection('Users')
                                               .doc(currentUserID.toString())
@@ -555,12 +555,12 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                         border: OutlineInputBorder(),
                                       ),
                                       validator: (value) {
-                                        if (value.isEmpty) {
+                                        if (value!.isEmpty) {
                                           return 'Alamat rumah tidak boleh kosong';
                                         }
                                         return null;
                                       },
-                                      onSaved: (value) => _alamatRumah = value,
+                                      onSaved: (value) => _alamatRumah = value!,
                                     ),
                                   ),
                                   actions: [
@@ -577,8 +577,8 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                                       textColor: AppThemeData().whiteColor,
                                       color: AppThemeData().secondaryColor,
                                       onClicked: () {
-                                        if (_formKey.currentState.validate()) {
-                                          _formKey.currentState.save();
+                                        if (_formKey.currentState!.validate()) {
+                                          _formKey.currentState?.save();
                                           FirebaseFirestore.instance
                                               .collection('Users')
                                               .doc(currentUserID.toString())
@@ -607,7 +607,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                   color: AppThemeData().secondaryColor,
                   onClicked: () {
                     validateEdits();
-                  },
+                  }, key: null,
                 ),
                 SizedBox(
                   height: 20.0,
@@ -644,8 +644,8 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   }
 
   void validateEdits() {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState?.save();
       uploadImagesToStorage();
     }
   }

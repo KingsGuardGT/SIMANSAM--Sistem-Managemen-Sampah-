@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simansam/Models/trash_pick_ups_model.dart';
 import 'package:simansam/Widgets/button_widgets.dart';
-import 'package:simansam/Pages/BottomNavBar/PickMyTrash/view_trash_details.dart';
 
 
 class EditTrashDetails extends StatefulWidget {
@@ -19,7 +18,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
   final userReference = FirebaseFirestore.instance.collection('Users');
   final FirebaseAuth auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
-  String _trashName, _trashDescription, _trashLocationAddress, _startDate, _returnDate, _startTime, _returnTime, _postedDate;
+  late String _trashName, _trashDescription, _trashLocationAddress, _startDate, _returnDate, _startTime, _returnTime, _postedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
             return CircularProgressIndicator();
           } else {
             TrashPickUpsModel trashPickUpsModel =
-            TrashPickUpsModel.fromDocument(snapshot.data.docs[0]);
+            TrashPickUpsModel.fromDocument(snapshot.data!.docs[0]);
 
             _trashName = trashPickUpsModel.trashName;
             _trashDescription = trashPickUpsModel.trashDescription;
@@ -61,7 +60,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                       "Nama Sampah",
                       style: TextStyle(
                           fontSize:
-                          Theme.of(context).textTheme.titleMedium.fontSize,
+                          Theme.of(context).textTheme.titleMedium?.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                     TextFormField(
@@ -70,12 +69,12 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                         hintText: "Masukkan nama sampah",
                       ),
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return "Nama sampah tidak boleh kosong";
                         }
                         return null;
                       },
-                      onSaved: (value) => _trashName = value,
+                      onSaved: (value) => _trashName = value!,
                     ),
                     SizedBox(
                       height: 20.0,
@@ -84,7 +83,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                       "Deskripsi Sampah",
                       style: TextStyle(
                           fontSize:
-                          Theme.of(context).textTheme.titleMedium.fontSize,
+                          Theme.of(context).textTheme.titleMedium?.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                     TextFormField(
@@ -93,12 +92,12 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                         hintText: "Masukkan deskripsi sampah",
                       ),
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return "Deskripsi sampah tidak boleh kosong";
                         }
                         return null;
                       },
-                      onSaved: (value) => _trashDescription = value,
+                      onSaved: (value) => _trashDescription = value!,
                     ),
                     SizedBox(
                       height: 20.0,
@@ -107,7 +106,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                       "Lokasi Sampah",
                       style: TextStyle(
                           fontSize:
-                          Theme.of(context).textTheme.titleMedium.fontSize,
+                          Theme.of(context).textTheme.titleMedium?.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                     TextFormField(
@@ -116,12 +115,12 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                         hintText: "Masukkan lokasi sampah",
                       ),
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value!.isEmpty) {
                           return "Lokasi sampah tidak boleh kosong";
                         }
                         return null;
                       },
-                      onSaved: (value) => _trashLocationAddress = value,
+                      onSaved: (value) => _trashLocationAddress = value!,
                     ),
                     SizedBox(
                       height: 20.0,
@@ -130,7 +129,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                       "Tanggal Diposting",
                       style: TextStyle(
                           fontSize:
-                          Theme.of(context).textTheme.titleMedium.fontSize,
+                          Theme.of(context).textTheme.titleMedium?.fontSize,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -141,8 +140,8 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                         text: "Simpan Perubahan",
                         color: Theme.of(context).colorScheme.background,
                         onClicked: () async {
-                          if (_formKey.currentState.validate()) {
-                            _formKey.currentState.save();
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState?.save();
 
                             await userReference
                                 .doc(widget.userID)
@@ -162,6 +161,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
                             Navigator.pop(context);
                           }
                         },
+                        // or any other unique value
                       ),
                     ),
                   ],

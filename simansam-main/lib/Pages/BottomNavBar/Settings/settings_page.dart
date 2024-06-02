@@ -28,19 +28,19 @@ class _SettingsPageState extends State<SettingsPage> {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
           .collection("Users")
-          .where('uuid', isEqualTo: "${auth.currentUser.uid}")
+          .where('uuid', isEqualTo: "${auth.currentUser?.uid}")
           .snapshots(),
       builder: (context, dataSnapshot) {
         if (!dataSnapshot.hasData) {
           return Text(
             "Hai! ",
             style: TextStyle(
-                fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+                fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
                 fontWeight: FontWeight.bold),
           );
         } else {
           UserModelClass userModelClass =
-          UserModelClass.fromDocument(dataSnapshot.data.docs[0]);
+          UserModelClass.fromDocument(dataSnapshot.data!.docs[0]);
           return Row(
             children: [
               ImageFramesWidgets().userProfileFrame(
@@ -52,14 +52,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     "${userModelClass.name}",
                     style: TextStyle(
                         fontSize:
-                        Theme.of(context).textTheme.titleLarge.fontSize,
+                        Theme.of(context).textTheme.titleLarge?.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "${userModelClass.accountType}",
                     style: TextStyle(
                         fontSize:
-                        Theme.of(context).textTheme.titleMedium.fontSize,
+                        Theme.of(context).textTheme.titleMedium?.fontSize,
                         fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -82,8 +82,8 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       Text("Tentang Kami",
           style: TextStyle(
-            fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
-            color: Theme.of(context).textTheme.labelLarge.color,
+            fontSize: Theme.of(context).textTheme.labelLarge?.fontSize,
+            color: Theme.of(context).textTheme.labelLarge?.color,
             fontWeight: FontWeight.bold,
           ))
     ]);
@@ -95,7 +95,7 @@ class _SettingsPageState extends State<SettingsPage> {
         Text(
           hashTags,
           style: TextStyle(
-              fontSize: Theme.of(context).textTheme.bodySmall.fontSize,
+              fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
               fontWeight: FontWeight.bold,
               color: AppThemeData().deepBlueColor),
         ),
@@ -141,7 +141,7 @@ class _SettingsPageState extends State<SettingsPage> {
               size: 35.0,
             ),
           )
-        ],
+        ], 
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -159,7 +159,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   text: "Keluar",
                   icon: Icons.logout,
                   iconToLeft: true,
-                  onClicked: () => SignOutAlertDialog().showAlert(context),
+                  onClicked: () => SignOutAlertDialog().showAlert(context), 
                 ),
                 SizedBox(
                   height: 5.0,
@@ -176,7 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         Text(
                           "$themeText",
                           style: TextStyle(
-                              fontSize: Theme.of(context).textTheme.labelLarge.fontSize,
+                              fontSize: Theme.of(context).textTheme.labelLarge?.fontSize,
                               fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -198,7 +198,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       MaterialPageRoute(
                           builder: (context) => ProfileInfoPage()),
                     );
-                  },
+                  }, 
                 ),
                 SizedBox(
                   height: 15.0,
@@ -213,7 +213,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       MaterialPageRoute(
                           builder: (context) => SettingsUserGuide()),
                     );
-                  },
+                  }, 
                 ),
                 SizedBox(
                   height: 15.0,
@@ -229,7 +229,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       MaterialPageRoute(
                           builder: (context) => GiveFeedbackPage()),
                     );
-                  },
+                  }, 
                 ),
                 SizedBox(
                   height: 15.0,

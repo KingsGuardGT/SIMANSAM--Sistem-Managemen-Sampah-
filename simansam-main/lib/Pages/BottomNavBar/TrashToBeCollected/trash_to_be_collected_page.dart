@@ -15,12 +15,12 @@ class TrashToBeCollected extends StatefulWidget {
 }
 
 class _TrashToBeCollectedState extends State<TrashToBeCollected> {
-  Widget _childMap;
-  GoogleMapController _googleMapController;
-  Position _currentPosition;
-  String _currentAddress;
-  BitmapDescriptor currentUserMarkerIcon, mapRecyclingCenterMarkerIcon;
-  List eventLocations;
+  late Widget _childMap;
+  late GoogleMapController _googleMapController;
+  late Position _currentPosition;
+  late String _currentAddress;
+  late BitmapDescriptor currentUserMarkerIcon, mapRecyclingCenterMarkerIcon;
+  late List eventLocations;
   Map<MarkerId, Marker> currentUserMarker = <MarkerId, Marker>{};
   Map<MarkerId, Marker> recyclingCentersMarkers = <MarkerId, Marker>{};
   Set<Marker> _displayMapMarkers = Set();
@@ -52,7 +52,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
         print(e);
       });
     } catch (error) {
-      ToastMessages().toastError(error, context);
+      ToastMessages().toastError(error.toString(), context);
     }
   }
 
@@ -73,7 +73,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
         _childMap = mapWidget();
       });
     } catch (error) {
-      ToastMessages().toastError(error, context);
+      ToastMessages().toastError(error.toString(), context);
     }
   }
 

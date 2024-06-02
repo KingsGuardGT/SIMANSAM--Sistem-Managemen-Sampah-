@@ -16,11 +16,11 @@ class PickTrashLocation extends StatefulWidget {
 }
 
 class _PickTrashLocationState extends State<PickTrashLocation> {
-  Widget _googleMapWidget;
-  GoogleMapController _googleMapController;
-  String _currentAddress;
-  List _trashLocationDetails;
-  BitmapDescriptor trashLocationMarkerIcon;
+  late Widget _googleMapWidget;
+  late GoogleMapController _googleMapController;
+  late String _currentAddress;
+  late List _trashLocationDetails;
+  late BitmapDescriptor trashLocationMarkerIcon;
   Map<MarkerId, Marker> trashLocationMarker = <MarkerId, Marker>{};
 
   @override
@@ -49,7 +49,7 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
         _googleMapWidget = mapWidget();
       });
     } catch (error) {
-      ToastMessages().toastError(error, context);
+      ToastMessages().toastError(error.toString(), context);
     }
   }
 

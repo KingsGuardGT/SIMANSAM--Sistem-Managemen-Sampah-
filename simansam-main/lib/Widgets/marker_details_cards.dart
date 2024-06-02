@@ -7,8 +7,8 @@ class MarkerDetailsCard {
       child: Text(
         detailsTitle,
         style: TextStyle(
-            color: Theme.of(context).textTheme.titleSmall.color,
-            fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
+            color: Theme.of(context).textTheme.titleSmall?.color,
+            fontSize: Theme.of(context).textTheme.titleSmall?.fontSize,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -20,8 +20,8 @@ class MarkerDetailsCard {
       child: Text(
         detailsName,
         style: TextStyle(
-            color: Theme.of(context).textTheme.titleSmall.color,
-            fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
+            color: Theme.of(context).textTheme.titleSmall?.color,
+            fontSize: Theme.of(context).textTheme.titleSmall?.fontSize,
             fontWeight: FontWeight.normal),
       ),
     );
@@ -143,11 +143,11 @@ class MarkerDetailsCard {
                           "Alamat Lokasi",
                           style: TextStyle(
                               color:
-                              Theme.of(context).textTheme.titleLarge.color,
+                              Theme.of(context).textTheme.titleLarge?.color,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .titleLarge
-                                  .fontSize,
+                                  ?.fontSize,
                               fontWeight: FontWeight.bold),
                         ),
                       ],

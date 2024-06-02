@@ -5,7 +5,7 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
   final List<Widget> widgets;
 
-  const SecondaryAppBar({Key key, this.title, this.appBar, this.widgets})
+  const SecondaryAppBar({Key? key, required this.title, required this.appBar, required this.widgets})
       : super(key: key);
 
   @override

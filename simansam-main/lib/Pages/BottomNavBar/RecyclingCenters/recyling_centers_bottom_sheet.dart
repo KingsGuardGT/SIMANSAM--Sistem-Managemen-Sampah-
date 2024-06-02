@@ -8,8 +8,8 @@ class RecyclingCentersBottomSheet {
       child: Text(
         judulDetail,
         style: TextStyle(
-            color: Theme.of(context).textTheme.titleSmall.color,
-            fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
+            color: Theme.of(context).textTheme.titleSmall?.color,
+            fontSize: Theme.of(context).textTheme.titleSmall?.fontSize,
             fontWeight: FontWeight.bold),
       ),
     );
@@ -21,8 +21,8 @@ class RecyclingCentersBottomSheet {
       child: Text(
         namaDetail,
         style: TextStyle(
-            color: Theme.of(context).textTheme.titleSmall.color,
-            fontSize: Theme.of(context).textTheme.titleSmall.fontSize,
+            color: Theme.of(context).textTheme.titleSmall?.color,
+            fontSize: Theme.of(context).textTheme.titleSmall?.fontSize,
             fontWeight: FontWeight.normal),
       ),
     );
@@ -53,11 +53,11 @@ class RecyclingCentersBottomSheet {
                           "PusatDaurUlang",
                           style: TextStyle(
                               color:
-                              Theme.of(context).textTheme.titleLarge.color,
+                              Theme.of(context).textTheme.titleLarge?.color,
                               fontSize: Theme.of(context)
                                   .textTheme
                                   .titleLarge
-                                  .fontSize,
+                                  ?.fontSize,
                               fontWeight: FontWeight.bold),
                         ),
                       ],

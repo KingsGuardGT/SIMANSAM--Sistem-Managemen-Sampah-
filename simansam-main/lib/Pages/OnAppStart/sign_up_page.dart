@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:simansam/Pages/OnAppStart/sign_in_page.dart';
 import 'package:simansam/Pages/OnAppStart/user_guide.dart';
@@ -14,7 +15,7 @@ import '../../Widgets/toast_messages.dart';
 class SignUpPage extends StatefulWidget {
 /*  SignUpPage({Key key, this.title}) : super(key: key);
   final String title;*/
-  SignUpPage({this.app});
+  SignUpPage({required this.app});
 
   final FirebaseApp app;
 
@@ -39,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isHidden = true;
   bool _isHiddenC = true;
 
-  double circularProgressVal;
+  late double circularProgressVal;
   bool isUserCreated = false;
   bool isAnError = false;
 
@@ -47,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String formattedTime = DateFormat('kk:mm:a').format(DateTime.now());
 
   String accountTypeName = "Pengumpul Sampah";
-  int accountTypeID;
+  late int accountTypeID;
 
   void _togglePasswordView() {
     setState(() {
@@ -153,12 +154,14 @@ class _SignUpPageState extends State<SignUpPage> {
                               height: 50.0,
                             ),
                             new ButtonWidget(
-                                text: "Coba Lagi",
-                                textColor: AppThemeData().whiteColor,
-                                color: AppThemeData().redColor,
-                                onClicked: () {
-                                  Navigator.pop(context);
-                                }),
+                              text: "Coba Lagi",
+                              textColor: AppThemeData().whiteColor,
+                              color: AppThemeData().redColor,
+                              onClicked: () {
+                                Navigator.pop(context);
+                              },
+                               // or any other unique value
+                            ),
                           ],
                         ))
                   else
@@ -182,18 +185,20 @@ class _SignUpPageState extends State<SignUpPage> {
                               height: 50.0,
                             ),
                             new ButtonWidget(
-                                text: "Lanjutkan",
-                                textColor: AppThemeData().whiteColor,
-                                color: AppThemeData().primaryColor,
-                                onClicked: () {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => WelcomeGuidePage(
-                                              nameController.text.toString(),
-                                              accountTypeName)),
-                                      ModalRoute.withName("/WelcomeScreen"));
-                                }),
+                              text: "Lanjutkan",
+                              textColor: AppThemeData().whiteColor,
+                              color: AppThemeData().primaryColor,
+                              onClicked: () {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => WelcomeGuidePage(
+                                            nameController.text.toString(),
+                                            accountTypeName)),
+                                    ModalRoute.withName("/WelcomeScreen"));
+                              },
+                              // or any other unique value
+                            ),
                           ],
                         )),
                 ],
@@ -240,21 +245,21 @@ class _SignUpPageState extends State<SignUpPage> {
       await firebaseAuth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
 
-      if (FirebaseAuth.instance.currentUser.uid != null) {
+      if (FirebaseAuth.instance.currentUser?.uid != null) {
         print('Akun Pengguna Terotentikasi!');
 
-        User user = FirebaseAuth.instance.currentUser;
+        User? user = FirebaseAuth.instance.currentUser;
 
-        if (!user.emailVerified) {
+        if (!user!.emailVerified) {
           await user.sendEmailVerification();
           print('Email Verifikasi Dikirim!');
         }
         try {
           FirebaseFirestore.instance
               .collection("Users")
-              .doc(FirebaseAuth.instance.currentUser.uid.toString())
+              .doc(FirebaseAuth.instance.currentUser?.uid.toString())
               .set({
-            "uuid": FirebaseAuth.instance.currentUser.uid.toString(),
+            "uuid": FirebaseAuth.instance.currentUser?.uid.toString(),
             "accountType": "$accountTypeName",
             "name": nameController.text,
             "email": emailController.text,
@@ -303,7 +308,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Text(
           "Pilih Jenis Akun",
           style: TextStyle(
-              fontSize: Theme.of(context).textTheme.titleLarge.fontSize,
+              fontSize: Theme.of(context).textTheme.titleLarge?.fontSize,
               fontWeight: FontWeight.bold),
         ),
         SizedBox(
@@ -353,11 +358,12 @@ class _SignUpPageState extends State<SignUpPage> {
     return WillPopScope(
       onWillPop: () async {
         print("test");
-        return Navigator.pushAndRemoveUntil(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => UserGuidePage()),
               (Route<dynamic> route) => false,
         );
+        return false; // Add this line
       },
       child: Scaffold(
         backgroundColor: AppThemeData().greenAccentColor,
@@ -393,7 +399,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .headlineSmall
-                                    .fontSize,
+                                    ?.fontSize,
                                 fontWeight: FontWeight.bold,
                               )),
                         ],
@@ -513,10 +519,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             printSignUpData();
                             authenticateUser();
                           } else {
-                            /*_toastMessages.toastInfo(
-                                'Coba lagi dengan detail yang benar!');*/
+                            _toastMessages.toastInfo('Coba lagi dengan detail yang benar!', Toast.LENGTH_SHORT as BuildContext);
                           }
                         },
+
                       ),
                       SizedBox(height: 20),
                       Container(
@@ -541,6 +547,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 );
                                 print("Beralih ke Masuk");
                               },
+                              // or any other unique value
                             ),
                           ],
                         ),

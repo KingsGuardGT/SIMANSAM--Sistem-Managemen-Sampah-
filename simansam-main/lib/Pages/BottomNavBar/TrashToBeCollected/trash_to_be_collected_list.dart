@@ -12,8 +12,8 @@ class TrashToBeCollectedList extends StatefulWidget {
 
 class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
   final firestoreInstance = FirebaseFirestore.instance;
-  TrashPickUpsModel trashPickUpsModel;
-  UserModelClass selectedTrashPickerModel;
+  late TrashPickUpsModel trashPickUpsModel;
+  late UserModelClass selectedTrashPickerModel;
   String accountType = "Admin SIMANSAM";
   bool viewTrashPicker = false;
 
@@ -53,7 +53,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                 selectedTrashPickerModel = userModelClass;
               });
             },
-            child: snapshot.data.docs.length == null
+            child: snapshot.data?.docs.length == null
                 ? Container()
                 : Row(
                     children: [
@@ -84,7 +84,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                                     fontSize: Theme.of(context)
                                         .textTheme
                                         .titleLarge
-                                        .fontSize,
+                                        ?.fontSize,
                                     fontWeight: FontWeight.w500,
                                     color: Theme.of(context).primaryColor),
                               ),
@@ -125,7 +125,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
           }
           return !snapshot.hasData
               ? Container()
-              : snapshot.data.docs.length.toString() == "0"
+              : snapshot.data?.docs.length.toString() == "0"
                   ? Container(
                       height: 250.0,
                       width: 200.0,
@@ -140,7 +140,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .titleLarge
-                                    .fontSize),
+                                    ?.fontSize),
                           ),
                           ClipOval(
                             child: Image.asset(
@@ -155,11 +155,11 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                   : ListView.builder(
                       scrollDirection: Axis.vertical,
                       physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data.docs.length,
+                      itemCount: snapshot.data?.docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         UserModelClass userModelClass =
                             UserModelClass.fromDocument(
-                                snapshot.data.docs[index]);
+                                snapshot.data!.docs[index]);
                         return trashPickersDetailsCard(
                             snapshot, userModelClass);
                       },
@@ -239,7 +239,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                       userID, trashPickUpsModel.trashID, "Admin SIMANSAM")),
             );
           },
-          child: snapshot.data.docs.length == null
+          child: snapshot.data?.docs.length == null
               ? Container()
               : Row(
                   children: [
@@ -268,7 +268,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                                   fontSize: Theme.of(context)
                                       .textTheme
                                       .titleLarge
-                                      .fontSize,
+                                      ?.fontSize,
                                   fontWeight: FontWeight.w500,
                                   color: Theme.of(context).primaryColor),
                             ),
@@ -308,7 +308,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
         builder: (context, snapshot) {
           return !snapshot.hasData
               ? Container()
-              : snapshot.data.docs.length.toString() == "0"
+              : snapshot.data!.docs.length.toString() == "0"
                   ? Container(
                       height: 250.0,
                       width: 200.0,
@@ -323,7 +323,7 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .titleLarge
-                                    .fontSize),
+                                    ?.fontSize),
                           ),
                           Image.asset(
                             'assets/icons/icon_broom.png',
@@ -336,11 +336,11 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
                   : ListView.builder(
                       scrollDirection: Axis.vertical,
                       physics: BouncingScrollPhysics(),
-                      itemCount: snapshot.data.docs.length,
+                      itemCount: snapshot.data?.docs.length,
                       itemBuilder: (BuildContext context, int index) {
                         TrashPickUpsModel trashPickUpsModel =
                             TrashPickUpsModel.fromDocument(
-                                snapshot.data.docs[index]);
+                                snapshot.data!.docs[index]);
                         return trashDetailsCard(
                             snapshot, trashPickUpsModel, userID);
                       },

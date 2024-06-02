@@ -8,11 +8,11 @@ class RecyclingCenterModel {
   final GeoPoint location;
 
   RecyclingCenterModel({
-    this.id,
-    this.name,
-    this.address,
-    this.phone,
-    this.location,
+    required this.id,
+    required this.name,
+    required this.address,
+    required this.phone,
+    required this.location,
   });
 
   factory RecyclingCenterModel.fromDocument(DocumentSnapshot documentSnapshot) {

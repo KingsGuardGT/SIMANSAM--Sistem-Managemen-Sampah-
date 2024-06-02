@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:simansam/Pages/OnAppStart/sign_up_page.dart';
 import 'package:simansam/Pages/OnAppStart/welcome_page.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class UserGuidePage extends StatefulWidget {
   @override
@@ -19,11 +20,11 @@ class _UserGuidePageState extends State<UserGuidePage> {
     return WillPopScope(
         onWillPop: () async {
           print("tes");
-          return Navigator.pushAndRemoveUntil(
+          await Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => WelcomePage()),
-                (Route<dynamic> route) => false,
           );
+          return false;
         },
         child: Scaffold(
           appBar: AppBar(
@@ -56,7 +57,7 @@ class _UserGuidePageState extends State<UserGuidePage> {
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUpPage()),
+                      MaterialPageRoute(builder: (context) => SignUpPage(app: Firebase.app())),
                           (Route<dynamic> route) => false,
                     );
                     print("Beralih ke Pendaftaran");
@@ -68,11 +69,10 @@ class _UserGuidePageState extends State<UserGuidePage> {
           body: SafeArea(
             child: Stack(
               children: [
-                WebView(
+                InAppWebView(
                   key: _key,
-                  initialUrl: siteLink,
-                  javascriptMode: JavascriptMode.unrestricted,
-                  onPageFinished: (finish) {
+                  initialUrlRequest: URLRequest(url: Uri.parse(siteLink)),
+                  onLoadStop: (controller, url) {
                     setState(() {
                       isLoading = false;
                     });

@@ -30,7 +30,7 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
                     style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize:
-                                Theme.of(context).textTheme.headlineSmall.fontSize,
+                                Theme.of(context).textTheme.headlineSmall?.fontSize,
                             fontWeight: FontWeight.bold)
                         .copyWith(color: Colors.grey.shade900)),
                 SizedBox(
@@ -64,7 +64,7 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
                       ),
                       (route) => false,
                     );
-                  },
+                  }, 
                 )
               ],
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class SettingsUserGuide extends StatefulWidget {
   @override
@@ -7,10 +7,16 @@ class SettingsUserGuide extends StatefulWidget {
 }
 
 class _SettingsUserGuideState extends State<SettingsUserGuide> {
-  final _key = UniqueKey();
+  late final key; // corrected: use 'late' keyword instead of 'final'
   bool isLoading = true;
   String siteLink =
       "https://sites.google.com/view/simansam-user-guide";
+
+  @override
+  void initState() {
+    super.initState();
+    key = UniqueKey(); // corrected: initialize 'key' in 'initState'
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +40,15 @@ class _SettingsUserGuideState extends State<SettingsUserGuide> {
       body: SafeArea(
         child: Stack(
           children: [
-            WebView(
-              key: _key,
-              initialUrl: siteLink,
-              javascriptMode: JavascriptMode.unrestricted,
-              onPageFinished: (finish) {
+            InAppWebView(
+              key: Key(key.toString()), // corrected: use 'Key' widget
+              initialUrlRequest: URLRequest(url: Uri.parse(siteLink)), // corrected: use 'URLRequest'
+              initialOptions: InAppWebViewGroupOptions(
+                crossPlatform: InAppWebViewOptions(
+                  javaScriptEnabled: true, // corrected: use 'InAppWebViewOptions'
+                ),
+              ),
+              onLoadStop: (controller, url) {
                 setState(() {
                   isLoading = false;
                 });

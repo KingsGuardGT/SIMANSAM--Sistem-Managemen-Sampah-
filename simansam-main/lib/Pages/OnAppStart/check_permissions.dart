@@ -189,24 +189,25 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => showDialog<bool>(
-          context: context,
-          builder: (c) => AlertDialog(
-            title: Text('Keluar dari SIMANSAM'),
-            content: Text('Apakah Anda benar-benar ingin keluar'),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10.0))),
-            actions: [
-              TextButton(
-                child: Text('Ya'),
-                onPressed: () => Navigator.pop(c, true),
-              ),
-              TextButton(
-                child: Text('Tidak'),
-                onPressed: () => Navigator.pop(c, false),
-              ),
-            ],
-          )),
+      onWillPop: () async => (await showDialog<bool>(
+        context: context,
+        builder: (c) => AlertDialog(
+          title: Text('Keluar dari SIMANSAM'),
+          content: Text('Apakah Anda benar-benar ingin keluar'),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          actions: [
+            TextButton(
+              child: Text('Ya'),
+              onPressed: () => Navigator.pop(c, true),
+            ),
+            TextButton(
+              child: Text('Tidak'),
+              onPressed: () => Navigator.pop(c, false),
+            ),
+          ],
+        ),
+      ))?? false,
       child: Scaffold(
         backgroundColor: AppThemeData().greenAccentColor,
         body: SafeArea(
@@ -252,7 +253,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .titleMedium
-                                    .fontSize),
+                                    ?.fontSize),
                           )
                         ],
                       ),
@@ -272,7 +273,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .titleMedium
-                                    .fontSize),
+                                    ?.fontSize),
                           )
                         ],
                       ),
@@ -292,7 +293,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                                 fontSize: Theme.of(context)
                                     .textTheme
                                     .titleMedium
-                                    .fontSize),
+                                    ?.fontSize),
                           )
                         ],
                       ),
@@ -307,7 +308,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                           "Akses penyimpanan mencari foto untuk digunakan dalam pemilih Anda.",
                       style: TextStyle(
                           fontSize:
-                          Theme.of(context).textTheme.titleMedium.fontSize),
+                          Theme.of(context).textTheme.titleMedium?.fontSize),
                     ),
                   ),
                   Padding(
@@ -399,7 +400,7 @@ class _CheckAppPermissionsState extends State<CheckAppPermissions> {
                       );
                     },
                     text: "Lanjutkan ke Aplikasi",
-                    textColor: AppThemeData().whiteColor,
+                    textColor: AppThemeData().whiteColor, 
                   )
                       : Container(),
                 ],
