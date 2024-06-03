@@ -21,9 +21,9 @@ class _SignInPageState extends State<SignInPage> {
   bool _isHidden = true;
   bool isUserSigned = false;
   bool isInValidaAccount = false;
-  late double circularProgressVal;
+  double? circularProgressVal;
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  late String accountType;
+  String? accountType;
 
   void _togglePasswordView() {
     setState(() {
@@ -199,7 +199,7 @@ class _SignInPageState extends State<SignInPage> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (BuildContext context) => BottomNavBar(accountType),
+          builder: (BuildContext context) => BottomNavBar(accountType!),
         ),
             (route) => false,
       );

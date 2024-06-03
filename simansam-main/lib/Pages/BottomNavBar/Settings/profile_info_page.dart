@@ -19,17 +19,17 @@ class ProfileInfoPage extends StatefulWidget {
 
 class _ProfileInfoPageState extends State<ProfileInfoPage> {
   var currentUserID = FirebaseAuth.instance.currentUser?.uid;
-  late CollectionReference imgRef;
-  late Reference ref;
-  late File _userSelectedFileImage;
-  late String firebaseStorageUploadedImageURL;
-  late String _userLatestProfileImage;
+  CollectionReference? imgRef;
+  Reference? ref;
+  File? _userSelectedFileImage;
+  String? firebaseStorageUploadedImageURL;
+  String? _userLatestProfileImage;
 
   // Proses Pengunggahan
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
-  late double circularProgressVal;
+  double? circularProgressVal;
 
   // -------------------------------- PROSES PENGUNGGAHAN -------------------------------- \\
 
@@ -222,13 +222,13 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
 
   Future<void> uploadImagesToStorage() async {
     if (_userSelectedFileImage != null) {
-      FirebaseStorage.instance.refFromURL(_userLatestProfileImage).delete();
+      FirebaseStorage.instance.refFromURL(_userLatestProfileImage!).delete();
 
       try {
         var firebaseStorage;
         ref = firebaseStorage.FirebaseStorage.instance.ref().child(
             'Gambar Profil Pengguna/${FirebaseAuth.instance.currentUser?.uid}/${FirebaseAuth.instance.currentUser?.uid}');
-        await ref.putFile(_userSelectedFileImage);
+        await ref?.putFile(_userSelectedFileImage!);
 
         String downloadURL = await firebaseStorage.FirebaseStorage.instance
             .ref()
@@ -237,14 +237,14 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
             .getDownloadURL();
         firebaseStorageUploadedImageURL = downloadURL.toString();
         print("Gambar Diunggah ke Firebase Storage!");
-        print("URL Gambar: " + firebaseStorageUploadedImageURL);
-        saveEditProfileToFireStore(firebaseStorageUploadedImageURL);
+        print("URL Gambar: " + firebaseStorageUploadedImageURL!);
+        saveEditProfileToFireStore(firebaseStorageUploadedImageURL!);
       } catch (e) {
         print(e.toString());
         ifAnError();
       }
     } else {
-      saveEditProfileToFireStore(_userLatestProfileImage);
+      saveEditProfileToFireStore(_userLatestProfileImage!);
     }
   }
 
@@ -293,7 +293,7 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  late String _nama, _nomorKontak, _email, _alamatRumah;
+  String? _nama, _nomorKontak, _email, _alamatRumah;
 
   Widget _profileDetails() {
     return Padding(

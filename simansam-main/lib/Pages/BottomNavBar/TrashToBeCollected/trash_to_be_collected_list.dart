@@ -12,8 +12,8 @@ class TrashToBeCollectedList extends StatefulWidget {
 
 class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
   final firestoreInstance = FirebaseFirestore.instance;
-  late TrashPickUpsModel trashPickUpsModel;
-  late UserModelClass selectedTrashPickerModel;
+  TrashPickUpsModel? trashPickUpsModel;
+  UserModelClass? selectedTrashPickerModel;
   String accountType = "Admin SIMANSAM";
   bool viewTrashPicker = false;
 
@@ -209,13 +209,13 @@ class _TrashToBeCollectedListState extends State<TrashToBeCollectedList> {
               },
             ),
             Text(
-              "${selectedTrashPickerModel.name}'s Pengambilan Sampah",
+              "${selectedTrashPickerModel?.name}'s Pengambilan Sampah",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],
         ),
         _scheduledTrashPicksList(
-            selectedTrashPickerModel.name, selectedTrashPickerModel.uuid),
+            selectedTrashPickerModel!.name, selectedTrashPickerModel!.uuid),
       ],
     );
   }

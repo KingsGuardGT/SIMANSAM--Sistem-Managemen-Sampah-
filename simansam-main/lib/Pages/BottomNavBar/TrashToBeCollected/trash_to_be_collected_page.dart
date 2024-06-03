@@ -15,12 +15,12 @@ class TrashToBeCollected extends StatefulWidget {
 }
 
 class _TrashToBeCollectedState extends State<TrashToBeCollected> {
-  late Widget _childMap;
-  late GoogleMapController _googleMapController;
-  late Position _currentPosition;
-  late String _currentAddress;
-  late BitmapDescriptor currentUserMarkerIcon, mapRecyclingCenterMarkerIcon;
-  late List eventLocations;
+   Widget? _childMap;
+   GoogleMapController? _googleMapController;
+   Position? _currentPosition;
+   String? _currentAddress;
+   BitmapDescriptor? currentUserMarkerIcon, mapRecyclingCenterMarkerIcon;
+   List? eventLocations;
   Map<MarkerId, Marker> currentUserMarker = <MarkerId, Marker>{};
   Map<MarkerId, Marker> recyclingCentersMarkers = <MarkerId, Marker>{};
   Set<Marker> _displayMapMarkers = Set();
@@ -59,7 +59,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
   _getCurrentUserAddressFromLatLng() async {
     try {
       List<Placemark> p = await placemarkFromCoordinates(
-          _currentPosition.latitude, _currentPosition.longitude);
+          _currentPosition!.latitude, _currentPosition!.longitude);
       Placemark place = p[0];
       setState(() {
         if (place != null) {
@@ -83,20 +83,18 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
         'assets/icons/icon_home.png');
   }
 
-  _setCurrentUserMarker() {
-    return <Marker>[
-      Marker(
-          markerId: MarkerId('LokasiSayaSaatIni'),
-          position:
-          LatLng(_currentPosition.latitude, _currentPosition.longitude),
-          icon: currentUserMarkerIcon,
-          onTap: () {
-            print('Lokasi Saya');
-          },
-          infoWindow:
-          InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress))
-    ].toSet();
-  }
+   _setCurrentUserMarker() {
+     return <Marker>[
+       Marker(
+           markerId: MarkerId('LokasiSayaSaatIni'),
+           position: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+           icon: currentUserMarkerIcon?? BitmapDescriptor.defaultMarker,
+           onTap: () {
+             print('Lokasi Saya');
+           },
+           infoWindow: InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress))
+     ].toSet();
+   }
 
   setMapRecyclingCentersMarkerIcon() async {
     mapRecyclingCenterMarkerIcon = await BitmapDescriptor.fromAssetImage(
@@ -145,16 +143,17 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
     final MarkerId markerID = MarkerId(id);
     final Marker marker = Marker(
       markerId: markerID,
-      icon: mapRecyclingCenterMarkerIcon,
+      icon: mapRecyclingCenterMarkerIcon ?? BitmapDescriptor.defaultMarker,
       position: LatLng(latitude, longitude),
       infoWindow: InfoWindow(
-          title: name,
-          onTap: () {
-            print("id: $id\n"
-                "nama: $name\n"
-                "garis lintang: $latitude\n"
-                "garis bujur: $longitude");
-          }),
+        title: name,
+        onTap: () {
+          print("id: $id\n"
+              "nama: $name\n"
+              "garis lintang: $latitude\n"
+              "garis bujur: $longitude");
+        },
+      ),
     );
     setState(() {
       recyclingCentersMarkers[markerID] = marker;
@@ -195,7 +194,7 @@ class _TrashToBeCollectedState extends State<TrashToBeCollected> {
       myLocationButtonEnabled: true,
       zoomControlsEnabled: true,
       initialCameraPosition: CameraPosition(
-        target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        target: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
         zoom: 8.5,
       ),
       onMapCreated: (GoogleMapController controller) {

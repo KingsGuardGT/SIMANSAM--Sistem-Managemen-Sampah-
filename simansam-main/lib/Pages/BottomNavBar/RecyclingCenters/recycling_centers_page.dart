@@ -1,3 +1,14 @@
+import 'dart:async';
+import 'dart:ffi';
+import 'dart:typed_data';
+
+import 'package:fab_circular_menu_plus/fab_circular_menu_plus.dart';
+import 'package:flip_card/flip_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:flutter_rating_stars/flutter_rating_stars.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -6,6 +17,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simansam/Models/recycling_center_model.dart';
 import 'package:simansam/Theme/theme_provider.dart';
 import 'package:simansam/Widgets/toast_messages.dart';
+import 'package:simansam/models/auto_complete_result.dart';
+import 'package:simansam/providers/search_places.dart';
+import 'package:simansam/services/map_services.dart';
 
 import 'recycling_centers_list.dart';
 import 'recyling_centers_bottom_sheet.dart';
@@ -16,12 +30,12 @@ class RecyclingCenters extends StatefulWidget {
 }
 
 class _RecyclingCentersState extends State<RecyclingCenters> {
-  late Widget _childMap;
-  late GoogleMapController _googleMapController;
-  late Position _currentPosition;
-  late String _currentAddress;
-  late BitmapDescriptor currentUserMarkerIcon, mapRecyclingCenterMarkerIcon;
-  late List eventLocations;
+   Widget? _childMap;
+   GoogleMapController? _googleMapController;
+   Position? _currentPosition;
+   String? _currentAddress;
+   BitmapDescriptor? currentUserMarkerIcon, mapRecyclingCenterMarkerIcon;
+   List? eventLocations;
   Map<MarkerId, Marker> currentUserMarker = <MarkerId, Marker>{};
   Map<MarkerId, Marker> recyclingCentersMarkers = <MarkerId, Marker>{};
   Set<Marker> _displayMapMarkers = Set();
@@ -61,7 +75,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
   _getCurrentUserAddressFromLatLng() async {
     try {
       List<Placemark> p = await placemarkFromCoordinates(
-          _currentPosition.latitude, _currentPosition.longitude);
+          _currentPosition!.latitude, _currentPosition!.longitude);
       Placemark place = p[0];
       setState(() {
         if (place != null) {
@@ -88,13 +102,14 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
     setState(() {
       currentUserMarker.clear();
       currentUserMarker[MarkerId('MyCurrentLocation')] = Marker(
-          markerId: MarkerId('MyCurrentLocation'),
-          position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
-          icon: currentUserMarkerIcon,
-          onTap: () {
-            print('Lokasi Saya');
-          },
-          infoWindow: InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress));
+        markerId: MarkerId('MyCurrentLocation'),
+        position: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+        icon: currentUserMarkerIcon?? BitmapDescriptor.defaultMarker,
+        onTap: () {
+          print('Lokasi Saya');
+        },
+        infoWindow: InfoWindow(title: 'Lokasi Saya', snippet: _currentAddress),
+      );
       _displayMapMarkers = Set<Marker>.of(currentUserMarker.values);
     });
   }
@@ -200,7 +215,7 @@ class _RecyclingCentersState extends State<RecyclingCenters> {
       myLocationButtonEnabled: true,
       zoomControlsEnabled: true,
       initialCameraPosition: CameraPosition(
-        target: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        target: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
         zoom: 8.5,
       ),
       onMapCreated: (GoogleMapController controller) {

@@ -7,7 +7,7 @@ class SettingsUserGuide extends StatefulWidget {
 }
 
 class _SettingsUserGuideState extends State<SettingsUserGuide> {
-  late final key; // corrected: use 'late' keyword instead of 'final'
+  Key? key;
   bool isLoading = true;
   String siteLink =
       "https://sites.google.com/view/simansam-user-guide";

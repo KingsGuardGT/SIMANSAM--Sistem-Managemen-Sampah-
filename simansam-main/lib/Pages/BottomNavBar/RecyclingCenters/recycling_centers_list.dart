@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:simansam/Models/recycling_center_model.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:simansam/Theme/theme_provider.dart';
 
 class RecyclingCentersList extends StatefulWidget {
@@ -11,12 +12,12 @@ class RecyclingCentersList extends StatefulWidget {
 
 class _RecyclingCentersListState extends State<RecyclingCentersList> {
   final firestoreInstance = FirebaseFirestore.instance;
-  late RecyclingCenterModel recyclingCenterModel;
-  String accountType = "Pengumpul Sampah";
+  RecyclingCenterModel? recyclingCenterModel;
+  String accountType = "Admin SIMANSAM";
   bool viewTrashPicker = false;
-  late GoogleMapController _mapController;
+  GoogleMapController? _mapController;
   LatLng _initialPosition = LatLng(37.42796133580664, -122.085749655962);
-  late LatLng _selectedPosition;
+  LatLng? _selectedPosition;
 
   Future<void> addRecyclingCenter(
       String name, String address, String phone, GeoPoint location) async {
@@ -400,8 +401,8 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  late GoogleMapController _mapController;
-  late Marker _marker;
+  GoogleMapController? _mapController;
+  Marker? _marker;
 
   @override
   Widget build(BuildContext context) {
@@ -425,7 +426,7 @@ class _MapScreenState extends State<MapScreen> {
             widget.onPositionChanged(position);
           });
         },
-        markers: _marker!= null? {_marker} : {},
+        markers: _marker!= null? {_marker!} : {},
       ),
     );
   }

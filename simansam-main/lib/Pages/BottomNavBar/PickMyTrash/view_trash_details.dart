@@ -19,7 +19,7 @@ class ViewTrashDetails extends StatefulWidget {
 class _ViewTrashDetailsState extends State<ViewTrashDetails> {
   final userReference = FirebaseFirestore.instance.collection('Users');
   final FirebaseAuth auth = FirebaseAuth.instance;
-  late List trashTypesList;
+  List? trashTypesList;
 
   Widget trashTypesFilter(TrashPickUpsModel trashPickUpsModel) {
     return Container(

@@ -16,11 +16,11 @@ class PickTrashLocation extends StatefulWidget {
 }
 
 class _PickTrashLocationState extends State<PickTrashLocation> {
-  late Widget _googleMapWidget;
-  late GoogleMapController _googleMapController;
-  late String _currentAddress;
-  late List _trashLocationDetails;
-  late BitmapDescriptor trashLocationMarkerIcon;
+  Widget? _googleMapWidget;
+  GoogleMapController? _googleMapController;
+  String? _currentAddress;
+  List? _trashLocationDetails;
+  BitmapDescriptor? trashLocationMarkerIcon;
   Map<MarkerId, Marker> trashLocationMarker = <MarkerId, Marker>{};
 
   @override
@@ -138,24 +138,24 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
               context: context,
               builder: (BuildContext context) {
                 return MarkerDetailsCard()
-                    .showSelectLocationDetails(_trashLocationDetails, context);
+                    .showSelectLocationDetails(_trashLocationDetails!, context);
               },
             );
           },
         ),
-        icon: trashLocationMarkerIcon,
+        icon: trashLocationMarkerIcon ?? BitmapDescriptor.defaultMarker,
       );
 
       trashLocationMarker[markerId] = marker;
     });
     _getTrashLocationAddressFromLatLng(latLang.latitude, latLang.longitude);
-    GoogleMapController controller = _googleMapController;
-    controller.animateCamera(CameraUpdate.newLatLngZoom(latLang, 15.0));
+    GoogleMapController? controller = _googleMapController;
+    controller?.animateCamera(CameraUpdate.newLatLngZoom(latLang, 15.0));
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
         return MarkerDetailsCard()
-            .showSelectLocationDetails(_trashLocationDetails, context);
+            .showSelectLocationDetails(_trashLocationDetails!, context);
       },
     );
   }
@@ -178,10 +178,10 @@ class _PickTrashLocationState extends State<PickTrashLocation> {
               onPressed: () {
                 ToastMessages().toastSuccess(
                     "Lokasi Dipilih: \n"
-                        "${_trashLocationDetails[0].toString()}, "
-                        "${_trashLocationDetails[0].toString()}, "
-                        "${_trashLocationDetails[6].toString()}, "
-                        "${_trashLocationDetails[5].toString()}",
+                        "${_trashLocationDetails?[0].toString()}, "
+                        "${_trashLocationDetails?[0].toString()}, "
+                        "${_trashLocationDetails?[6].toString()}, "
+                        "${_trashLocationDetails?[5].toString()}",
                     context);
                 print(_trashLocationDetails);
 

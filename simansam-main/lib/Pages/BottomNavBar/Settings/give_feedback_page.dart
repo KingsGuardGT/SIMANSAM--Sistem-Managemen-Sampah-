@@ -23,7 +23,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
-  late double circularProgressVal;
+  double? circularProgressVal;
 
   _onChanged(String value) {
     setState(() {
