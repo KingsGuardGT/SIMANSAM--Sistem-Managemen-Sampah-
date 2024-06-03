@@ -275,7 +275,7 @@ class _SignInPageState extends State<SignInPage> {
                                 })),
                         SizedBox(height: 20),
                         Image.asset(
-                          'assets/logos/trashpick_logo_banner.png',
+                          'assets/logos/simansam_logo_banner.png',
                           height: 200,
                           width: 200,
                         ),

@@ -37,7 +37,7 @@ class _WelcomeGuidePageState extends State<WelcomeGuidePage> {
                   height: 50.0,
                 ),
                 Image.asset(
-                  'assets/logos/trashpick_logo_banner.png',
+                  'assets/logos/simansam_logo_banner.png',
                   height: 200.0,
                   width: 200.0,
                 ),

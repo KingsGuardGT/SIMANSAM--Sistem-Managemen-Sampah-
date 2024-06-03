@@ -389,7 +389,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'assets/logos/trashpick_logo_banner.png',
+                            'assets/logos/simansam_logo_banner.png',
                             height: 120,
                             width: 120,
                           ),

@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
-                  'assets/logos/trashpick_logo_curved.png',
+                  'assets/logos/simansam_logo_curved.png',
                   height: 75.0,
                   width: 75.0,
                 ),

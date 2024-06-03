@@ -212,7 +212,7 @@ class _GiveFeedbackPageState extends State<GiveFeedbackPage> {
             height: 20.0,
           ),
           Image.asset(
-            'assets/logos/trashpick_logo_curved.png',
+            'assets/logos/simansam_logo_curved.png',
             height: 150.0,
             width: 150.0,
           ),
