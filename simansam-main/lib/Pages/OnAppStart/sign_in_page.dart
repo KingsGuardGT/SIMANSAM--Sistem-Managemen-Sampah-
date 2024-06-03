@@ -27,7 +27,7 @@ class _SignInPageState extends State<SignInPage> {
 
   void _togglePasswordView() {
     setState(() {
-      _isHidden = !_isHidden;
+      _isHidden = _isHidden;
     });
   }
 
@@ -40,13 +40,13 @@ class _SignInPageState extends State<SignInPage> {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
-              title: !isUserSigned
+              title: isUserSigned
                   ? Center(child: Text("Masuk"))
                   : Center(child: Text("Selamat Datang Kembali")),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (!isUserSigned)
+                  if (isUserSigned)
                     !isInValidaAccount
                         ? Column(
                       mainAxisSize: MainAxisSize.min,

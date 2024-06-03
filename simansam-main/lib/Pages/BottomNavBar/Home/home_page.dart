@@ -19,19 +19,19 @@ class _HomePageState extends State<HomePage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   late String badgeType;
 
-  @override
-  void initState() {
-    _setBadgeType();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   _setBadgeType();
+  //   super.initState();
+  // }
 
-  _setBadgeType() {
-    if (widget.accountType == "Pengumpul Sampah") {
-      badgeType = "Pengumpul";
-    } else if (widget.accountType == "Pemungut Sampah") {
-      badgeType = "Pemungut";
-    }
-  }
+  // _setBadgeType() {
+  //   if (widget.accountType == "Pengumpul Sampah") {
+  //     badgeType = "Pengumpul";
+  //   } else if (widget.accountType == "Pemungut Sampah") {
+  //     badgeType = "Pemungut";
+  //   }
+  // }
 
   // _statTitle(String title) {
   //   return Text(

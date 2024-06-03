@@ -16,6 +16,7 @@ class _BeAwareState extends State<BeAware> {
   final Dio dio = Dio();
 
   List<Article> articles = [];
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -36,44 +37,68 @@ class _BeAwareState extends State<BeAware> {
   }
 
   Widget _buildUI() {
-    return ListView.builder(
-      itemCount: articles.length,
-      itemBuilder: (context, index) {
-        final article = articles[index];
-        return ListTile(
-          onTap: () {
-            _launchUrl(
-              Uri.parse(article.url ?? ""),
-            );
-          },
-          leading: Image.network(
-            article.urlToImage ?? PLACEHOLDER_IMAGE_LINK,
-            height: 250,
-            width: 100,
-            fit: BoxFit.cover,
-          ),
-          title: Text(
-            article.title ?? "",
-          ),
-          subtitle: Text(
-            article.publishedAt ?? "",
-          ),
-        );
-      },
-    );
+    if (isLoading) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return ListView.builder(
+        itemCount: articles.length,
+        itemBuilder: (context, index) {
+          final article = articles[index];
+          return ListTile(
+            onTap: () {
+              _launchUrl(
+                Uri.parse(article.url?? ""),
+              );
+            },
+            leading: Image.network(
+              article.urlToImage?? PLACEHOLDER_IMAGE_LINK,
+              height: 250,
+              width: 100,
+              fit: BoxFit.cover,
+            ),
+            title: Text(
+              article.title?? "",
+            ),
+            subtitle: Text(
+              article.publishedAt?? "",
+            ),
+          );
+        },
+      );
+    }
   }
 
   Future<void> _getNews() async {
-    final response = await dio.get(
-      'https://newsapi.org/v2/everything?country=id&q=sampah&apiKey=${"789a9c334e794ac9ad5bf5d5f003398a"}',
-    );
-    final articlesJson = response.data["articles"] as List;
     setState(() {
-      List<Article> newsArticle =
-      articlesJson.map((a) => Article.fromJson(a)).toList();
-      newsArticle = newsArticle.where((a) => a.title != "[Removed]").toList();
-      articles = newsArticle;
+      isLoading = true;
     });
+    try {
+      final response = await dio.get(
+        'https://newsapi.org/v2/everything?q=sampah&apiKey=789a9c334e794ac9ad5bf5d5f003398a',
+      );
+      if (response.statusCode == 200) {
+        final articlesJson = response.data["articles"] as List;
+        setState(() {
+          List<Article> newsArticle =
+          articlesJson.map((a) => Article.fromJson(a)).toList();
+          newsArticle = newsArticle.where((a) => a.title!= "[Removed]").toList();
+          articles = newsArticle;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          isLoading = false;
+        });
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print('Error: $e');
+    }
   }
 
   Future<void> _launchUrl(Uri url) async {

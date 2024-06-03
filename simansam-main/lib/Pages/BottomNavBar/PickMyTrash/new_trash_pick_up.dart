@@ -33,19 +33,19 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   new TextEditingController();
   TextEditingController _trashLocationController = new TextEditingController();
   int charLength = 0;
-  late File _image;
+  File? _image;
   final String userProfileID = FirebaseAuth.instance.currentUser!.uid.toString();
 
   // Proses Mengunggah
   bool isStartToUpload = false;
   bool isUploadComplete = false;
   bool isAnError = false;
-  late double circularProgressVal;
+  double? circularProgressVal;
 
   // Sementara hingga dihapus
-  late CollectionReference imgRef;
-  late firebase_storage.Reference ref;
-  late String imageURL;
+  CollectionReference? imgRef;
+  firebase_storage.Reference? ref;
+  String? imageURL;
   final firestoreInstance = FirebaseFirestore.instance;
   String formattedDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   String formattedTime = DateFormat('kk:mm:a').format(DateTime.now());
@@ -64,7 +64,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
   };
 
   List trashTypeArray = [];
-  late List trashTypes;
+  List? trashTypes;
 
   getCheckboxItems() {
     trashTypeArray.clear();
@@ -82,17 +82,17 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
 
   String locationName = "Lokasi Saya";
   String userHomeLocation = "Rumah Saya";
-  late int locationTypeID;
+  int? locationTypeID;
 
   final userReference = FirebaseFirestore.instance.collection('Users');
   final FirebaseAuth auth = FirebaseAuth.instance;
-  late Position _currentPosition;
+  Position? _currentPosition;
 
-  late List _trashLocationDetails;
+  List? _trashLocationDetails;
   String userCurrentAddress = "Tidak Ada Lokasi yang Dipilih!";
   String selectedFromMapAddress = "Tidak Ada Lokasi yang Dipilih!";
   String trashLocationAddress = "Tidak Ada Lokasi yang Dipilih!";
-  late double trashLocationLatitude, trashLocationLongitude;
+  double? trashLocationLatitude, trashLocationLongitude;
 
   // ------------------------------ Pemilih Tanggal ------------------------------ \\
 
@@ -373,7 +373,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
           .ref()
       //.child('Posts/$userProfileID/$postID/${Path.basename(_image.path)}');
           .child('Pengambilan Sampah/$userProfileID/$trashID/$trashID');
-      await ref.putFile(_image);
+      await ref?.putFile(_image!);
 
       String downloadURL = await firebase_storage.FirebaseStorage.instance
           .ref()
@@ -382,8 +382,8 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
           .getDownloadURL();
       imageURL = downloadURL.toString();
       print("Gambar Diunggah ke Firebase Storage!");
-      print("URL Gambar: " + imageURL);
-      addPostToFireStore(imageURL);
+      print("URL Gambar: " + imageURL!);
+      addPostToFireStore(imageURL!);
     } catch (e) {
       print(e.toString());
       ifAnError();
@@ -405,7 +405,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       'trashTypes': trashTypes,
       'trashLocationAddress': trashLocationAddress,
       'trashLocationLocation':
-      new GeoPoint(trashLocationLatitude, trashLocationLongitude),
+      new GeoPoint(trashLocationLatitude!, trashLocationLongitude!),
       'startDate': startDate,
       'returnDate': returnDate,
       'startTime': startTime,
@@ -439,7 +439,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
           _currentPosition = position;
         });
         _getCurrentUserAddressFromLatLng(
-            _currentPosition.latitude, _currentPosition.longitude);
+            _currentPosition?.latitude, _currentPosition?.longitude);
       }).catchError((e) {
         print(e);
       });
@@ -473,19 +473,19 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
         ];
 
         userCurrentAddress = ""
-            "${_trashLocationDetails[0].toString()}, "
-            "${_trashLocationDetails[1].toString()}, "
-            "${_trashLocationDetails[2].toString()}, "
-            "${_trashLocationDetails[3].toString()}, "
-            "${_trashLocationDetails[4].toString()}, "
-            "${_trashLocationDetails[5].toString()}, "
-            "${_trashLocationDetails[6].toString()}, "
-            "${_trashLocationDetails[7].toString()}, "
-            "${_trashLocationDetails[8].toString()}, "
-            "${_trashLocationDetails[9].toString()}, "
-            "${_trashLocationDetails[10].toString()}, "
-            "${_trashLocationDetails[11].toString()}, "
-            "${_trashLocationDetails[12].toString()}";
+            "${_trashLocationDetails![0].toString()}, "
+            "${_trashLocationDetails![1].toString()}, "
+            "${_trashLocationDetails![2].toString()}, "
+            "${_trashLocationDetails![3].toString()}, "
+            "${_trashLocationDetails![4].toString()}, "
+            "${_trashLocationDetails![5].toString()}, "
+            "${_trashLocationDetails![6].toString()}, "
+            "${_trashLocationDetails![7].toString()}, "
+            "${_trashLocationDetails![8].toString()}, "
+            "${_trashLocationDetails![9].toString()}, "
+            "${_trashLocationDetails![10].toString()}, "
+            "${_trashLocationDetails![11].toString()}, "
+            "${_trashLocationDetails![12].toString()}";
 
         ToastMessages().toastSuccess("Lokasi Dipilih: \n"
           "$trashLocationAddress", context);
@@ -576,7 +576,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
           "Tidak bisa meninggalkan deskripsi sampah", context);
     } else if (_image == null) {
       new ToastMessages().toastError("Harap pilih gambar", context);
-    } else if (trashTypes.isEmpty) {
+    } else if (trashTypes!.isEmpty) {
       new ToastMessages()
           .toastError("Harap pilih setidaknya satu jenis", context);
     } else if (trashLocationAddress == "Tidak Ada Lokasi Dipilih!") {
@@ -618,7 +618,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
       final result = await Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PickTrashLocation(_currentPosition)),
+            builder: (context) => PickTrashLocation(_currentPosition!)),
       );
       setState(() {
         if (result == null) {
@@ -626,19 +626,19 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
         } else {
           _trashLocationDetails = result;
           selectedFromMapAddress = ""
-              "${_trashLocationDetails[0].toString()}, "
-              "${_trashLocationDetails[1].toString()}, "
-              "${_trashLocationDetails[2].toString()}, "
-              "${_trashLocationDetails[3].toString()}, "
-              "${_trashLocationDetails[4].toString()}, "
-              "${_trashLocationDetails[5].toString()}, "
-              "${_trashLocationDetails[6].toString()}, "
-              "${_trashLocationDetails[7].toString()}, "
-              "${_trashLocationDetails[8].toString()}, "
-              "${_trashLocationDetails[9].toString()}, "
-              "${_trashLocationDetails[10].toString()}, "
-              "${_trashLocationDetails[11].toString()}, "
-              "${_trashLocationDetails[12].toString()}";
+              "${_trashLocationDetails![0].toString()}, "
+              "${_trashLocationDetails![1].toString()}, "
+              "${_trashLocationDetails![2].toString()}, "
+              "${_trashLocationDetails![3].toString()}, "
+              "${_trashLocationDetails![4].toString()}, "
+              "${_trashLocationDetails![5].toString()}, "
+              "${_trashLocationDetails![6].toString()}, "
+              "${_trashLocationDetails![7].toString()}, "
+              "${_trashLocationDetails![8].toString()}, "
+              "${_trashLocationDetails![9].toString()}, "
+              "${_trashLocationDetails![10].toString()}, "
+              "${_trashLocationDetails![11].toString()}, "
+              "${_trashLocationDetails![12].toString()}";
           trashLocationAddress = selectedFromMapAddress;
         }
       });
@@ -1107,7 +1107,7 @@ class _NewTrashPickUpState extends State<NewTrashPickUp> {
                           color: Colors.white,
                         ),
                         child: Image.file(
-                          _image,
+                          _image!,
                           width: MediaQuery
                               .of(context)
                               .size

@@ -40,7 +40,7 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isHidden = true;
   bool _isHiddenC = true;
 
-  late double circularProgressVal;
+  double? circularProgressVal;
   bool isUserCreated = false;
   bool isAnError = false;
 
@@ -48,7 +48,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String formattedTime = DateFormat('kk:mm:a').format(DateTime.now());
 
   String accountTypeName = "Pengumpul Sampah";
-  late int accountTypeID;
+  int? accountTypeID;
 
   void _togglePasswordView() {
     setState(() {
@@ -336,7 +336,7 @@ class _SignUpPageState extends State<SignUpPage> {
               groupValue: accountTypeID,
               onChanged: (val) {
                 setState(() {
-                  accountTypeName = 'ADMIN Dinas Lingkungan Hidup';
+                  accountTypeName = 'Admin SIMANSAM';
                   accountTypeID = 2;
                 });
               },

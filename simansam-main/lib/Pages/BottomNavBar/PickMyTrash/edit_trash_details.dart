@@ -18,7 +18,7 @@ class _EditTrashDetailsState extends State<EditTrashDetails> {
   final userReference = FirebaseFirestore.instance.collection('Users');
   final FirebaseAuth auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
-  late String _trashName, _trashDescription, _trashLocationAddress, _startDate, _returnDate, _startTime, _returnTime, _postedDate;
+  String? _trashName, _trashDescription, _trashLocationAddress, _startDate, _returnDate, _startTime, _returnTime, _postedDate;
 
   @override
   Widget build(BuildContext context) {
